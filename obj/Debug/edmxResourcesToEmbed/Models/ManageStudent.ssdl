@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ManageStudentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="COURSE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseName" Type="varchar(max)" />
+    <Property Name="Time" Type="datetime" />
+    <Property Name="FacultyId" Type="int" />
+    <Property Name="Seat" Type="varchar" MaxLength="50" />
+    <Property Name="DepartmentId" Type="int" />
+    <Property Name="Images" Type="varchar(max)" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="DEPARTMENT">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentName" Type="varchar(max)" />
+    <Property Name="Images" Type="varchar(max)" />
+    <Property Name="Seat" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="FACILITIES">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" />
+    <Property Name="Images" Type="varchar(max)" />
+    <Property Name="Writter" Type="varchar(max)" />
+    <Property Name="Time" Type="datetime" />
+    <Property Name="Description" Type="text" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="FACULTY">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="Avatar" Type="varchar(max)" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="Birthday" Type="datetime" />
+    <Property Name="Gender" Type="smallint" />
+    <Property Name="Profiles" Type="varchar(max)" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'ManageStudent.dbo.FEEDBACK' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="FEEDBACK">
+          <Property Name="StudentId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>-->
+  <EntityType Name="ROLE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar(max)" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="STUDENT">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="varchar(max)" />
+    <Property Name="LastName" Type="varchar(max)" />
+    <Property Name="FatherName" Type="varchar(max)" />
+    <Property Name="MotherName" Type="varchar(max)" />
+    <Property Name="PhoneNumber" Type="int" />
+    <Property Name="ResidentialAddress" Type="varchar(max)" />
+    <Property Name="PermanentAddress" Type="varchar(max)" />
+    <Property Name="Gender" Type="smallint" />
+    <Property Name="Birthday" Type="date" />
+    <Property Name="Email" Type="varchar(max)" />
+    <Property Name="AdmissionFor" Type="smallint" />
+    <Property Name="Sports" Type="varchar(max)" />
+    <Property Name="DepartmentId" Type="int" />
+    <Property Name="CourseId" Type="int" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TABULAR">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LastName" Type="varchar(max)" />
+    <Property Name="FirstName" Type="varchar(max)" />
+    <Property Name="Birthday" Type="datetime" />
+    <Property Name="FatherName" Type="varchar(max)" />
+    <Property Name="MotherName" Type="varchar(max)" />
+    <Property Name="ResidentialAddress" Type="varchar(max)" />
+    <Property Name="PermanentAddress" Type="varchar(max)" />
+    <Property Name="Email" Type="varchar(max)" />
+    <Property Name="Gender" Type="smallint" />
+    <Property Name="AdmissionFor" Type="smallint" />
+    <Property Name="Sports" Type="nchar" MaxLength="10" />
+    <Property Name="EnrollmentNo" Type="int" />
+    <Property Name="Center" Type="varchar(max)" />
+    <Property Name="Stream" Type="varchar(max)" />
+    <Property Name="Field" Type="varchar(max)" />
+    <Property Name="OutOf" Type="smallint" />
+    <Property Name="ClassObtained" Type="varchar(max)" />
+    <Property Name="DepartmentId" Type="int" />
+    <Property Name="CourseId" Type="int" />
+    <Property Name="University" Type="varchar" MaxLength="50" />
+    <Property Name="MarksSecured" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Avatar" Type="varchar(max)" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="Gender" Type="smallint" />
+    <Property Name="Birthday" Type="datetime" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="Role" Type="int" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <Association Name="FK_COURSE_DEPARTMENT">
+    <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
+    <End Role="COURSE" Type="Self.COURSE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTMENT">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="COURSE">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COURSE_FACULTY">
+    <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="0..1" />
+    <End Role="COURSE" Type="Self.COURSE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACULTY">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="COURSE">
+        <PropertyRef Name="FacultyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_Feedback_STUDENT" />-->
+  <Association Name="FK_STUDENT_COURSE">
+    <End Role="COURSE" Type="Self.COURSE" Multiplicity="0..1" />
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COURSE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="STUDENT">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STUDENT_DEPARTMENT">
+    <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTMENT">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="STUDENT">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TABULAR_COURSE">
+    <End Role="COURSE" Type="Self.COURSE" Multiplicity="0..1" />
+    <End Role="TABULAR" Type="Self.TABULAR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COURSE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TABULAR">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USER_Role">
+    <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
+    <End Role="USER" Type="Self.USER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="USER">
+        <PropertyRef Name="Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ManageStudentModelStoreContainer">
+    <EntitySet Name="COURSE" EntityType="Self.COURSE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FACILITIES" EntityType="Self.FACILITIES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FACULTY" EntityType="Self.FACULTY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TABULAR" EntityType="Self.TABULAR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_COURSE_DEPARTMENT" Association="Self.FK_COURSE_DEPARTMENT">
+      <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+      <End Role="COURSE" EntitySet="COURSE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COURSE_FACULTY" Association="Self.FK_COURSE_FACULTY">
+      <End Role="FACULTY" EntitySet="FACULTY" />
+      <End Role="COURSE" EntitySet="COURSE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STUDENT_COURSE" Association="Self.FK_STUDENT_COURSE">
+      <End Role="COURSE" EntitySet="COURSE" />
+      <End Role="STUDENT" EntitySet="STUDENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STUDENT_DEPARTMENT" Association="Self.FK_STUDENT_DEPARTMENT">
+      <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+      <End Role="STUDENT" EntitySet="STUDENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TABULAR_COURSE" Association="Self.FK_TABULAR_COURSE">
+      <End Role="COURSE" EntitySet="COURSE" />
+      <End Role="TABULAR" EntitySet="TABULAR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USER_Role" Association="Self.FK_USER_Role">
+      <End Role="ROLE" EntitySet="ROLE" />
+      <End Role="USER" EntitySet="USER" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

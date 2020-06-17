@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -121,6 +129,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
@@ -131,41 +141,78 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\COURSE.cs">
+      <DependentUpon>ManageStudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DEPARTMENT.cs">
+      <DependentUpon>ManageStudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FACILITy.cs">
+      <DependentUpon>ManageStudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FACULTY.cs">
+      <DependentUpon>ManageStudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ManageStudent.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageStudent.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ManageStudent.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageStudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ManageStudent.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageStudent.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ROLE.cs">
+      <DependentUpon>ManageStudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\STUDENT.cs">
+      <DependentUpon>ManageStudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>ManageStudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TABULAR.cs">
+      <DependentUpon>ManageStudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER.cs">
+      <DependentUpon>ManageStudent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admin\css\animate.css" />
     <Content Include="Content\admin\css\bootstrap.min.css" />
     <Content Include="Content\admin\css\font-awesome.css" />
-    <Content Include="Content\admin\css\font.css" />
-    <Content Include="Content\admin\css\jqvmap.css" />
-    <Content Include="Content\admin\css\lightbox.css" />
-    <Content Include="Content\admin\css\minimal.css" />
-    <Content Include="Content\admin\css\monthly.css" />
-    <Content Include="Content\admin\css\morris.css" />
-    <Content Include="Content\admin\css\style-responsive.css" />
+    <Content Include="Content\admin\css\graph.css" />
+    <Content Include="Content\admin\css\icon-font.min.css" />
     <Content Include="Content\admin\css\style.css" />
+    <Content Include="Content\admin\fonts\digital-7-webfont.svg" />
+    <Content Include="Content\admin\fonts\digital-7_italic-webfont.svg" />
+    <Content Include="Content\admin\fonts\digital-7_mono-webfont.svg" />
     <Content Include="Content\admin\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\admin\fonts\Linearicons-Free.svg" />
+    <Content Include="Content\admin\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="Content\admin\images\1.jpg" />
     <Content Include="Content\admin\images\1.png" />
+    <Content Include="Content\admin\images\2.jpg" />
     <Content Include="Content\admin\images\2.png" />
+    <Content Include="Content\admin\images\3.jpg" />
     <Content Include="Content\admin\images\3.png" />
-    <Content Include="Content\admin\images\bg.jpg" />
-    <Content Include="Content\admin\images\close.png" />
-    <Content Include="Content\admin\images\g1.jpg" />
-    <Content Include="Content\admin\images\g2.jpg" />
-    <Content Include="Content\admin\images\g3.jpg" />
-    <Content Include="Content\admin\images\g4.jpg" />
-    <Content Include="Content\admin\images\g5.jpg" />
-    <Content Include="Content\admin\images\g6.jpg" />
-    <Content Include="Content\admin\images\g7.jpg" />
-    <Content Include="Content\admin\images\g8.jpg" />
-    <Content Include="Content\admin\images\g9.jpg" />
-    <Content Include="Content\admin\images\mail.png" />
-    <Content Include="Content\admin\images\minimal.png" />
-    <Content Include="Content\admin\images\nav-expand.png" />
-    <Content Include="Content\admin\images\next.png" />
-    <Content Include="Content\admin\images\pass.png" />
-    <Content Include="Content\admin\images\prev.png" />
-    <Content Include="Content\admin\images\search-icon.png" />
+    <Content Include="Content\admin\images\4.png" />
+    <Content Include="Content\admin\images\5.png" />
+    <Content Include="Content\admin\images\6.png" />
+    <Content Include="Content\admin\images\7.png" />
+    <Content Include="Content\admin\images\lock.png" />
+    <Content Include="Content\admin\images\search.png" />
+    <Content Include="Content\admin\images\tick.png" />
+    <Content Include="Content\admin\images\user.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -229,35 +276,29 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\admin\js\bootstrap.js" />
-    <Content Include="Scripts\admin\js\jquery.dcjqaccordion.2.7.js" />
-    <Content Include="Scripts\admin\js\jquery.fileupload.js" />
-    <Content Include="Scripts\admin\js\jquery.min.js" />
+    <Content Include="Models\ManageStudent.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ManageStudent.edmx</DependentUpon>
+      <LastGenOutput>ManageStudent.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ManageStudent.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ManageStudent.edmx</DependentUpon>
+      <LastGenOutput>ManageStudent.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\admin\js\bootstrap.min.js" />
+    <Content Include="Scripts\admin\js\Chart.js" />
+    <Content Include="Scripts\admin\js\classie.js" />
+    <Content Include="Scripts\admin\js\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\admin\js\jquery.flexisel.js" />
+    <Content Include="Scripts\admin\js\jquery.flot.min.js" />
     <Content Include="Scripts\admin\js\jquery.nicescroll.js" />
-    <Content Include="Scripts\admin\js\jquery.scrollTo.js" />
-    <Content Include="Scripts\admin\js\jquery.slimscroll.js" />
-    <Content Include="Scripts\admin\js\jquery.vmap.asia.js" />
-    <Content Include="Scripts\admin\js\jquery.vmap.australia.js" />
-    <Content Include="Scripts\admin\js\jquery.vmap.europe.js" />
-    <Content Include="Scripts\admin\js\jquery.vmap.js" />
-    <Content Include="Scripts\admin\js\jquery.vmap.sampledata.js" />
-    <Content Include="Scripts\admin\js\jquery.vmap.world.js" />
-    <Content Include="Scripts\admin\js\jquery2.0.3.min.js" />
-    <Content Include="Scripts\admin\js\lightbox-plus-jquery.min.js" />
-    <Content Include="Scripts\admin\js\monthly.js" />
-    <Content Include="Scripts\admin\js\morris.js" />
-    <Content Include="Scripts\admin\js\raphael-min.js" />
-    <Content Include="Scripts\admin\js\script.js" />
     <Content Include="Scripts\admin\js\scripts.js" />
+    <Content Include="Scripts\admin\js\skycons.js" />
+    <Content Include="Scripts\admin\js\uisearch.js" />
+    <Content Include="Scripts\admin\js\wow.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\admin\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\admin\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\admin\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\admin\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\admin\fonts\FontAwesome.otf" />
-    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\images\Thumbs.db" />
     <Content Include="Content\webfonts\fa-brands-400.eot" />
     <Content Include="Content\webfonts\fa-brands-400.ttf" />
@@ -271,6 +312,38 @@
     <Content Include="Content\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\webfonts\fa-solid-900.woff" />
     <Content Include="Content\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\admin\fonts\digital-7-webfont.eot" />
+    <Content Include="Content\admin\fonts\digital-7-webfont.ttf" />
+    <Content Include="Content\admin\fonts\digital-7-webfont.woff" />
+    <Content Include="Content\admin\fonts\digital-7_italic-webfont.eot" />
+    <Content Include="Content\admin\fonts\digital-7_italic-webfont.ttf" />
+    <Content Include="Content\admin\fonts\digital-7_italic-webfont.woff" />
+    <Content Include="Content\admin\fonts\digital-7_mono-webfont.eot" />
+    <Content Include="Content\admin\fonts\digital-7_mono-webfont.ttf" />
+    <Content Include="Content\admin\fonts\digital-7_mono-webfont.woff" />
+    <Content Include="Content\admin\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\admin\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\admin\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\admin\fonts\FontAwesome.otf" />
+    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\admin\fonts\Linearicons-Free.eot" />
+    <Content Include="Content\admin\fonts\Linearicons-Free.ttf" />
+    <Content Include="Content\admin\fonts\Linearicons-Free.woff" />
+    <Content Include="Content\admin\fonts\Linearicons-Free.woff2" />
+    <Content Include="Content\admin\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="Content\admin\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="Content\admin\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="Content\admin\fonts\WeatherIcons-Regular.otf" />
+    <EntityDeploy Include="Models\ManageStudent.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ManageStudent.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ManageStudent.edmx.diagram">
+      <DependentUpon>ManageStudent.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -308,19 +381,21 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\_CustomerLayout.cshtml" />
-    <Content Include="Views\Index\Index.cshtml" />
+    <Content Include="Views\Shared\_CustomerLayout.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Index\Index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\Admission.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\Facilities\Index.cshtml" />
+    <Content Include="Views\Faculty\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Contact\" />
-    <Folder Include="Views\Course\" />
-    <Folder Include="Views\Department\" />
-    <Folder Include="Views\Facilities\" />
-    <Folder Include="Views\Faculty\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -334,6 +409,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

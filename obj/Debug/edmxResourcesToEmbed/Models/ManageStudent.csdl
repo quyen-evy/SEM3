@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ManageStudentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="COURSE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CourseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+    <Property Name="FacultyId" Type="Int32" />
+    <Property Name="Seat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK_COURSE_DEPARTMENT" FromRole="COURSE" ToRole="DEPARTMENT" />
+    <NavigationProperty Name="FACULTY" Relationship="Self.FK_COURSE_FACULTY" FromRole="COURSE" ToRole="FACULTY" />
+    <NavigationProperty Name="STUDENTs" Relationship="Self.FK_STUDENT_COURSE" FromRole="COURSE" ToRole="STUDENT" />
+    <NavigationProperty Name="TABULARs" Relationship="Self.FK_TABULAR_COURSE" FromRole="COURSE" ToRole="TABULAR" />
+  </EntityType>
+  <EntityType Name="DEPARTMENT">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Seat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="COURSEs" Relationship="Self.FK_COURSE_DEPARTMENT" FromRole="DEPARTMENT" ToRole="COURSE" />
+    <NavigationProperty Name="STUDENTs" Relationship="Self.FK_STUDENT_DEPARTMENT" FromRole="DEPARTMENT" ToRole="STUDENT" />
+  </EntityType>
+  <EntityType Name="FACILITy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Writter" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="FACULTY">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Birthday" Type="DateTime" Precision="3" />
+    <Property Name="Gender" Type="Int16" />
+    <Property Name="Profiles" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="COURSEs" Relationship="Self.FK_COURSE_FACULTY" FromRole="FACULTY" ToRole="COURSE" />
+  </EntityType>
+  <EntityType Name="ROLE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="USERs" Relationship="Self.FK_USER_Role" FromRole="ROLE" ToRole="USER" />
+  </EntityType>
+  <EntityType Name="STUDENT">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FatherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="MotherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="Int32" />
+    <Property Name="ResidentialAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PermanentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="Int16" />
+    <Property Name="Birthday" Type="DateTime" Precision="0" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AdmissionFor" Type="Int16" />
+    <Property Name="Sports" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="CourseId" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="COURSE" Relationship="Self.FK_STUDENT_COURSE" FromRole="STUDENT" ToRole="COURSE" />
+    <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK_STUDENT_DEPARTMENT" FromRole="STUDENT" ToRole="DEPARTMENT" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TABULAR">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Birthday" Type="DateTime" Precision="3" />
+    <Property Name="FatherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="MotherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ResidentialAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PermanentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="Int16" />
+    <Property Name="AdmissionFor" Type="Int16" />
+    <Property Name="Sports" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="EnrollmentNo" Type="Int32" />
+    <Property Name="Center" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Stream" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Field" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="OutOf" Type="Int16" />
+    <Property Name="ClassObtained" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="CourseId" Type="Int32" />
+    <Property Name="University" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MarksSecured" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="COURSE" Relationship="Self.FK_TABULAR_COURSE" FromRole="TABULAR" ToRole="COURSE" />
+  </EntityType>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="Int16" />
+    <Property Name="Birthday" Type="DateTime" Precision="3" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="ROLE1" Relationship="Self.FK_USER_Role" FromRole="USER" ToRole="ROLE" />
+  </EntityType>
+  <Association Name="FK_COURSE_DEPARTMENT">
+    <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
+    <End Role="COURSE" Type="Self.COURSE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTMENT">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="COURSE">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COURSE_FACULTY">
+    <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="0..1" />
+    <End Role="COURSE" Type="Self.COURSE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACULTY">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="COURSE">
+        <PropertyRef Name="FacultyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STUDENT_COURSE">
+    <End Role="COURSE" Type="Self.COURSE" Multiplicity="0..1" />
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COURSE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="STUDENT">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TABULAR_COURSE">
+    <End Role="COURSE" Type="Self.COURSE" Multiplicity="0..1" />
+    <End Role="TABULAR" Type="Self.TABULAR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COURSE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TABULAR">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STUDENT_DEPARTMENT">
+    <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTMENT">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="STUDENT">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USER_Role">
+    <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
+    <End Role="USER" Type="Self.USER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="USER">
+        <PropertyRef Name="Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ManageStudentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="COURSEs" EntityType="Self.COURSE" />
+    <EntitySet Name="DEPARTMENTs" EntityType="Self.DEPARTMENT" />
+    <EntitySet Name="FACILITIES" EntityType="Self.FACILITy" />
+    <EntitySet Name="FACULTies" EntityType="Self.FACULTY" />
+    <EntitySet Name="ROLEs" EntityType="Self.ROLE" />
+    <EntitySet Name="STUDENTs" EntityType="Self.STUDENT" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TABULARs" EntityType="Self.TABULAR" />
+    <EntitySet Name="USERs" EntityType="Self.USER" />
+    <AssociationSet Name="FK_COURSE_DEPARTMENT" Association="Self.FK_COURSE_DEPARTMENT">
+      <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+      <End Role="COURSE" EntitySet="COURSEs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COURSE_FACULTY" Association="Self.FK_COURSE_FACULTY">
+      <End Role="FACULTY" EntitySet="FACULTies" />
+      <End Role="COURSE" EntitySet="COURSEs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STUDENT_COURSE" Association="Self.FK_STUDENT_COURSE">
+      <End Role="COURSE" EntitySet="COURSEs" />
+      <End Role="STUDENT" EntitySet="STUDENTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TABULAR_COURSE" Association="Self.FK_TABULAR_COURSE">
+      <End Role="COURSE" EntitySet="COURSEs" />
+      <End Role="TABULAR" EntitySet="TABULARs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STUDENT_DEPARTMENT" Association="Self.FK_STUDENT_DEPARTMENT">
+      <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+      <End Role="STUDENT" EntitySet="STUDENTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USER_Role" Association="Self.FK_USER_Role">
+      <End Role="ROLE" EntitySet="ROLEs" />
+      <End Role="USER" EntitySet="USERs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

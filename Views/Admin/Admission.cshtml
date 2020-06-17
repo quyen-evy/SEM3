@@ -1,0 +1,180 @@
+﻿@using projectsem3.Models
+@model projectsem3.Models.TABULAR
+@{
+    ViewBag.Title = "Admission";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        $("#Birthday").datepicker({
+            dateFormat: "dd/mm/yy"
+        })
+    });
+</script>
+<div id="page-wrapper">
+    <div class="graphs">
+        <h3 class="blank1">Student Information</h3>
+        <div class="tab-content">
+            <div class="tab-pane active form-horizontal" id="horizontal-form">
+                
+                    @using (Html.BeginForm("Information", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                       
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Student Name</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.FirstName)
+                                @Html.TextBoxFor(u => u.LastName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Father Name</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.FatherName)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Mother Name</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.MotherName)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Date of Birth</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(U => U.Birthday, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            <div class="col-sm-2 jlkdfj1">
+                                <p class="help-block">As per the certificate!</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="radio" class="col-sm-2 control-label">Gender</label>
+                            <div class="col-sm-8">
+                                @Html.RadioButtonFor(u => u.Gender, "0")
+                                @Html.Label("Male")
+                                @Html.RadioButtonFor(u => u.Gender, "1")
+                                @Html.Label("Female")
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Residential Address</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.ResidentialAddress)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Permanent Address</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.PermanentAddress)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="radio" class="col-sm-2 control-label">Admission For</label>
+                            <div class="col-sm-8">
+                                @Html.RadioButtonFor(u => u.Gender, "0")
+                                @Html.Label("Stream")
+                                @Html.RadioButtonFor(u => u.Gender, "1")
+                                @Html.Label("Field")
+                            </div>
+                        </div>
+
+                    }
+                
+            </div>
+        </div>
+
+        <h3 class="blank1">Eligible for the admission</h3>
+        <div class="tab-content">
+            <div class="tab-pane active" id="horizontal-form">
+                <form class="form-horizontal">
+                    @using (Html.BeginForm("Admission", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">University</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.University)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Enrollment Number</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.EnrollmentNo)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Center</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.Center)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Stream</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.Stream)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Field</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.Field)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Marks Secured</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.MarksSecured)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Out of</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.OutOf)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">Class Obtained</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(u => u.ClassObtained)
+                            </div>
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+
+        <div class="bs-example" data-example-id="form-validation-states-with-icons">
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputFile">File input</label>
+                    <input type="file" id="exampleInputFile">
+                    <p class="help-block">Example block-level help text here.</p>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <button class="btn-success btn">Submit</button>
+                            <button class="btn-default btn">Cancel</button>
+                            <button class="btn-inverse btn">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+		</div>
