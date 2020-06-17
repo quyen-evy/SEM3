@@ -19,11 +19,6 @@ namespace projectsem3.Controllers
         {
             return View();
         }
-        public ActionResult Information(int id)
-        {
-            STUDENT stu = ManageEntities.STUDENTs.SingleOrDefault(u => u.Id == id && u.Status == false);
-            TempData["student"] = stu;
-            return View();
-        }
+       
     }
 }
