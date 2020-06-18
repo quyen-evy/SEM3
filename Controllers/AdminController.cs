@@ -17,7 +17,9 @@ namespace projectsem3.Controllers
         }
         public ActionResult Admission()
         {
-            return View();
+            List<TABULAR> tabular = ManageEntities.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
+
+            return View(tabular);
         }
        
     }
