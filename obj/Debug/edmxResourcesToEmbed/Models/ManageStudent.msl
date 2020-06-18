@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ManageStudentModelStoreContainer" CdmEntityContainer="ManageStudentEntities">
+  <EntityContainerMapping StorageEntityContainer="ManageStudentStoreContainer" CdmEntityContainer="ManageStudentEntities">
     <EntitySetMapping Name="COURSEs">
-      <EntityTypeMapping TypeName="ManageStudentModel.COURSE">
+      <EntityTypeMapping TypeName="ManageStudent.COURSE">
         <MappingFragment StoreEntitySet="COURSE">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CourseName" ColumnName="CourseName" />
@@ -17,7 +17,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DEPARTMENTs">
-      <EntityTypeMapping TypeName="ManageStudentModel.DEPARTMENT">
+      <EntityTypeMapping TypeName="ManageStudent.DEPARTMENT">
         <MappingFragment StoreEntitySet="DEPARTMENT">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
@@ -28,7 +28,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FACILITIES">
-      <EntityTypeMapping TypeName="ManageStudentModel.FACILITy">
+      <EntityTypeMapping TypeName="ManageStudent.FACILITy">
         <MappingFragment StoreEntitySet="FACILITIES">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -41,7 +41,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FACULTies">
-      <EntityTypeMapping TypeName="ManageStudentModel.FACULTY">
+      <EntityTypeMapping TypeName="ManageStudent.FACULTY">
         <MappingFragment StoreEntitySet="FACULTY">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -56,7 +56,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ROLEs">
-      <EntityTypeMapping TypeName="ManageStudentModel.ROLE">
+      <EntityTypeMapping TypeName="ManageStudent.ROLE">
         <MappingFragment StoreEntitySet="ROLE">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -65,7 +65,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="STUDENTs">
-      <EntityTypeMapping TypeName="ManageStudentModel.STUDENT">
+      <EntityTypeMapping TypeName="ManageStudent.STUDENT">
         <MappingFragment StoreEntitySet="STUDENT">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -86,19 +86,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="ManageStudentModel.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TABULARs">
-      <EntityTypeMapping TypeName="ManageStudentModel.TABULAR">
+      <EntityTypeMapping TypeName="ManageStudent.TABULAR">
         <MappingFragment StoreEntitySet="TABULAR">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -127,7 +116,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="USERs">
-      <EntityTypeMapping TypeName="ManageStudentModel.USER">
+      <EntityTypeMapping TypeName="ManageStudent.USER">
         <MappingFragment StoreEntitySet="USER">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Avatar" ColumnName="Avatar" />

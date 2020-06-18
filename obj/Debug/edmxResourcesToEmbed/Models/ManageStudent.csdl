@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ManageStudentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="ManageStudent" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="COURSE">
     <Key>
       <PropertyRef Name="Id" />
@@ -88,16 +88,6 @@
     <Property Name="Status" Type="Boolean" />
     <NavigationProperty Name="COURSE" Relationship="Self.FK_STUDENT_COURSE" FromRole="STUDENT" ToRole="COURSE" />
     <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK_STUDENT_DEPARTMENT" FromRole="STUDENT" ToRole="DEPARTMENT" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="TABULAR">
     <Key>
@@ -224,7 +214,6 @@
     <EntitySet Name="FACULTies" EntityType="Self.FACULTY" />
     <EntitySet Name="ROLEs" EntityType="Self.ROLE" />
     <EntitySet Name="STUDENTs" EntityType="Self.STUDENT" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="TABULARs" EntityType="Self.TABULAR" />
     <EntitySet Name="USERs" EntityType="Self.USER" />
     <AssociationSet Name="FK_COURSE_DEPARTMENT" Association="Self.FK_COURSE_DEPARTMENT">
