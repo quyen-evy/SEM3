@@ -4,14 +4,15 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
+
 <script>
     $(document).ready(function () {
         $("#Birthday").datepicker({
             dateFormat: "dd/mm/yy",
             changeMonth: true,
             changeYear: true,
-            yearRange : '1990:2000',
-            defaultDate: new Date(1999,01-01,09),
+            yearRange: '1990:2000',
+            defaultDate: new Date(1999, 01 - 01, 09),
         });
     });
 </script>
@@ -45,21 +46,28 @@
                     @Html.TextBoxFor(u => u.LastName, new { @placeholder = "Last Name", @class = "form-control", @type = "text", @required = "", @name = "Your last name" })
                 </div>
                 <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.FatherName, new { @placeholder = "Father Name", @class = "form-control", @type = "text", @required = "", @name = "Your father name" })
+                    @Html.TextBoxFor(u => u.Birthday, null, new { @class = "form-control", @placeholder = "Date of Birth ( as per the certificate)" })
                 </div>
                 <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.MotherName, new { @placeholder = "Mother Name", @class = "form-control", @type = "text", @required = "", @name = "Your mother name" })
-                </div>
-                <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.Birthday, null, new { @class = "form-control" , @placeholder = "Date of Birth"})
+                    @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email", @class = "form-control", @type = "text", @required = "", @name = "Your email" })
                 </div>
                 <div class="styled-input agile-styled-input-top form-group">
+                    @*@Html.DropDownListFor(u => u.Gender, new SelectList(Enum.GetValues(Type("Gender"))), "Select Gender")*@
                     <select class="category2" required="">
                         <option value="">Gender</option>
                         <option value="">Female</option>
                         <option value="">Male</option>
                     </select>
                 </div>
+
+                <div class="styled-input form-group">
+                    @Html.TextBoxFor(u => u.FatherName, new { @placeholder = "Father Name", @class = "form-control", @type = "text", @required = "", @name = "Your father name" })
+                </div>
+                <div class="styled-input form-group">
+                    @Html.TextBoxFor(u => u.MotherName, new { @placeholder = "Mother Name", @class = "form-control", @type = "text", @required = "", @name = "Your mother name" })
+                </div>
+
+
                 <div class="styled-input form-group">
                     @Html.TextBoxFor(u => u.ResidentialAddress, new { @placeholder = "Residential Address", @class = "form-control", @type = "text", @required = "", @name = "Residential Address" })
                 </div>
@@ -72,42 +80,43 @@
                             <option value="">Admission for </option>
                             <option value="">Stream</option>
                             <option value="">Field</option>
-
                         </select>
                     </div>
                 </div>
+                <div class="styled-input form-group">
+                    @Html.TextBoxFor(u => u.Sports, new { @placeholder = "Sports (if any)", @class = "form-control", @type = "text", @required = "", @name = "Sport" })
+                </div>
                 <div class="styled-input">
-                    @* @using (Html.BeginForm("Admission", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-                        @Html.ValidationSummary(true) *@
-                        <label class="header-admin-form font-weight-bold text-dark my-3">Eligible for the admission</label>
-                        <div class="form-group">
-                            @Html.TextBoxFor(u => u.University, new { @placeholder = "University", @class = "form-control", @type = "text", @required = "", @name = "University" })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(u => u.EnrollmentNo, new { @placeholder = "EnrollmentNo", @class = "form-control", @type = "text", @required = "", @name = "EnrollmentNo" })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(u => u.Center, new { @placeholder = "Center", @class = "form-control", @type = "text", @required = "", @name = "Center" })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(u => u.Stream, new { @placeholder = "Stream", @class = "form-control", @type = "text", @required = "", @name = "Stream" })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(u => u.Field, new { @placeholder = "Field", @class = "form-control", @type = "text", @required = "", @name = "Field" })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(u => u.MarksSecured, new { @placeholder = "MarksSecured", @class = "form-control", @type = "text", @required = "", @name = "MarksSecured" })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(u => u.OutOf, new { @placeholder = "OutOf", @class = "form-control", @type = "text", @required = "", @name = "OutOf" })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(u => u.ClassObtained, new { @placeholder = "ClassObtained", @class = "form-control", @type = "text", @required = "", @name = "ClassObtained" })
-                        </div>
+
+                    <label class="header-admin-form font-weight-bold text-dark my-3">The details of your previous education</label>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.University, new { @placeholder = "University", @class = "form-control", @type = "text", @required = "", @name = "University" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.EnrollmentNo, new { @placeholder = "Enrollment number", @class = "form-control", @type = "text", @required = "", @name = "EnrollmentNo" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.Center, new { @placeholder = "Center", @class = "form-control", @type = "text", @required = "", @name = "Center" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.Stream, new { @placeholder = "Stream", @class = "form-control", @type = "text", @required = "", @name = "Stream" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.Field, new { @placeholder = "Field", @class = "form-control", @type = "text", @required = "", @name = "Field" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.MarksSecured, new { @placeholder = "Marks Secured", @class = "form-control", @type = "text", @required = "", @name = "MarksSecured" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.OutOf, new { @placeholder = "Out Of", @class = "form-control", @type = "text", @required = "", @name = "OutOf" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.ClassObtained, new { @placeholder = "Class Obtained", @class = "form-control", @type = "text", @required = "", @name = "ClassObtained" })
+                    </div>
                     @* } *@
                 </div>
                 <input type="submit" value="Submit">
+                <input type="submit" value="Download Form">
             }
         </div>
     </div>
