@@ -39,11 +39,12 @@ namespace projectsem3.Controllers
                 }
             }
             ViewBag.SignInErrorMessage = "The email or the password that you've entered is incorrect";
-            return Content("Unsuccessful");
+            return View("Index","Error");
         }
         public ActionResult Register()
         {
             return View();
         }
+
     }
 }
