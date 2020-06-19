@@ -21,6 +21,9 @@ namespace projectsem3.Controllers
 
             return View(tabular);
         }
-       
+        public ActionResult Update()
+        {
+            return View();
+        }
     }
 }
