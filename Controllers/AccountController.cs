@@ -15,6 +15,11 @@ namespace projectsem3.Controllers
         // GET: Account
         public ActionResult Login()
         {
+            List<DEPARTMENT> department = ManageEntities.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
+            TempData["department"] = department;
+            List<FACILITy> facilities = ManageEntities.FACILITIES.Where(y => y.Status == false).ToList<FACILITy>();
+            TempData["facilities"] = facilities;
+            
             return View();
 
         }
@@ -30,16 +35,19 @@ namespace projectsem3.Controllers
                     Session["user"] = user;
                     if (user.Role == 4)
                     {
-                        return RedirectToAction("Index", "Index");
+                        return Content("User Admin");
+                        //return RedirectToAction("Index", "Index");
                     }
                     else
                     {
-                        return RedirectToAction("Admission", "Admin");
+                        return Content("test");
+                        //return RedirectToAction("Admission", "Admin");
                     }
                 }
             }
             ViewBag.SignInErrorMessage = "The email or the password that you've entered is incorrect";
-            return View("Index","Error");
+            // return Content("Test");
+            return RedirectToAction("Index","Error");
         }
         public ActionResult Register()
         {
