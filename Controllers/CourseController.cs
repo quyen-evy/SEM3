@@ -9,11 +9,11 @@ namespace projectsem3.Controllers
 {
     public class CourseController : Controller
     {
-        private ManageStudentEntities ManageEntities = new ManageStudentEntities();
+        private ManageStudentEntities ManageStudent = new ManageStudentEntities();
         // GET: Course
         public ActionResult Index()
         {
-            List<COURSE> course = ManageEntities.COURSEs.Where(u => u.Status == false).ToList<COURSE>();
+            List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false).ToList<COURSE>();
             return View(course);
         }
     }

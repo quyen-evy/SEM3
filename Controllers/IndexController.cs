@@ -8,16 +8,16 @@ namespace projectsem3.Controllers
 {
     public class IndexController : Controller
     {
-        private ManageStudentEntities ManageEntities = new ManageStudentEntities();
+        private ManageStudentEntities ManageStudent = new ManageStudentEntities();
         // GET: Index
         public ActionResult Index()
 
         {
 
 
-            List<FACILITy> facilities = ManageEntities.FACILITIES.Where(v => v.Status == false).ToList<FACILITy>();
+            List<FACILITy> facilities = ManageStudent.FACILITIES.Where(v => v.Status == false).ToList<FACILITy>();
             TempData["facilities"] = facilities;
-            List<DEPARTMENT> department = ManageEntities.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
+            List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
             TempData["department"] = department;
             return View();
         }

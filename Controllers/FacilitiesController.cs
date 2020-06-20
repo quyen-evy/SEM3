@@ -9,18 +9,18 @@ namespace projectsem3.Controllers
 {
     public class FacilitiesController : Controller
     {
-        private ManageStudentEntities ManageEntities = new ManageStudentEntities();
+        private ManageStudentEntities ManageStudent = new ManageStudentEntities();
 
         // GET: Facilities
         public ActionResult Index(int id=1)
         {
-            List<FACILITy> facilitiesId = ManageEntities.FACILITIES.Where(u => u.Status == false && u.Id == id).ToList<FACILITy>();
+            List<FACILITy> facilitiesId = ManageStudent.FACILITIES.Where(u => u.Status == false && u.Id == id).ToList<FACILITy>();
             ViewBag.facilitiesId = facilitiesId;
-            List<FACILITy> facilities = ManageEntities.FACILITIES.Where(u => u.Status == false).ToList<FACILITy>();
+            List<FACILITy> facilities = ManageStudent.FACILITIES.Where(u => u.Status == false).ToList<FACILITy>();
             TempData["facilities"] = facilities;
-            List<DEPARTMENT> department = ManageEntities.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
+            List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
             TempData["department"] = department;
-            List<FEEDBACK> feedback = ManageEntities.FEEDBACKs.Where(u => u.Status == false && u.FacilitiesId == id).ToList<FEEDBACK>();
+            List<FEEDBACK> feedback = ManageStudent.FEEDBACKs.Where(u => u.Status == false && u.FacilitiesId == id).ToList<FEEDBACK>();
             TempData["feedback"] = feedback;
 
             return View(facilitiesId);
@@ -35,8 +35,8 @@ namespace projectsem3.Controllers
                 feedback.Time = DateTime.Now;
                 feedback.FacilitiesId = id;
 
-                ManageEntities.FEEDBACKs.Add(feedback);
-                ManageEntities.SaveChanges();
+                ManageStudent.FEEDBACKs.Add(feedback);
+                ManageStudent.SaveChanges();
                 return Content("tks your comment");
             }
             return Content("pls check comment");

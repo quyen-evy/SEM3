@@ -9,7 +9,7 @@ namespace projectsem3.Controllers
 {
     public class ContactController : Controller
     {
-        private ManageStudentEntities ManageEntities = new ManageStudentEntities();
+        private ManageStudentEntities ManageStudent = new ManageStudentEntities();
         // GET: Contact
         public ActionResult Index()
         {

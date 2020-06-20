@@ -10,18 +10,18 @@ namespace projectsem3.Controllers
 {
     public class DepartmentController : Controller
     {
-        private ManageStudentEntities ManageEntities = new ManageStudentEntities();
+        private ManageStudentEntities ManageStudent = new ManageStudentEntities();
         // GET: Department
         public ActionResult Index(int id=1)
         {
 
-            List<COURSE> course = ManageEntities.COURSEs.Where(u => u.Status == false && u.DepartmentId == id).ToList<COURSE>();
+            List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false && u.DepartmentId == id).ToList<COURSE>();
 
-            List<DEPARTMENT> departmentID = ManageEntities.DEPARTMENTs.Where(v => v.Status == false && v.Id == id).ToList<DEPARTMENT>();
+            List<DEPARTMENT> departmentID = ManageStudent.DEPARTMENTs.Where(v => v.Status == false && v.Id == id).ToList<DEPARTMENT>();
             ViewBag.departmentId = departmentID;
-            List<DEPARTMENT> department = ManageEntities.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
+            List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
             TempData["department"] = department;
-            List<FACILITy> facilities = ManageEntities.FACILITIES.Where(y => y.Status == false).ToList<FACILITy>();
+            List<FACILITy> facilities = ManageStudent.FACILITIES.Where(y => y.Status == false).ToList<FACILITy>();
             TempData["facilities"] = facilities;
             return View(course);
         }

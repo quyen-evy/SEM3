@@ -10,14 +10,14 @@ namespace projectsem3.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-        private ManageStudentEntities ManageEntities = new ManageStudentEntities();
+        private ManageStudentEntities ManageStudent = new ManageStudentEntities();
         public ActionResult Index()
         {
             return View();
         }
         public ActionResult Admission()
         {
-            List<TABULAR> tabular = ManageEntities.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
+            List<TABULAR> tabular = ManageStudent.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
 
             return View(tabular);
         }
