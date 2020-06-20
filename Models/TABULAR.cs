@@ -15,25 +15,25 @@ namespace projectsem3.Models
     public partial class TABULAR
     {
         public int Id { get; set; }
+        public string FatherName { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public Nullable<System.DateTime> Birthday { get; set; }
-        public string FatherName { get; set; }
+        public Nullable<short> Gender { get; set; }
         public string MotherName { get; set; }
+        public string Email { get; set; }
         public string ResidentialAddress { get; set; }
         public string PermanentAddress { get; set; }
-        public string Email { get; set; }
-        public Nullable<short> Gender { get; set; }
         public Nullable<short> AdmissionFor { get; set; }
-        public string Sports { get; set; }
-        public Nullable<int> EnrollmentNo { get; set; }
+        public string EnrollmentNo { get; set; }
         public string Center { get; set; }
-        public string Stream { get; set; }
         public string Field { get; set; }
-        public Nullable<short> OutOf { get; set; }
-        public string ClassObtained { get; set; }
+        public string Stream { get; set; }
+        public string Sports { get; set; }
         public Nullable<int> DepartmentId { get; set; }
         public Nullable<int> CourseId { get; set; }
+        public string ClassObtained { get; set; }
+        public string OutOf { get; set; }
         public string University { get; set; }
         public string MarksSecured { get; set; }
         public Nullable<bool> Status { get; set; }

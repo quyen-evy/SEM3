@@ -36,10 +36,10 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar(max)" />
           <Property Name="Images" Type="varchar(max)" />
-          <Property Name="Writter" Type="varchar(max)" />
-          <Property Name="Time" Type="datetime" />
           <Property Name="Description" Type="text" />
           <Property Name="Status" Type="bit" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="writer" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="FACULTY">
           <Key>
@@ -55,14 +55,17 @@
           <Property Name="Profiles" Type="varchar(max)" />
           <Property Name="Status" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'ManageStudent.dbo.FEEDBACK' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="FEEDBACK">
-          <Property Name="StudentId" Type="int" />
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="FacilitiesId" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Time" Type="datetime" />
           <Property Name="Status" Type="bit" />
-        </EntityType>-->
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="ROLE">
           <Key>
             <PropertyRef Name="Id" />
@@ -75,22 +78,23 @@ warning 6013: The table/view 'ManageStudent.dbo.FEEDBACK' does not have a primar
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar(max)" />
           <Property Name="LastName" Type="varchar(max)" />
-          <Property Name="FatherName" Type="varchar(max)" />
-          <Property Name="MotherName" Type="varchar(max)" />
-          <Property Name="PhoneNumber" Type="int" />
-          <Property Name="ResidentialAddress" Type="varchar(max)" />
-          <Property Name="PermanentAddress" Type="varchar(max)" />
           <Property Name="Gender" Type="smallint" />
           <Property Name="Birthday" Type="date" />
-          <Property Name="Email" Type="varchar(max)" />
-          <Property Name="AdmissionFor" Type="smallint" />
+          <Property Name="ResidentialAddress" Type="varchar(max)" />
+          <Property Name="PermanentAddress" Type="varchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="FatherName" Type="varchar(max)" />
+          <Property Name="MotherName" Type="varchar(max)" />
           <Property Name="Sports" Type="varchar(max)" />
+          <Property Name="AdmissionFor" Type="smallint" />
           <Property Name="DepartmentId" Type="int" />
           <Property Name="CourseId" Type="int" />
           <Property Name="Status" Type="bit" />
+          <Property Name="Avatar" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -107,25 +111,25 @@ warning 6013: The table/view 'ManageStudent.dbo.FEEDBACK' does not have a primar
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FatherName" Type="varchar(max)" />
           <Property Name="LastName" Type="varchar(max)" />
           <Property Name="FirstName" Type="varchar(max)" />
-          <Property Name="Birthday" Type="datetime" />
-          <Property Name="FatherName" Type="varchar(max)" />
+          <Property Name="Birthday" Type="date" />
+          <Property Name="Gender" Type="smallint" />
           <Property Name="MotherName" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar(max)" />
           <Property Name="ResidentialAddress" Type="varchar(max)" />
           <Property Name="PermanentAddress" Type="varchar(max)" />
-          <Property Name="Email" Type="varchar(max)" />
-          <Property Name="Gender" Type="smallint" />
           <Property Name="AdmissionFor" Type="smallint" />
-          <Property Name="Sports" Type="nchar" MaxLength="10" />
-          <Property Name="EnrollmentNo" Type="int" />
+          <Property Name="EnrollmentNo" Type="varchar(max)" />
           <Property Name="Center" Type="varchar(max)" />
-          <Property Name="Stream" Type="varchar(max)" />
           <Property Name="Field" Type="varchar(max)" />
-          <Property Name="OutOf" Type="smallint" />
-          <Property Name="ClassObtained" Type="varchar(max)" />
+          <Property Name="Stream" Type="varchar(max)" />
+          <Property Name="Sports" Type="varchar(max)" />
           <Property Name="DepartmentId" Type="int" />
           <Property Name="CourseId" Type="int" />
+          <Property Name="ClassObtained" Type="varchar(max)" />
+          <Property Name="OutOf" Type="varchar(max)" />
           <Property Name="University" Type="varchar" MaxLength="50" />
           <Property Name="MarksSecured" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="bit" />
@@ -170,9 +174,18 @@ warning 6013: The table/view 'ManageStudent.dbo.FEEDBACK' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_Feedback_STUDENT" />-->
+        <Association Name="FK_Feedback_STUDENT">
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+          <End Role="FEEDBACK" Type="Self.FEEDBACK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FEEDBACK">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_STUDENT_COURSE">
           <End Role="COURSE" Type="Self.COURSE" Multiplicity="0..1" />
           <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
@@ -226,6 +239,7 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
           <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FACILITIES" EntityType="Self.FACILITIES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FACULTY" EntityType="Self.FACULTY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FEEDBACK" EntityType="Self.FEEDBACK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -238,6 +252,10 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
           <AssociationSet Name="FK_COURSE_FACULTY" Association="Self.FK_COURSE_FACULTY">
             <End Role="FACULTY" EntitySet="FACULTY" />
             <End Role="COURSE" EntitySet="COURSE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_STUDENT" Association="Self.FK_Feedback_STUDENT">
+            <End Role="STUDENT" EntitySet="STUDENT" />
+            <End Role="FEEDBACK" EntitySet="FEEDBACK" />
           </AssociationSet>
           <AssociationSet Name="FK_STUDENT_COURSE" Association="Self.FK_STUDENT_COURSE">
             <End Role="COURSE" EntitySet="COURSE" />
@@ -298,10 +316,10 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Writter" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Time" Type="DateTime" Precision="3" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="writer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="FACULTY">
           <Key>
@@ -318,6 +336,18 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
           <Property Name="Status" Type="Boolean" />
           <NavigationProperty Name="COURSEs" Relationship="Self.FK_COURSE_FACULTY" FromRole="FACULTY" ToRole="COURSE" />
         </EntityType>
+        <EntityType Name="FEEDBACK">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="FacilitiesId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="STUDENT" Relationship="Self.FK_Feedback_STUDENT" FromRole="FEEDBACK" ToRole="STUDENT" />
+        </EntityType>
         <EntityType Name="ROLE">
           <Key>
             <PropertyRef Name="Id" />
@@ -331,24 +361,26 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FatherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="MotherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNumber" Type="Int32" />
-          <Property Name="ResidentialAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PermanentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Gender" Type="Int16" />
           <Property Name="Birthday" Type="DateTime" Precision="0" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="AdmissionFor" Type="Int16" />
+          <Property Name="ResidentialAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FatherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MotherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Sports" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AdmissionFor" Type="Int16" />
           <Property Name="DepartmentId" Type="Int32" />
           <Property Name="CourseId" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
+          <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="COURSE" Relationship="Self.FK_STUDENT_COURSE" FromRole="STUDENT" ToRole="COURSE" />
           <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK_STUDENT_DEPARTMENT" FromRole="STUDENT" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="FEEDBACKs" Relationship="Self.FK_Feedback_STUDENT" FromRole="STUDENT" ToRole="FEEDBACK" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -365,25 +397,25 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FatherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Birthday" Type="DateTime" Precision="3" />
-          <Property Name="FatherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="Int16" />
           <Property Name="MotherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ResidentialAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PermanentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="Int16" />
           <Property Name="AdmissionFor" Type="Int16" />
-          <Property Name="Sports" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="EnrollmentNo" Type="Int32" />
+          <Property Name="EnrollmentNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Center" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Stream" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Field" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="OutOf" Type="Int16" />
-          <Property Name="ClassObtained" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Stream" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Sports" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DepartmentId" Type="Int32" />
           <Property Name="CourseId" Type="Int32" />
+          <Property Name="ClassObtained" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OutOf" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="University" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MarksSecured" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" />
@@ -466,6 +498,18 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Feedback_STUDENT">
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+          <End Role="FEEDBACK" Type="Self.FEEDBACK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FEEDBACK">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_USER_Role">
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
           <End Role="USER" Type="Self.USER" Multiplicity="*" />
@@ -483,6 +527,7 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
           <EntitySet Name="DEPARTMENTs" EntityType="Self.DEPARTMENT" />
           <EntitySet Name="FACILITIES" EntityType="Self.FACILITy" />
           <EntitySet Name="FACULTies" EntityType="Self.FACULTY" />
+          <EntitySet Name="FEEDBACKs" EntityType="Self.FEEDBACK" />
           <EntitySet Name="ROLEs" EntityType="Self.ROLE" />
           <EntitySet Name="STUDENTs" EntityType="Self.STUDENT" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
@@ -507,6 +552,10 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
           <AssociationSet Name="FK_STUDENT_DEPARTMENT" Association="Self.FK_STUDENT_DEPARTMENT">
             <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
             <End Role="STUDENT" EntitySet="STUDENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_STUDENT" Association="Self.FK_Feedback_STUDENT">
+            <End Role="STUDENT" EntitySet="STUDENTs" />
+            <End Role="FEEDBACK" EntitySet="FEEDBACKs" />
           </AssociationSet>
           <AssociationSet Name="FK_USER_Role" Association="Self.FK_USER_Role">
             <End Role="ROLE" EntitySet="ROLEs" />
@@ -551,10 +600,10 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Images" ColumnName="Images" />
-                <ScalarProperty Name="Writter" ColumnName="Writter" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="writer" ColumnName="writer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -573,6 +622,18 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="FEEDBACKs">
+            <EntityTypeMapping TypeName="ManageStudentModel.FEEDBACK">
+              <MappingFragment StoreEntitySet="FEEDBACK">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="FacilitiesId" ColumnName="FacilitiesId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ROLEs">
             <EntityTypeMapping TypeName="ManageStudentModel.ROLE">
               <MappingFragment StoreEntitySet="ROLE">
@@ -588,19 +649,20 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
-                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="ResidentialAddress" ColumnName="ResidentialAddress" />
-                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="ResidentialAddress" ColumnName="ResidentialAddress" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="AdmissionFor" ColumnName="AdmissionFor" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
                 <ScalarProperty Name="Sports" ColumnName="Sports" />
+                <ScalarProperty Name="AdmissionFor" ColumnName="AdmissionFor" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -619,25 +681,25 @@ error 6004: The table 'ManageStudent.dbo.FEEDBACK' is referenced by a relationsh
             <EntityTypeMapping TypeName="ManageStudentModel.TABULAR">
               <MappingFragment StoreEntitySet="TABULAR">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="ResidentialAddress" ColumnName="ResidentialAddress" />
                 <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="AdmissionFor" ColumnName="AdmissionFor" />
-                <ScalarProperty Name="Sports" ColumnName="Sports" />
                 <ScalarProperty Name="EnrollmentNo" ColumnName="EnrollmentNo" />
                 <ScalarProperty Name="Center" ColumnName="Center" />
-                <ScalarProperty Name="Stream" ColumnName="Stream" />
                 <ScalarProperty Name="Field" ColumnName="Field" />
-                <ScalarProperty Name="OutOf" ColumnName="OutOf" />
-                <ScalarProperty Name="ClassObtained" ColumnName="ClassObtained" />
+                <ScalarProperty Name="Stream" ColumnName="Stream" />
+                <ScalarProperty Name="Sports" ColumnName="Sports" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="ClassObtained" ColumnName="ClassObtained" />
+                <ScalarProperty Name="OutOf" ColumnName="OutOf" />
                 <ScalarProperty Name="University" ColumnName="University" />
                 <ScalarProperty Name="MarksSecured" ColumnName="MarksSecured" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

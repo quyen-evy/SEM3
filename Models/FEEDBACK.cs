@@ -12,14 +12,15 @@ namespace projectsem3.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class FACILITy
+    public partial class FEEDBACK
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Images { get; set; }
+        public int StudentId { get; set; }
+        public Nullable<int> FacilitiesId { get; set; }
         public string Description { get; set; }
-        public Nullable<bool> Status { get; set; }
         public Nullable<System.DateTime> Time { get; set; }
-        public string writer { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public int Id { get; set; }
+    
+        public virtual STUDENT STUDENT { get; set; }
     }
 }

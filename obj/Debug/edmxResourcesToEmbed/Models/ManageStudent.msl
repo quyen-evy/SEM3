@@ -33,10 +33,10 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Images" ColumnName="Images" />
-          <ScalarProperty Name="Writter" ColumnName="Writter" />
-          <ScalarProperty Name="Time" ColumnName="Time" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="writer" ColumnName="writer" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -55,6 +55,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="FEEDBACKs">
+      <EntityTypeMapping TypeName="ManageStudentModel.FEEDBACK">
+        <MappingFragment StoreEntitySet="FEEDBACK">
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="FacilitiesId" ColumnName="FacilitiesId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ROLEs">
       <EntityTypeMapping TypeName="ManageStudentModel.ROLE">
         <MappingFragment StoreEntitySet="ROLE">
@@ -70,19 +82,20 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
-          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="ResidentialAddress" ColumnName="ResidentialAddress" />
-          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="ResidentialAddress" ColumnName="ResidentialAddress" />
+          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
           <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="AdmissionFor" ColumnName="AdmissionFor" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
           <ScalarProperty Name="Sports" ColumnName="Sports" />
+          <ScalarProperty Name="AdmissionFor" ColumnName="AdmissionFor" />
           <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
           <ScalarProperty Name="CourseId" ColumnName="CourseId" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -101,25 +114,25 @@
       <EntityTypeMapping TypeName="ManageStudentModel.TABULAR">
         <MappingFragment StoreEntitySet="TABULAR">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="ResidentialAddress" ColumnName="ResidentialAddress" />
           <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="AdmissionFor" ColumnName="AdmissionFor" />
-          <ScalarProperty Name="Sports" ColumnName="Sports" />
           <ScalarProperty Name="EnrollmentNo" ColumnName="EnrollmentNo" />
           <ScalarProperty Name="Center" ColumnName="Center" />
-          <ScalarProperty Name="Stream" ColumnName="Stream" />
           <ScalarProperty Name="Field" ColumnName="Field" />
-          <ScalarProperty Name="OutOf" ColumnName="OutOf" />
-          <ScalarProperty Name="ClassObtained" ColumnName="ClassObtained" />
+          <ScalarProperty Name="Stream" ColumnName="Stream" />
+          <ScalarProperty Name="Sports" ColumnName="Sports" />
           <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
           <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="ClassObtained" ColumnName="ClassObtained" />
+          <ScalarProperty Name="OutOf" ColumnName="OutOf" />
           <ScalarProperty Name="University" ColumnName="University" />
           <ScalarProperty Name="MarksSecured" ColumnName="MarksSecured" />
           <ScalarProperty Name="Status" ColumnName="Status" />

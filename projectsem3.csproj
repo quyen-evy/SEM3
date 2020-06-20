@@ -156,6 +156,9 @@
     <Compile Include="Models\FACULTY.cs">
       <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FEEDBACK.cs">
+      <DependentUpon>ManageStudent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageStudent.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -748,13 +751,6 @@
     <Content Include="Content\admin\fonts\weathericons-regular-webfont.ttf" />
     <Content Include="Content\admin\fonts\weathericons-regular-webfont.woff" />
     <Content Include="Content\admin\fonts\WeatherIcons-Regular.otf" />
-    <EntityDeploy Include="Models\ManageStudent.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ManageStudent.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ManageStudent.edmx.diagram">
-      <DependentUpon>ManageStudent.edmx</DependentUpon>
-    </Content>
     <Content Include="ckeditor\CHANGES.md" />
     <Content Include="ckeditor\LICENSE.md" />
     <Content Include="ckeditor\plugins\scayt\CHANGELOG.md" />
@@ -770,6 +766,13 @@
     <Content Include="ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="ckeditor\skins\moono-lisa\readme.md" />
+    <EntityDeploy Include="Models\ManageStudent.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ManageStudent.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ManageStudent.edmx.diagram">
+      <DependentUpon>ManageStudent.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

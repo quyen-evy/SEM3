@@ -1,4 +1,5 @@
-﻿
+﻿@using projectsem3.Models
+@model projectsem3.Models.STUDENT
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
@@ -24,13 +25,23 @@
         </h3>
         <!-- content -->
         <div class="sub-main-w3 pt-md-4">
-            <form action="#" method="post">
+            @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.ValidationSummary(true)
+
                 <div class="form-style-agile form-group">
                     <label>
-                        Your Name
+                        Your First Name
                         <i class="fas fa-user"></i>
                     </label>
-                    <input placeholder="Your Name" class="form-control" name="Name" type="text" required="">
+                    @Html.TextBoxFor(u => u.FirstName, new { @placeholder = "First Name", @class = "form-control", @type = "text", @required = "", @name = "Your first name" })
+                </div>
+                <div class="form-style-agile form-group">
+                    <label>
+                        Your Last Name
+                        <i class="fas fa-user"></i>
+                    </label>
+                    @Html.TextBoxFor(u => u.LastName, new { @placeholder = "First Name", @class = "form-control", @type = "text", @required = "", @name = "Your first name" })
                 </div>
                 <div class="form-style-agile form-group">
                     <label>
@@ -65,7 +76,7 @@
                 </ul>
                 <!-- //switch -->
                 <input type="submit" value="Register">
-            </form>
+            }
         </div>
         <!-- //content -->
     </div>

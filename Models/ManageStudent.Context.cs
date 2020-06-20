@@ -29,6 +29,7 @@ namespace projectsem3.Models
         public virtual DbSet<DEPARTMENT> DEPARTMENTs { get; set; }
         public virtual DbSet<FACILITy> FACILITIES { get; set; }
         public virtual DbSet<FACULTY> FACULTies { get; set; }
+        public virtual DbSet<FEEDBACK> FEEDBACKs { get; set; }
         public virtual DbSet<ROLE> ROLEs { get; set; }
         public virtual DbSet<STUDENT> STUDENTs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
