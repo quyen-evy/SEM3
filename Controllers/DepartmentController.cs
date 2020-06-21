@@ -12,11 +12,11 @@ namespace projectsem3.Controllers
     {
         private ManageStudentEntities ManageStudent = new ManageStudentEntities();
         // GET: Department
-        public ActionResult Index(int id=1)
+        public ActionResult Index(int id = 1)
         {
 
             List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false && u.DepartmentId == id).ToList<COURSE>();
-
+           
             List<DEPARTMENT> departmentID = ManageStudent.DEPARTMENTs.Where(v => v.Status == false && v.Id == id).ToList<DEPARTMENT>();
             ViewBag.departmentId = departmentID;
             List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
