@@ -36,7 +36,7 @@ namespace projectsem3.Controllers
             if (ModelState.IsValid)
             {
                 string passwordMD5 = password.ToMD5();
-                USER user = ManageEntities.USERs.SingleOrDefault(u => u.Email == email && u.Password == passwordMD5 && u.Status == false);
+                USER user = ManageStudent.USERs.SingleOrDefault(u => u.Email == email && u.Password == passwordMD5 && u.Status == false);
                 if (user != null)
                 {
                     Session["user"] = user;
@@ -70,7 +70,7 @@ namespace projectsem3.Controllers
         }
         private ActionResult UpdateFacilities(FACILITy facilities, HttpPostedFileBase postedFile)
         {
-            FACILITy facility = ManageEntities.FACILITIES.SingleOrDefault(u => u.Status == false);
+            FACILITy facility = ManageStudent.FACILITIES.SingleOrDefault(u => u.Status == false);
             if(ModelState.IsValid)
             {
                 if(SaveImage(postedFile))
@@ -79,7 +79,7 @@ namespace projectsem3.Controllers
                     facility.Description = facilities.Description;
                     facility.Time = facilities.Time;
                     facility.writer = facilities.writer;
-                    ManageEntities.SaveChanges();
+                    ManageStudent.SaveChanges();
                     ViewBag.Status = "Update successful";
                 }
                 else
