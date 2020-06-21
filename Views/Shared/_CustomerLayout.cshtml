@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using projectsem3.Models
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -101,7 +102,14 @@
                                 </div>
                             </div>
                             <div class="col-sm-4 col-6 top-login-butt text-right mt-sm-2">
-                                <a href="login.html" class="button-head-mow3 text-white">Login</a>
+                                @if (Session["student"] != null)
+                                {
+                                    var student = Session["student"] as STUDENT;
+                                    <text>Hello <a href="../Account/Profile">@student.FirstName @student.LastName</a></text>
+                                }
+                                else
+                                {
+                                    <a href="../account/login" class="button-head-mow3 text-white">Login</a>}
                             </div>
                         </div>
                     </div>
@@ -123,13 +131,13 @@
                 <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
                     <ul class="navbar-nav justify-content-center">
                         <li class="nav-item active">
-                            <a class="nav-link text-white" href="index.html">
+                            <a class="nav-link text-white" href="../Index">
                                 Home
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="about.html">About Us</a>
+                            <a class="nav-link text-white" href="../Home/About">About Us</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -140,7 +148,7 @@
                                 <a class="dropdown-item" href="course_details.html">Course Details</a>
                                 <a class="dropdown-item" href="course_details.html">Course Details</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="form.html">Admission Form</a>
+                                <a class="dropdown-item" href="../Admission">Admission Form</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -148,12 +156,12 @@
                                 Department
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="language.html">Language</a>
-                                <a class="dropdown-item" href="communication.html">Chemistry</a>
-                                <a class="dropdown-item" href="business.html">Economics</a>
-                                <a class="dropdown-item" href="software.html">Psychology</a>
-                                <a class="dropdown-item" href="social_media.html">Geology</a>
-                                <a class="dropdown-item" href="photography.html">Mathematics</a>
+
+                                @foreach (var department in TempData["department"] as List<DEPARTMENT>)
+                                {
+                                    <a class="dropdown-item" href="../department/index?id=@department.Id">@department.DepartmentName</a>
+
+                                }
                             </div>
                         </li>
                         <li class="nav-item">
@@ -164,22 +172,20 @@
                                 Facilities
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="single.html">College canteen</a>
-                                <a class="dropdown-item" href="single.html">Hostel</a>
-                                <a class="dropdown-item" href="single.html">Placement center</a>
-                                <a class="dropdown-item" href="single.html">Gymkhana</a>
-                                <a class="dropdown-item" href="single.html">College library</a>
-                                <a class="dropdown-item" href="single.html">Administrator office</a>
+                                @foreach (var facility in TempData["facilities"] as List<FACILITy>)
+                                {
+                                    <a class="dropdown-item" href="../Facilities/Index?id=@facility.Id">@facility.Name</a>
+                                }
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="register.html">Register</a>
+                            <a class="nav-link text-white" href="../account/register">Register</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="gallery.html">Gallery</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="contact.html">Contact Us</a>
+                            <a class="nav-link text-white" href="../contact/index">Contact Us</a>
                         </li>
                     </ul>
                 </div>
@@ -269,6 +275,9 @@
     </footer>
     <!-- //footer -->
     <!-- Js files -->
+    <!-- JavaScript -->
+    <script src="../Scripts/js/jquery-2.2.3.min.js"></script>
+    <!-- Default-JavaScript-File -->
     <script src="../Scripts/js/bootstrap.js"></script>
     <!-- Necessary-JavaScript-File-For-Bootstrap -->
     <!-- banner slider -->

@@ -145,26 +145,29 @@
     </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="Models\COURSE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DEPARTMENT.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FACILITy.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FACULTY.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model1.Context.cs">
+    <Compile Include="Models\FEEDBACK.cs">
+      <DependentUpon>ManageStudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ManageStudent.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
+      <DependentUpon>ManageStudent.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model1.cs">
+    <Compile Include="Models\ManageStudent.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageStudent.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -172,16 +175,16 @@
       <DependentUpon>ManageStudent.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ROLE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\STUDENT.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TABULAR.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USER.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -684,15 +687,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Model1.Context.tt">
+    <Content Include="Models\ManageStudent.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ManageStudent.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <LastGenOutput>ManageStudent.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model1.tt">
+    <Content Include="Models\ManageStudent.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ManageStudent.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <LastGenOutput>ManageStudent.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\admin\js\bootstrap.min.js" />
     <Content Include="Scripts\admin\js\Chart.js" />
@@ -745,13 +748,6 @@
     <Content Include="Content\admin\fonts\weathericons-regular-webfont.ttf" />
     <Content Include="Content\admin\fonts\weathericons-regular-webfont.woff" />
     <Content Include="Content\admin\fonts\WeatherIcons-Regular.otf" />
-    <EntityDeploy Include="Models\ManageStudent.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ManageStudent.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ManageStudent.edmx.diagram">
-      <DependentUpon>ManageStudent.edmx</DependentUpon>
-    </Content>
     <Content Include="ckeditor\CHANGES.md" />
     <Content Include="ckeditor\LICENSE.md" />
     <Content Include="ckeditor\plugins\scayt\CHANGELOG.md" />
@@ -767,6 +763,13 @@
     <Content Include="ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="ckeditor\skins\moono-lisa\readme.md" />
+    <EntityDeploy Include="Models\ManageStudent.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ManageStudent.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ManageStudent.edmx.diagram">
+      <DependentUpon>ManageStudent.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -819,6 +822,7 @@
     <Content Include="Views\Admission\Index.cshtml" />
     <Content Include="Views\Admin\Update.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

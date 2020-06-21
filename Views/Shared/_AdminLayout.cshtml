@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using projectsem3.Models
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -58,6 +59,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!--sidebar nav start-->
                 <ul class="nav nav-pills nav-stacked custom-nav">
                     <li class="active"><a href="index.html"><i class="lnr lnr-power-switch"></i><span>Dashboard</span></a></li>
+                    <li class="menu-list">
+                        <a href="#">
+                            <i class="lnr lnr-cog"></i>
+                            <span>Components</span>
+                        </a>
+                        <ul class="sub-menu-list">
+                            <li><a href="grids.html">Grids</a> </li>
+                            <li><a href="widgets.html">Widgets</a></li>
+                        </ul>
+                    </li>
                     <li><a href="forms.html"><i class="lnr lnr-spell-check"></i> <span>Forms</span></a></li>
                     <li><a href="tables.html"><i class="lnr lnr-menu"></i> <span>Tables</span></a></li>
                     <li class="menu-list">
@@ -67,6 +78,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="compose-mail.html">Compose Mail</a></li>
                         </ul>
                     </li>
+                    <li class="menu-list">
+                        <a href="#"><i class="lnr lnr-indent-increase"></i> <span>Menu Levels</span></a>
+                        <ul class="sub-menu-list">
+                            <li><a href="charts.html">Basic Charts</a> </li>
+                        </ul>
+                    </li>
+                    <li><a href="codes.html"><i class="lnr lnr-pencil"></i> <span>Typography</span></a></li>
+                    <li><a href="media.html"><i class="lnr lnr-select"></i> <span>Media Css</span></a></li>
                     <li class="menu-list">
                         <a href="#"><i class="lnr lnr-book"></i>  <span>Pages</span></a>
                         <ul class="sub-menu-list">
@@ -269,16 +288,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <ul>
                                 <li class="dropdown profile_details_drop">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <div class="profile_img">
-                                            <span style="background:url(../Content/admin/images/1.jpg) no-repeat center"> </span>
-                                            <div class="user-name">
-                                                <p>Michael<span>Administrator</span></p>
+                                        @if (Session["user"] != null)
+                                        {
+                                            var user = Session["user"] as USER;
+                                            <div class="profile_img">
+                                                <span style="background:url(@user.Avatar) no-repeat center"> </span>
+                                                <div class="user-name">
+                                                    <p>@user.FirstName @user.LastName </p>
+                                                </div>
+                                                <i class="lnr lnr-chevron-down"></i>
+                                                <i class="lnr lnr-chevron-up"></i>
+                                                <div class="clearfix"></div>
                                             </div>
-                                            <i class="lnr lnr-chevron-down"></i>
-                                            <i class="lnr lnr-chevron-up"></i>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </a>
+                                        }
+                                        </a>
                                     <ul class="dropdown-menu drp-mnu">
                                         <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
                                         <li> <a href="#"><i class="fa fa-user"></i>Profile</a> </li>
@@ -299,7 +322,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <!--footer section start-->
             <footer>
-                <p> All Rights Reserved | Design by</a></p>
+                <p> All Rights Reserved | Design by TiQM</a></p>
             </footer>
             <!--footer section end-->
             <!-- main content end-->

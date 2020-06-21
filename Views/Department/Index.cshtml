@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<projectsem3.Models.COURSE>
+@using projectsem3.Models
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
@@ -18,191 +19,76 @@
     <div class="container py-xl-5 py-lg-3">
         <h3 class="title text-capitalize font-weight-light text-dark text-center mb-sm-5 mb-4">
             course -
-            <span class="font-weight-bold">Language</span>
+
+            <span class="font-weight-bold">@ViewBag.departmentId[0].DepartmentName</span>
         </h3>
-        <div class="row cource-list-agile pt-4">
-            <div class="col-lg-7 agile-course-main">
-                <div class="w3ls-cource-first">
-                    <img src="images/1.png" alt="" class="img-fluid img-poiscour mx-auto d-block mt-2"></img>
-                    <div class="px-md-5 px-4  pb-md-5 pb-4">
-                        <h3 class="text-dark">Advanced Language English</h3>
-                        <p class="mt-3 mb-4 pr-lg-5">accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                        <ul class="list-unstyled text-capitalize">
-                            <li>
-                                <i class="fas fa-calendar-alt mr-3"></i>may - aug 2018
-                            </li>
-                            <li class="my-3">
-                                <i class="fas fa-clock mr-3"></i>4 - 6 hours
-                            </li>
-                            <li>
-                                <i class="fas fa-users mr-3"></i>70 seats
-                            </li>
-                        </ul>
+        @foreach (var course in Model.Take(1))
+        {
+            <div class="row cource-list-agile pt-4">
+                <div class="col-lg-7 agile-course-main">
+                    <div class="w3ls-cource-first">
+                        <img src="../Content/images/2.png" alt="" class="img-fluid img-poiscour mx-auto d-block mt-2"></img>
+                        <div class="px-md-5 px-4  pb-md-5 pb-4">
+                            <h3 class="text-dark">Advanced @course.CourseName</h3>
+                            <p class="mt-3 mb-4 pr-lg-5">@course.Description</p>
+                            <ul class="list-unstyled text-capitalize">
+                                <li>
+                                    <i class="fas fa-calendar-alt mr-3"></i>@course.Time
+                                </li>
+                                <li class="my-3">
+                                    <i class="fas fa-clock mr-3"></i>4 - 6 hours
+                                </li>
+                                <li>
+                                    <i class="fas fa-users mr-3"></i>@course.Seat
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-5 agile-course-main-2 mt-4">
-                <img src="images/am1.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="buttons-w3ls">
-                <a class="btn button-cour-w3ls text-white" href="course_details.html" role="button">Learn More</a>
-                <a class="btn bg-dark text-white" href="form.html" role="button">Apply Now</a>
-            </div>
-        </div>
-        <div class="row cource-list-agile cource-list-agile-2">
-            <div class="col-lg-5 agile-course-main-3 mt-4">
-                <img src="images/am2.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="col-lg-7 agile-course-main text-right">
-                <div class="w3ls-cource-first">
-                    <img src="images/2.png" alt="" class="img-fluid img-poiscour mx-auto d-block mt-2"></img>
-                    <div class="px-md-5 px-4  pb-md-5 pb-4">
-                        <h3 class="text-dark">Advanced Language Japanese</h3>
-                        <p class="mt-3 mb-4 pl-lg-4">accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                        <ul class="list-unstyled text-capitalize">
-                            <li>
-                                june - aug 2018
-                                <i class="fas fa-calendar-alt ml-3"></i>
-                            </li>
-                            <li class="my-3">
-                                3 - 6 hours
-                                <i class="fas fa-clock ml-3"></i>
-                            </li>
-                            <li>
-                                60 seats
-                                <i class="fas fa-users ml-3"></i>
-                            </li>
-                        </ul>
+                <div class="col-lg-5 agile-course-main-2 mt-4">
+                    <img src="../Content/@course.Images" alt="" class="img-fluid">
+                </div>
+                <div class="buttons-w3ls">
+                    <a class="btn button-cour-w3ls text-white" href="course_details.html" role="button">Learn More</a>
+                    <a class="btn bg-dark text-white" href="form.html" role="button">Apply Now</a>
+                </div>
+            </div>}
+        @foreach (var course in Model.Skip(1))
+        {
+            <div class="row cource-list-agile cource-list-agile-2">
+                <div class="col-lg-5 agile-course-main-3 mt-4">
+                    <img src="../Content/@course.Images" alt="" class="img-fluid">
+                </div>
+                <div class="col-lg-7 agile-course-main text-right">
+                    <div class="w3ls-cource-first">
+                        <img src="../Content/images/2.png" alt="" class="img-fluid"></img>
+                        <div class="px-md-5 px-4  pb-md-5 pb-4">
+                            <h3 class="text-dark">Advanced @course.CourseName</h3>
+                            <p class="mt-3 mb-4 pl-lg-4">@course.Description</p>
+                            <ul class="list-unstyled text-capitalize">
+                                <li>
+                                    @course.Time
+                                    <i class="fas fa-calendar-alt ml-3"></i>
+                                </li>
+                                <li class="my-3">
+                                    3 - 6 hours
+                                    <i class="fas fa-clock ml-3"></i>
+                                </li>
+                                <li>
+                                    @course.Seat
+                                    <i class="fas fa-users ml-3"></i>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="buttons-w3ls-2">
-                <a class="btn button-cour-w3ls text-white" href="course_details.html" role="button">Learn More</a>
-                <a class="btn bg-dark text-white" href="form.html" role="button">Apply Now</a>
-            </div>
-        </div>
-        <div class="row cource-list-agile pt-4">
-            <div class="col-lg-7 agile-course-main">
-                <div class="w3ls-cource-first">
-                    <img src="images/1.png" alt="" class="img-fluid img-poiscour mx-auto d-block mt-2"></img>
-                    <div class="px-md-5 px-4  pb-md-5 pb-4">
-                        <h3 class="text-dark">The Art Language Of Translation</h3>
-                        <p class="mt-3 mb-4 pr-lg-5">accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                        <ul class="list-unstyled text-capitalize">
-                            <li>
-                                <i class="fas fa-calendar-alt mr-3"></i>may - aug 2018
-                            </li>
-                            <li class="my-3">
-                                <i class="fas fa-clock mr-3"></i>4 - 6 hours
-                            </li>
-                            <li>
-                                <i class="fas fa-users mr-3"></i>70 seats
-                            </li>
-                        </ul>
-                    </div>
+                <div class="buttons-w3ls-2">
+                    <a class="btn button-cour-w3ls text-white" href="course_details.html" role="button">Learn More</a>
+                    <a class="btn bg-dark text-white" href="form.html" role="button">Apply Now</a>
                 </div>
             </div>
-            <div class="col-lg-5 agile-course-main-2 mt-4">
-                <img src="images/am3.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="buttons-w3ls">
-                <a class="btn button-cour-w3ls text-white" href="course_details.html" role="button">Learn More</a>
-                <a class="btn bg-dark text-white" href="form.html" role="button">Apply Now</a>
-            </div>
-        </div>
-        <div class="row cource-list-agile cource-list-agile-2">
-            <div class="col-lg-5 agile-course-main-3 mt-4">
-                <img src="images/am4.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="col-lg-7 agile-course-main text-right">
-                <div class="w3ls-cource-first">
-                    <img src="images/2.png" alt="" class="img-fluid img-poiscour mx-auto d-block mt-2"></img>
-                    <div class="px-md-5 px-4  pb-md-5 pb-4">
-                        <h3 class="text-dark">Experiential Learning Language Focus</h3>
-                        <p class="mt-3 mb-4 pl-lg-4">accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                        <ul class="list-unstyled text-capitalize">
-                            <li>
-                                june - aug 2018
-                                <i class="fas fa-calendar-alt ml-3"></i>
-                            </li>
-                            <li class="my-3">
-                                3 - 6 hours
-                                <i class="fas fa-clock ml-3"></i>
-                            </li>
-                            <li>
-                                60 seats
-                                <i class="fas fa-users ml-3"></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="buttons-w3ls-2">
-                <a class="btn button-cour-w3ls text-white" href="course_details.html" role="button">Learn More</a>
-                <a class="btn bg-dark text-white" href="form.html" role="button">Apply Now</a>
-            </div>
-        </div>
-        <div class="row cource-list-agile pt-4">
-            <div class="col-lg-7 agile-course-main">
-                <div class="w3ls-cource-first">
-                    <img src="images/1.png" alt="" class="img-fluid img-poiscour mx-auto d-block mt-2"></img>
-                    <div class="px-md-5 px-4  pb-md-5 pb-4">
-                        <h3 class="text-dark">Independent Study Korean</h3>
-                        <p class="mt-3 mb-4 pr-lg-5">accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                        <ul class="list-unstyled text-capitalize">
-                            <li>
-                                <i class="fas fa-calendar-alt mr-3"></i>may - aug 2018
-                            </li>
-                            <li class="my-3">
-                                <i class="fas fa-clock mr-3"></i>4 - 6 hours
-                            </li>
-                            <li>
-                                <i class="fas fa-users mr-3"></i>70 seats
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-5 agile-course-main-2 mt-4">
-                <img src="images/n2.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="buttons-w3ls">
-                <a class="btn button-cour-w3ls text-white" href="course_details.html" role="button">Learn More</a>
-                <a class="btn bg-dark text-white" href="form.html" role="button">Apply Now</a>
-            </div>
-        </div>
-        <div class="row cource-list-agile cource-list-agile-2">
-            <div class="col-lg-5 agile-course-main-3 mt-4">
-                <img src="images/n3.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="col-lg-7 agile-course-main text-right">
-                <div class="w3ls-cource-first">
-                    <img src="images/2.png" alt="" class="img-fluid img-poiscour mx-auto d-block mt-2"></img>
-                    <div class="px-md-5 px-4  pb-md-5 pb-4">
-                        <h3 class="text-dark">Intermediate Language Korean</h3>
-                        <p class="mt-3 mb-4 pl-lg-4">accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-                        <ul class="list-unstyled text-capitalize">
-                            <li>
-                                june - aug 2018
-                                <i class="fas fa-calendar-alt ml-3"></i>
-                            </li>
-                            <li class="my-3">
-                                3 - 6 hours
-                                <i class="fas fa-clock ml-3"></i>
-                            </li>
-                            <li>
-                                60 seats
-                                <i class="fas fa-users ml-3"></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="buttons-w3ls-2">
-                <a class="btn button-cour-w3ls text-white" href="course_details.html" role="button">Learn More</a>
-                <a class="btn bg-dark text-white" href="form.html" role="button">Apply Now</a>
-            </div>
-        </div>
+
+        }
     </div>
 </div>
 <!-- //course-->
