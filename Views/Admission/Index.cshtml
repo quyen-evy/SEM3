@@ -52,12 +52,13 @@
                     @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email", @class = "form-control", @type = "text", @required = "", @name = "Your email" })
                 </div>
                 <div class="styled-input agile-styled-input-top form-group">
-                    @*@Html.DropDownListFor(u => u.Gender, new SelectList(Enum.GetValues(Type("Gender"))), "Select Gender")*@
-                    <select class="category2" required="">
-                        <option value="">Gender</option>
-                        <option value="">Female</option>
-                        <option value="">Male</option>
-                    </select>
+                    <span> Select your Gender :</span>
+                    @Html.DropDownListFor(u => u.Gender,
+                new List<SelectListItem> {
+                     new SelectListItem { Value = "0" , Text = "Male" },
+                     new SelectListItem { Value = "1" , Text = "Female" },
+                  },
+                new { @class = "category2" })
                 </div>
 
                 <div class="styled-input form-group">
@@ -76,11 +77,13 @@
                 </div>
                 <div class="styled-input form-group">
                     <div class="agileits_w3layouts_grid">
-                        <select class="category2" name="category1" required="">
-                            <option value="">Admission for </option>
-                            <option value="">Stream</option>
-                            <option value="">Field</option>
-                        </select>
+                        <span> Admission for :</span>
+                        @Html.DropDownListFor(u => u.AdmissionFor,
+                    new List<SelectListItem> {
+                         new SelectListItem { Value = "0" , Text = "Stream" },
+                         new SelectListItem { Value = "1" , Text = "Field" },
+                      },
+                    new { @class = "category2" })
                     </div>
                 </div>
                 <div class="styled-input form-group">

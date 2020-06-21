@@ -10,7 +10,7 @@ namespace projectsem3.Controllers
 {
     public class AccountController : Controller
     {
-        private ManageStudentEntities ManageEntities = new ManageStudentEntities();
+        private ManageStudentEntities ManageStudent = new ManageStudentEntities();
         
         // GET: Account
         public ActionResult Login()
@@ -24,7 +24,7 @@ namespace projectsem3.Controllers
             if (ModelState.IsValid)
             {
                 string passwordMD5 = password.ToMD5();
-                USER user = ManageEntities.USERs.SingleOrDefault(u => u.Email == email && u.Password == passwordMD5 && u.Status == false);
+                USER user = ManageStudent.USERs.SingleOrDefault(u => u.Email == email && u.Password == passwordMD5 && u.Status == false);
                 if (user != null)
                 {
                     Session["user"] = user;

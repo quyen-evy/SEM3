@@ -9,12 +9,15 @@ namespace projectsem3.Controllers
 {
     public class CourseController : Controller
     {
-        private ManageStudentEntities ManageEntities = new ManageStudentEntities();
+        private ManageStudentEntities ManageStudent = new ManageStudentEntities();
         // GET: Course
         public ActionResult Index()
         {
-            List<COURSE> course = ManageEntities.COURSEs.Where(u => u.Status == false).ToList<COURSE>();
-            return View(course);
+            //List<COURSE> courseID = ManageStudent.COURSEs.Where(u => u.Status == false && u.Id == id).ToList<COURSE>();
+            //ViewBag.courseId = courseID;
+            //List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false ).ToList<COURSE>();
+            //TempData["courses"] = course;
+            return View();
         }
     }
 }
