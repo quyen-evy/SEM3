@@ -29,19 +29,13 @@
             {
                 @Html.ValidationSummary(true)
 
+                
                 <div class="form-style-agile form-group">
                     <label>
-                        Your First Name
+                        Student ID
                         <i class="fas fa-user"></i>
                     </label>
-                    @Html.TextBoxFor(u => u.FirstName, new { @placeholder = "First Name", @class = "form-control", @type = "text", @required = "", @name = "Your first name" })
-                </div>
-                <div class="form-style-agile form-group">
-                    <label>
-                        Your Last Name
-                        <i class="fas fa-user"></i>
-                    </label>
-                    @Html.TextBoxFor(u => u.LastName, new { @placeholder = "First Name", @class = "form-control", @type = "text", @required = "", @name = "Your first name" })
+                    @Html.TextBoxFor(u => u.Id, new { @placeholder = "StudentID", @class = "form-control", @required = "", @name = "Your id" })
                 </div>
                 <div class="form-style-agile form-group">
                     <label>

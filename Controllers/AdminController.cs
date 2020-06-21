@@ -1,6 +1,7 @@
 ﻿using projectsem3.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -22,7 +23,14 @@ namespace projectsem3.Controllers
 
             return View(tabular);
         }
-        public ActionResult Update()
+        public ActionResult UpdateFacilities(FACILITy fac)
+        {
+            int facilityId = fac.Id;
+            FACILITy facility = ManageStudent.FACILITIES.SingleOrDefault(u => u.Id == facilityId && u.Status == false);
+            TempData ["Fac"] = facility;
+            return View();
+        }
+        public ActionResult UpdateCourse()
         {
             return View();
         }
@@ -70,7 +78,9 @@ namespace projectsem3.Controllers
         }
         private ActionResult UpdateFacilities(FACILITy facilities, HttpPostedFileBase postedFile)
         {
-            FACILITy facility = ManageStudent.FACILITIES.SingleOrDefault(u => u.Status == false);
+            int facilitiesId = facilities.Id;
+            FACILITy facility = ManageStudent.FACILITIES.SingleOrDefault(u => u.Id == facilitiesId && u.Status == false);
+       
             if(ModelState.IsValid)
             {
                 if(SaveImage(postedFile))
@@ -86,9 +96,8 @@ namespace projectsem3.Controllers
                 {
                     ViewBag.Status = "Update unsuccessful";
                 }
-                return View("Update", facility);
             }
-            return null;
+            return View("Facilities", facility);
         }
 
     }

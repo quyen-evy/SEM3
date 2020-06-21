@@ -12,7 +12,7 @@ namespace projectsem3.Controllers
         private ManageStudentEntities ManageStudent = new ManageStudentEntities();
 
         // GET: Facilities
-        public ActionResult Index(int id=1)
+        public ActionResult Index(int id = 1)
         {
             List<FACILITy> facilitiesId = ManageStudent.FACILITIES.Where(u => u.Status == false && u.Id == id).ToList<FACILITy>();
             ViewBag.facilitiesId = facilitiesId;
@@ -37,9 +37,9 @@ namespace projectsem3.Controllers
 
                 ManageStudent.FEEDBACKs.Add(feedback);
                 ManageStudent.SaveChanges();
-                return Content("tks your comment");
+                return Content("Thanks your comment");
             }
-            return Content("pls check comment");
+            return Content("Please check comment");
         }
     }
 }
