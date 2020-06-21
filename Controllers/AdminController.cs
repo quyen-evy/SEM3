@@ -23,8 +23,11 @@ namespace projectsem3.Controllers
 
             return View(tabular);
         }
-        public ActionResult UpdateFacilities()
+        public ActionResult UpdateFacilities(FACILITy fac)
         {
+            int facilityId = fac.Id;
+            FACILITy facility = ManageStudent.FACILITIES.SingleOrDefault(u => u.Id == facilityId && u.Status == false);
+            TempData ["Fac"] = facility;
             return View();
         }
         public ActionResult UpdateCourse()
@@ -77,6 +80,7 @@ namespace projectsem3.Controllers
         {
             int facilitiesId = facilities.Id;
             FACILITy facility = ManageStudent.FACILITIES.SingleOrDefault(u => u.Id == facilitiesId && u.Status == false);
+       
             if(ModelState.IsValid)
             {
                 if(SaveImage(postedFile))
