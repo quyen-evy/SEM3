@@ -1,9 +1,1 @@
-Models
-bin\projectsem3.dll
-bin\projectsem3.pdb
-obj\Debug\projectsem3.dll
-obj\Debug\projectsem3.pdb
-obj\Debug\projectsem3.csproj.CoreCompileInputs.cache
-obj\Debug\projectsem3.csprojAssemblyReference.cache
-.vs\projectsem3\v16\.suo
-Web.config
+.vs/projectsem3/v16/.suo
