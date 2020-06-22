@@ -1,4 +1,5 @@
 ﻿using projectsem3.Models;
+using projectsem3.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,12 +24,17 @@ namespace projectsem3.Controllers
 
             return View(tabular);
         }
-        public ActionResult UpdateFacilities(FACILITy fac)
+        public ActionResult UpdateFacilities()
         {
-            int facilityId = fac.Id;
-            FACILITy facility = ManageStudent.FACILITIES.SingleOrDefault(u => u.Id == facilityId && u.Status == false);
-            TempData ["Fac"] = facility;
             return View();
+        }
+        public ActionResult GetNameById(int id)
+        {
+            
+            
+
+            
+            return null;
         }
         public ActionResult UpdateCourse()
         {

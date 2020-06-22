@@ -31,20 +31,11 @@ namespace projectsem3.Controllers
             if (ModelState.IsValid)
             {
                 string passwordMD5 = password.ToMD5();
-                USER user = ManageStudent.USERs.SingleOrDefault(u => u.Email == email && u.Password == passwordMD5 && u.Status == false);
-                if (user != null)
+                STUDENT student = ManageStudent.STUDENTs.SingleOrDefault(u => u.Email == email && u.Password == passwordMD5 && u.Status == false);
+                if (student != null)
                 {
-                    Session["user"] = user;
-                    if (user.Role == 4)
-                    {
-                        return Content("User Admin");
-                        //return RedirectToAction("Index", "Index");
-                    }
-                    else
-                    {
-                        return Content("test");
-                        //return RedirectToAction("Admission", "Admin");
-                    }
+                    Session["student"] = student;
+                    return RedirectToAction("Index", "Index");
                 }
             }
             ViewBag.SignInErrorMessage = "The email or the password that you've entered is incorrect";
