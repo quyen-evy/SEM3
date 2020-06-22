@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages.Html;
 
 namespace projectsem3.Controllers
 {
     public class DepartmentController : Controller
     {
-        // GET: Department
         private ManageStudentEntities ManageStudent = new ManageStudentEntities();
         // GET: Department
         public ActionResult Index(int id = 1)
@@ -25,5 +25,6 @@ namespace projectsem3.Controllers
             TempData["facilities"] = facilities;
             return View(course);
         }
+
     }
 }

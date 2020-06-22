@@ -13,11 +13,12 @@ namespace projectsem3.Controllers
         // GET: Course
         public ActionResult Index()
         {
-            //List<COURSE> courseID = ManageStudent.COURSEs.Where(u => u.Status == false && u.Id == id).ToList<COURSE>();
-            //ViewBag.courseId = courseID;
-            //List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false ).ToList<COURSE>();
-            //TempData["courses"] = course;
-            return View();
+            List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false).ToList<COURSE>();
+            List<FACILITy> facilities = ManageStudent.FACILITIES.Where(v => v.Status == false).ToList<FACILITy>();
+            TempData["facilities"] = facilities;
+            List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
+            TempData["department"] = department;
+            return View(course);
         }
     }
 }

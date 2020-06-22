@@ -16,6 +16,8 @@ namespace projectsem3.Controllers
         // GET: Account
         public ActionResult Login()
         {
+            List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
+            TempData["courses"] = course;
             List<FACILITy> facilities = ManageStudent.FACILITIES.Where(v => v.Status == false).ToList<FACILITy>();
             TempData["facilities"] = facilities;
             List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
@@ -35,19 +37,24 @@ namespace projectsem3.Controllers
                     Session["user"] = user;
                     if (user.Role == 4)
                     {
-                        return RedirectToAction("Index", "Index");
+                        return Content("User Admin");
+                        //return RedirectToAction("Index", "Index");
                     }
                     else
                     {
-                        return RedirectToAction("Admission", "Admin");
+                        return Content("test");
+                        //return RedirectToAction("Admission", "Admin");
                     }
                 }
             }
             ViewBag.SignInErrorMessage = "The email or the password that you've entered is incorrect";
-            return View("Index","Error");
+            // return Content("Test");
+            return RedirectToAction("Index","Error");
         }
         public ActionResult Register()
         {
+            List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
+            TempData["courses"] = course;
             List<FACILITy> facilities = ManageStudent.FACILITIES.Where(v => v.Status == false).ToList<FACILITy>();
             TempData["facilities"] = facilities;
             List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
