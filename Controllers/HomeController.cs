@@ -16,6 +16,8 @@ namespace projectsem3.Controllers
             TempData["department"] = department;
             List<FACILITy> facilities = ManageStudent.FACILITIES.Where(y => y.Status == false).ToList<FACILITy>();
             TempData["facilities"] = facilities;
+                        List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
+            TempData["courses"] = course;
             return View();
         }
 
