@@ -4,11 +4,14 @@
     ViewBag.Title = "Admission";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-    <script>
-        $(document).ready(function () {
-            $("#Birthday").datepicker({
-                dateFormat: "yyyy/mm/dd"
-            })
+<script>
+    $(document).ready(function () {
+        $("#Birthday").datepicker({
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange : '1990:2000',
+            defaultDate: new Date(1999,01-01,09),
         });
     </script>
     <div id="page-wrapper">

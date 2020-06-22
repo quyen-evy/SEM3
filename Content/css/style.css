@@ -1862,7 +1862,7 @@ input:checked+.slider-switch:before {
     letter-spacing: 6px;
 }
 
-button.w3ls-button2 {
+a.w3ls-button2 {
     background: linear-gradient(to left, #42a5f5, #86c9ff);
     border: none;
     padding: 14px 30px;

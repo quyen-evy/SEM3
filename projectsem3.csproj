@@ -180,9 +180,6 @@
     <Compile Include="Models\STUDENT.cs">
       <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>ManageStudent.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TABULAR.cs">
       <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>

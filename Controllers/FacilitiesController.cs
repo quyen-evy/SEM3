@@ -9,7 +9,6 @@ namespace projectsem3.Controllers
 {
     public class FacilitiesController : Controller
     {
-        // GET: Facilities
         private ManageStudentEntities ManageStudent = new ManageStudentEntities();
 
         // GET: Facilities
@@ -23,6 +22,8 @@ namespace projectsem3.Controllers
             TempData["department"] = department;
             List<FEEDBACK> feedback = ManageStudent.FEEDBACKs.Where(u => u.Status == false && u.FacilitiesId == id).ToList<FEEDBACK>();
             TempData["feedback"] = feedback;
+            List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
+            TempData["courses"] = course;
 
             return View(facilitiesId);
         }
