@@ -13,6 +13,8 @@ namespace projectsem3.Controllers
         private ManageStudentEntities ManageStudent = new ManageStudentEntities();
         public ActionResult Index()
         {
+            List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
+            TempData["courses"] = course;
             List<FACILITy> facilities = ManageStudent.FACILITIES.Where(u => u.Status == false).ToList<FACILITy>();
             TempData["facilities"] = facilities;
             List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
