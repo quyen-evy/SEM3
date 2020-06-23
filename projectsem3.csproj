@@ -147,6 +147,8 @@
     <Compile Include="Models\COURSE.cs">
       <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dao\DepartmentDao.cs" />
+    <Compile Include="Models\Dao\UserDao.cs" />
     <Compile Include="Models\DEPARTMENT.cs">
       <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>

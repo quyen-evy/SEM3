@@ -15,8 +15,8 @@ namespace projectsem3.Controllers
         public ActionResult Index(int id = 1)
         {
 
-            List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false && u.DepartmentId == id).ToList<COURSE>();
-           
+            List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
+            TempData["courses"] = course;
             List<DEPARTMENT> departmentID = ManageStudent.DEPARTMENTs.Where(v => v.Status == false && v.Id == id).ToList<DEPARTMENT>();
             ViewBag.departmentId = departmentID;
             List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
