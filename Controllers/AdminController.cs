@@ -24,19 +24,24 @@ namespace projectsem3.Controllers
 
             return View(tabular);
         }
-        public ActionResult UpdateFacilities()
+        public ActionResult UpdateFacilities(int id)
         {
+            //var get = GetNameById(id);
+            //return ViewBag.Fac = new SelectList(get, "Id", "Name", id);
             return View();
         }
-        public ActionResult GetNameById(int id)
-        {
-            
-            
+        //public IEnumerable<FACILITy> GetNameById(int id)
+        //{
+        //    List<FacModel> fac = new List<FacModel>();
+        //    foreach (var facs in ManageStudent.FACILITIES.Where(u => u.Status == false).ToList())
+        //    {
+        //        FacModel fm = new FacModel(facs.Id);
+        //        fac.Add(fm);
+        //    }                
+        //    return null;
+        //}
 
-            
-            return null;
-        }
-        public ActionResult UpdateCourse()
+            public ActionResult UpdateCourse()
         {
             return View();
         }
