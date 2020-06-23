@@ -144,14 +144,10 @@
                                 Courses & Admission
                             </a>
                             <div class="dropdown-menu">
-                                @{int i = 0;
-                                    foreach (var course in TempData["courses"] as List<COURSE>)
+                                    @foreach (var course in TempData["courses"] as List<COURSE>)
                                     {
-                                        if (i >= 5) { break; }
                                         <a class="dropdown-item" href="../course/index?id=@course.Id">@course.CourseName</a>
-                                        i++;
                                     }
-                                }
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="../Admission">Admission Form</a>
                             </div>
