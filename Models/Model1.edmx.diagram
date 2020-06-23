@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4342122fa21a4e73a8cd09d5867d8df7" Name="Diagram1">
+        <EntityTypeShape EntityType="ManageStudentModel.COURSE" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.DEPARTMENT" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.FACILITy" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.FACULTY" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.FEEDBACK" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.ROLE" Width="1.5" PointX="7.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.STUDENT" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.sysdiagram" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.TABULAR" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.USER" Width="1.5" PointX="10" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="ManageStudentModel.FK_COURSE_DEPARTMENT" ManuallyRouted="false" />
+        <AssociationConnector Association="ManageStudentModel.FK_COURSE_FACULTY" ManuallyRouted="false" />
+        <AssociationConnector Association="ManageStudentModel.FK_STUDENT_COURSE" ManuallyRouted="false" />
+        <AssociationConnector Association="ManageStudentModel.FK_TABULAR_COURSE" ManuallyRouted="false" />
+        <AssociationConnector Association="ManageStudentModel.FK_STUDENT_DEPARTMENT" ManuallyRouted="false" />
+        <AssociationConnector Association="ManageStudentModel.FK_FEEDBACK_FACILITIES" ManuallyRouted="false" />
+        <AssociationConnector Association="ManageStudentModel.FK_Feedback_STUDENT" ManuallyRouted="false" />
+        <AssociationConnector Association="ManageStudentModel.FK_USER_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
