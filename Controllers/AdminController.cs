@@ -1,4 +1,6 @@
 ﻿using projectsem3.Models;
+using projectsem3.Models.Dao;
+using projectsem3.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,15 +25,27 @@ namespace projectsem3.Controllers
 
             return View(tabular);
         }
-        public ActionResult UpdateFacilities(FACILITy fac)
+        public ActionResult UpdateFacilities(int id)
         {
-            int facilityId = fac.Id;
-            FACILITy facility = ManageStudent.FACILITIES.SingleOrDefault(u => u.Id == facilityId && u.Status == false);
-            TempData ["Fac"] = facility;
+            SetViewBag();
+            //var get = GetNameById(id);
+            //return ViewBag.Fac = new SelectList(get, "Id", "Name", id);
             return View();
         }
-        public ActionResult UpdateCourse()
+        //public IEnumerable<FACILITy> GetNameById(int id)
+        //{
+        //    List<FacModel> fac = new List<FacModel>();
+        //    foreach (var facs in ManageStudent.FACILITIES.Where(u => u.Status == false).ToList())
+        //    {
+        //        FacModel fm = new FacModel(facs.Id);
+        //        fac.Add(fm);
+        //    }                
+        //    return null;
+        //}
+
+            public ActionResult UpdateCourse()
         {
+            SetViewBag();
             return View();
         }
         public ActionResult Login()
@@ -100,5 +114,14 @@ namespace projectsem3.Controllers
             return View("Facilities", facility);
         }
 
+        public void SetViewBag(long? selectedId = null)
+        {
+            var dao = new DepartmentDao();
+            ViewBag.DepartmentID = new SelectList(dao.ListAll(), "Id", "DepartmentName", selectedId);
+            var fac = new FacultyDao();
+            ViewBag.FacultyID = new SelectList(fac.ListAll(), "Id", "FirstName", selectedId);
+            var cou = new CourseDao();
+            ViewBag.ID = new SelectList(cou.ListAll(), "Id", "CourseName", selectedId);
+        }
     }
 }

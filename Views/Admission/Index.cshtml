@@ -78,12 +78,7 @@
                 <div class="styled-input form-group">
                     <div class="agileits_w3layouts_grid">
                         <span> Admission for :</span>
-                        @Html.DropDownListFor(u => u.AdmissionFor,
-                    new List<SelectListItem> {
-                         new SelectListItem { Value = "0" , Text = "Stream" },
-                         new SelectListItem { Value = "1" , Text = "Field" },
-                      },
-                    new { @class = "category2" })
+                        @Html.DropDownListFor(u => u.DepartmentId, null, new { @class = "category2" })
                     </div>
                 </div>
                 <div class="styled-input form-group">
@@ -119,8 +114,10 @@
                     @* } *@
                 </div>
                 <input type="submit" value="Submit">
-                <input type="submit" value="Download Form">
-            }
+                <a class="custom-download" href="..\Content\admissionform.pdf" download="Admission Form"> Download Form </a>
+                }
+                
+            
         </div>
     </div>
 </div>
