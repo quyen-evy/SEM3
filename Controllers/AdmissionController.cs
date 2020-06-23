@@ -34,6 +34,5 @@ namespace projectsem3.Controllers
             var dao = new DepartmentDao();
             ViewBag.DepartmentID = new SelectList(dao.ListAll(), "Id", "DepartmentName", selectedId);
         }
-
     }
 }

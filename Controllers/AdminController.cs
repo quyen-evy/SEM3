@@ -1,4 +1,5 @@
 ﻿using projectsem3.Models;
+using projectsem3.Models.Dao;
 using projectsem3.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace projectsem3.Controllers
         }
         public ActionResult UpdateFacilities(int id)
         {
+            SetViewBag();
             //var get = GetNameById(id);
             //return ViewBag.Fac = new SelectList(get, "Id", "Name", id);
             return View();
@@ -43,6 +45,7 @@ namespace projectsem3.Controllers
 
             public ActionResult UpdateCourse()
         {
+            SetViewBag();
             return View();
         }
         public ActionResult Login()
@@ -111,5 +114,14 @@ namespace projectsem3.Controllers
             return View("Facilities", facility);
         }
 
+        public void SetViewBag(long? selectedId = null)
+        {
+            var dao = new DepartmentDao();
+            ViewBag.DepartmentID = new SelectList(dao.ListAll(), "Id", "DepartmentName", selectedId);
+            var fac = new FacultyDao();
+            ViewBag.FacultyID = new SelectList(fac.ListAll(), "Id", "FirstName", selectedId);
+            var cou = new CourseDao();
+            ViewBag.ID = new SelectList(cou.ListAll(), "Id", "CourseName", selectedId);
+        }
     }
 }
