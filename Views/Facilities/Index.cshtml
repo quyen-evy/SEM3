@@ -21,8 +21,8 @@
 <div class="single-w3l py-5">
     <div class="container py-xl-5 py-lg-3">
         <h3 class="title text-capitalize font-weight-light text-dark text-center mb-5">
-            single
-            <span class="font-weight-bold">page</span>
+            Our
+            <span class="font-weight-bold">Facilities</span>
         </h3>
         @foreach (var facilities in Model.Take(1))
         {
@@ -30,10 +30,10 @@
                 <!-- left side -->
                 <div class="col-lg-8 single-left">
                     <div class="single-left1">
-                    
+
                         <img src="../Content/@facilities.Images" alt=" " class="img-fluid" />
                         <h6 class="blog-first text-dark text-center my-4">
-                            <i class="far fa-user mr-2"></i>Jenny Joy
+                            <i class="far fa-user mr-2"></i>@facilities.writer
                         </h6>
                         <ul class="blog_list my-3 text-center">
                             <li>@facilities.Time</li>
@@ -51,7 +51,7 @@
                             </li>
                         </ul>
                         <h5 class="card-title">
-                            <a href="single.html" class="text-dark">Sed ut perspiciatis unde omnis iste natus error sit facilisis erat posuere erat</a>
+                            <a href="single.html" class="text-dark">We offer world-class facilities. Modern classrooms, purpose-built lecture theatres, studios, laboratories and other specialist spaces provide the perfect setting to thrive.</a>
                         </h5>
                         <p>
                             @facilities.Description
@@ -59,8 +59,7 @@
                     </div>
                     <div class="admin p-4 my-4">
                         <p>
-                            <i class="fas fa-quote-left mr-2"></i>nibh eu consequat magna ipsum ac ex. Nulla iaculis tincidunt elit, tortor luctus sit amet. Morbi in porta dolor.
-                            Morbi eget dui elit. consequat magna ipsum ac ex, Nulla iaculis consequat magna ipsum ac ex Nulla iaculis.
+                            <i class="fas fa-quote-left mr-2"></i>ITM vision is to provide our students, staff and alumni with the means to develop their entrepreneurial mindset, gain skills for intrapreneurship and help form enterprises.
                             <i class="fas fa-quote-right ml-2"></i>
                         </p>
                         <a href="#" class="mt-3 font-weight-bold text-right blockquote-footer">James Doe</a>
@@ -70,27 +69,27 @@
                             <ul>
                                 <li class="mt-3">
                                     <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">At vero eos et accusamus iusto</a>
+                                    <a href="single.html">A world class Indian education</a>
                                 </li>
                                 <li class="mt-3">
                                     <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Sed ut perspiciatis unde omnis</a>
+                                    <a href="single.html">5-Star ranking</a>
                                 </li>
                                 <li class="mt-3">
                                     <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Accusantium doloremque lauda</a>
+                                    <a href="single.html">Top 1% of world’s universities</a>
                                 </li>
                                 <li class="mt-3">
                                     <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Vel illum qui dolorem fugiat quo</a>
+                                    <a href="single.html">Excellent graduate outcomes</a>
                                 </li>
                                 <li class="mt-3">
                                     <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Quis autem vel eum repreh</a>
+                                    <a href="single.html">Encourages cultural awareness</a>
                                 </li>
                                 <li class="mt-3">
                                     <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Neque porro quisquam est qui</a>
+                                    <a href="single.html">Critical thinking</a>
                                 </li>
                             </ul>
                         </div>
@@ -98,27 +97,27 @@
                             <ul>
                                 <li class="mt-3">
                                     <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">At vero eos et accusamus iusto</a>
+                                    <a href="single.html">Encourages experimentation and creativity</a>
                                 </li>
                                 <li class="mt-3">
                                     <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Sed ut perspiciatis unde omnis</a>
+                                    <a href="single.html">Prepares you for success</a>
                                 </li>
                                 <li class="mt-3">
                                     <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Accusantium doloremque lauda</a>
+                                    <a href="single.html">Exposes you to new ideas</a>
                                 </li>
                                 <li class="mt-3">
                                     <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Vel illum qui dolorem fugiat quo</a>
+                                    <a href="single.html">Equips you with the skills </a>
                                 </li>
                                 <li class="mt-3">
                                     <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Quis autem vel eum repreh</a>
+                                    <a href="single.html">Knowledge to excel in your chosen career</a>
                                 </li>
                                 <li class="mt-3">
                                     <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Neque porro quisquam est qui</a>
+                                    <a href="single.html">Provide a range of resources</a>
                                 </li>
                             </ul>
                         </div>
@@ -129,7 +128,6 @@
                         <div class="comments-grids mt-4">
                             @foreach (var feedback in TempData["feedback"] as List<FEEDBACK>)
                             {
-                              
                                 <div class="row comments-grid">
                                     <div class="col-3 comments-grid-left">
                                         <img src="../content/@feedback.STUDENT.Avatar" alt=" " class="img-thumbnail rounded-circle" />
@@ -148,25 +146,24 @@
                                         @feedback.Description
                                     </div>
                                 </div>
-                               
                             }
                         </div>
                     </div>
                     <div class="leave-coment-form">
                         <h3 class="blog-title text-dark mb-4">Leave a Reply</h3>
-                        @using (Html.BeginForm("AddFB", "Facilities",new { id = @ViewBag.facilitiesId[0].Id }, FormMethod.Post))
+                        @using (Html.BeginForm("AddFB", "Facilities", new { id = @ViewBag.facilitiesId[0].Id }, FormMethod.Post))
                         {
-                           
-                    @Html.TextArea("description", null, new
-      {
-          @class = "form-control valid",
-          @data_val = "true",
-              @data_val_required = "Pls ..."
-      })
-                    <div class="mm_single_submit">
-                        <input type="submit" value="Post Comment">
-                    </div>
-                }
+
+                            @Html.TextArea("description", null, new
+                       {
+                           @class = "form-control valid",
+                           @data_val = "true",
+                           @data_val_required = "Pls ..."
+                       })
+                            <div class="mm_single_submit">
+                                <input type="submit" value="Post Comment">
+                            </div>
+                        }
                     </div>
                 </div>
                 <!-- //left side -->

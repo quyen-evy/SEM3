@@ -1,0 +1,127 @@
+﻿@using projectsem3.Models
+@model projectsem3.Models.TABULAR
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $("#Birthday").datepicker({
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1990:2000',
+            defaultDate: new Date(1999, 01 - 01, 09),
+        });
+    });
+</script>
+<!-- breadcrumb -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html">Home</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Admission Form</li>
+    </ol>
+</nav>
+<!-- breadcrumb -->
+<!-- //banner -->
+<!-- admission form -->
+<div class="form-w3l py-5">
+    <div class="container py-xl-5 py-lg-3">
+        <h3 class="title text-capitalize font-weight-light text-dark text-center mb-5">
+            Admission
+            <span class="font-weight-bold">form</span>
+        </h3>
+        <div class="register-form pt-md-4">
+
+            @using (Html.BeginForm("Ads", "Admission", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div class="styled-input form-group">
+                    @Html.TextBoxFor(u => u.FirstName, new { @placeholder = "First Name", @class = "form-control", @type = "text", @required = "", @name = "Your first name" })
+                </div>
+                <div class="styled-input form-group">
+                    @Html.TextBoxFor(u => u.LastName, new { @placeholder = "Last Name", @class = "form-control", @type = "text", @required = "", @name = "Your last name" })
+                </div>
+                <div class="styled-input form-group">
+                    @Html.TextBoxFor(u => u.Birthday, null, new { @class = "form-control", @placeholder = "Date of Birth ( as per the certificate)" })
+                </div>
+                <div class="styled-input form-group">
+                    @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email", @class = "form-control", @type = "text", @required = "", @name = "Your email" })
+                </div>
+                <div class="styled-input agile-styled-input-top form-group">
+                    <span> Select your Gender :</span>
+                    @Html.DropDownListFor(u => u.Gender,
+                new List<SelectListItem> {
+                     new SelectListItem { Value = "0" , Text = "Male" },
+                     new SelectListItem { Value = "1" , Text = "Female" },
+                  },
+                new { @class = "category2" })
+                </div>
+
+                <div class="styled-input form-group">
+                    @Html.TextBoxFor(u => u.FatherName, new { @placeholder = "Father Name", @class = "form-control", @type = "text", @required = "", @name = "Your father name" })
+                </div>
+                <div class="styled-input form-group">
+                    @Html.TextBoxFor(u => u.MotherName, new { @placeholder = "Mother Name", @class = "form-control", @type = "text", @required = "", @name = "Your mother name" })
+                </div>
+
+
+                <div class="styled-input form-group">
+                    @Html.TextBoxFor(u => u.ResidentialAddress, new { @placeholder = "Residential Address", @class = "form-control", @type = "text", @required = "", @name = "Residential Address" })
+                </div>
+                <div class="styled-input form-group">
+                    @Html.TextBoxFor(u => u.PermanentAddress, new { @placeholder = "Permanent Address", @class = "form-control", @type = "text", @required = "", @name = "Permanent Address" })
+                </div>
+                <div class="styled-input form-group">
+                    <div class="agileits_w3layouts_grid">
+                        <span> Admission for :</span>
+                        @Html.DropDownListFor(u => u.AdmissionFor,
+                    new List<SelectListItem> {
+                         new SelectListItem { Value = "0" , Text = "Stream" },
+                         new SelectListItem { Value = "1" , Text = "Field" },
+                      },
+                    new { @class = "category2" })
+                    </div>
+                </div>
+                <div class="styled-input form-group">
+                    @Html.TextBoxFor(u => u.Sports, new { @placeholder = "Sports (if any)", @class = "form-control", @type = "text", @required = "", @name = "Sport" })
+                </div>
+                <div class="styled-input">
+
+                    <label class="header-admin-form font-weight-bold text-dark my-3">The details of your previous education</label>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.University, new { @placeholder = "University", @class = "form-control", @type = "text", @required = "", @name = "University" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.EnrollmentNo, new { @placeholder = "Enrollment number", @class = "form-control", @type = "text", @required = "", @name = "EnrollmentNo" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.Center, new { @placeholder = "Center", @class = "form-control", @type = "text", @required = "", @name = "Center" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.Stream, new { @placeholder = "Stream", @class = "form-control", @type = "text", @required = "", @name = "Stream" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.Field, new { @placeholder = "Field", @class = "form-control", @type = "text", @required = "", @name = "Field" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.MarksSecured, new { @placeholder = "Marks Secured", @class = "form-control", @type = "text", @required = "", @name = "MarksSecured" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.OutOf, new { @placeholder = "Out Of", @class = "form-control", @type = "text", @required = "", @name = "OutOf" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.ClassObtained, new { @placeholder = "Class Obtained", @class = "form-control", @type = "text", @required = "", @name = "ClassObtained" })
+                    </div>
+                    @* } *@
+                </div>
+                <input type="submit" value="Submit">
+                <input type="submit" value="Download Form">
+            }
+        </div>
+    </div>
+</div>
+<!-- admission form -->

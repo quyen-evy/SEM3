@@ -10,12 +10,14 @@ namespace projectsem3.Controllers
     public class FacultyController : Controller
     {
         // GET: Faculty
-        private Manage_StudentEntities _manageEn = new Manage_StudentEntities();
+        private ManageStudentEntities ManageStudent = new ManageStudentEntities();
         public ActionResult Index()
         {
-            List<FACILITy> facilities = _manageEn.FACILITIES.Where(u => u.Status == false).ToList<FACILITy>();
+            List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
+            TempData["courses"] = course;
+            List<FACILITy> facilities = ManageStudent.FACILITIES.Where(u => u.Status == false).ToList<FACILITy>();
             TempData["facilities"] = facilities;
-            List<DEPARTMENT> department = _manageEn.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
+            List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
             TempData["department"] = department;
             return View();
         }

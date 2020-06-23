@@ -1,4 +1,5 @@
-﻿
+﻿@using projectsem3.Models
+@model projectsem3.Models.USER
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
@@ -24,19 +25,19 @@
         </h3>
         <!-- content -->
         <div class="sub-main-w3 pt-md-4">
-            @using (Html.BeginForm("SignIn", "Account", FormMethod.Post))
+            @using (Html.BeginForm("SignIn", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.ValidationSummary(true)
                 <div class="form-style-agile form-group">
                     <label>
-                        Email
+                        Username
                         <i class="fas fa-user"></i>
                     </label>
                     @Html.TextBox("email", null, new
                     {
                         @class = "form-control valid",
                         @data_val = "true",
-                            @data_val_required = "Email không đc dc để trống"
+                            @data_val_required = "Please fill in email"
                     })
                     @Html.ValidationMessage("email")
                 </div>
@@ -49,7 +50,7 @@
                         {
                             @class = "form-control valid",
                             @data_val = "true",
-                             @data_val_required = "MK không đc dc để trống"
+                             @data_val_required = "Please fill in password"
                         })
                     @Html.ValidationMessage("password")
                 </div>
@@ -68,9 +69,10 @@
                 </ul>
                 <!-- //switch -->
                 <input type="submit" value="Log In">
+                @(new HtmlString(ViewBag.SignInErrorMessage))
                 <p class="text-center dont-do mt-4 text-white">
                     Don't have an account?
-                    <a href="register.html" class="text-white  font-weight-bold">
+                    <a href="../Account/SignIn" class="text-white  font-weight-bold">
                         Register Now
                     </a>
                 </p>

@@ -13,10 +13,10 @@ namespace projectsem3.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Manage_StudentEntities : DbContext
+    public partial class ManageStudentEntities : DbContext
     {
-        public Manage_StudentEntities()
-            : base("name=Manage_StudentEntities")
+        public ManageStudentEntities()
+            : base("name=ManageStudentEntities")
         {
         }
     

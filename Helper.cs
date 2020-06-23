@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace DemoMVC
+namespace projectsem3
 {
     public static class Helper
     {
