@@ -1,4 +1,5 @@
 ﻿using projectsem3.Models;
+using projectsem3.Models.Dao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,19 @@ namespace projectsem3.Controllers
             TempData["department"] = department;
             List<FACILITy> facilities = ManageStudent.FACILITIES.Where(y => y.Status == false).ToList<FACILITy>();
             TempData["facilities"] = facilities;
+            SetViewBag();
             return View();
         }
 
         public ActionResult Ads()
         {
             return Content("fail vcl");
+        }
+
+        public void SetViewBag(long? selectedId = null)
+        {
+            var dao = new DepartmentDao();
+            ViewBag.DepartmentID = new SelectList(dao.ListAll(), "Id", "DepartmentName", selectedId);
         }
 
     }
