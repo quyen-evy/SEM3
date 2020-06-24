@@ -1,0 +1,64 @@
+﻿@using projectsem3.Models
+@{
+    ViewBag.Title = "Course";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="graphs">
+        <h3 class="blank1">Eligible for the admission</h3>
+        <div class="xs tabls">
+
+
+            <div class="bs-example4" data-example-id="simple-responsive-table">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Course Name</th>
+                                <th>Images</th>
+                                <th>Time</th>
+                                <th>Faculty Id</th>
+                                <th>Department Id</th>
+                                <th>Description</th>
+
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var course = ViewBag.Course as List<COURSE>;}
+                            @foreach (var courses in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@courses.Id</th>
+                                    <td>@courses.CourseName</td>
+                                    <td><img src="../Content/@courses.Images" height="50" width="50"></td>
+                                    <td>@courses.Time</td>
+                                    <td>@courses.FacultyId</td>
+                                    <td>@courses.DepartmentId</td>
+                                    <td>@courses.Description</td>
+                                    <td>
+                                        <a href="../admin/UpdateCourse?id=@courses.Id" class="btn-success btn">Update</a>
+
+                                    </td>
+                                    <td>
+                                        <a href="../admin/AddCourse" class="btn-default btn">Add</a>
+                                    </td>
+                                    <td>
+                                        <a href="../admin/UpdateCourse" class="btn-inverse btn">Delete</a>
+                                        
+                                    </td>
+
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- /.table-responsive -->
+
+
+
