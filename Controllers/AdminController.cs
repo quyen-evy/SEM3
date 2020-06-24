@@ -99,8 +99,7 @@ namespace projectsem3.Controllers
                 ManageStudent.SaveChanges();
             }
            
-            
-            return ViewBag.Status = "Delete successful";
+            return Content ("Delete successful");
         }
         [HttpPost]
         [ValidateInput(false)]
