@@ -25,9 +25,11 @@ namespace projectsem3.Controllers
 
             return View(tabular);
         }
-        public ActionResult UpdateFacilities(int id)
+
+        [HttpGet]
+        public ActionResult UpdateFacilities()
         {
-            SetViewBag();
+            SetFacViewBag();
             //var get = GetNameById(id);
             //return ViewBag.Fac = new SelectList(get, "Id", "Name", id);
             return View();
@@ -48,10 +50,14 @@ namespace projectsem3.Controllers
             SetViewBag();
             return View();
         }
+
+
         public ActionResult Login()
         {
             return View();
         }
+
+
         public ActionResult SignIn(string email, string password)
         {
 
@@ -69,6 +75,8 @@ namespace projectsem3.Controllers
             ViewBag.SignInErrorMessage = "The email or the password that you've entered is incorrect";
             return View("Index", "Error");
         }
+
+
         private bool SaveImage(HttpPostedFileBase postedFile)
         {
             try
@@ -90,6 +98,8 @@ namespace projectsem3.Controllers
                 return false;
             }
         }
+
+        [HttpPost]
         private ActionResult UpdateFacilities(FACILITy facilities, HttpPostedFileBase postedFile)
         {
             int facilitiesId = facilities.Id;
@@ -122,6 +132,12 @@ namespace projectsem3.Controllers
             ViewBag.FacultyID = new SelectList(fac.ListAll(), "Id", "FirstName", selectedId);
             var cou = new CourseDao();
             ViewBag.ID = new SelectList(cou.ListAll(), "Id", "CourseName", selectedId);
+        }
+
+        public void SetFacViewBag(long? selectedId = null)
+        {
+            var faci = new FacilityDao();
+            ViewBag.ID = new SelectList(faci.ListAll(), "Id", "Name", selectedId);
         }
     }
 }
