@@ -53,7 +53,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="signin">
 
-                        @using (Html.BeginForm("SignIn", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("SignIn", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
                             @Html.ValidationSummary(true)
                             <div class="log-input">
@@ -77,7 +77,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                {
                                    @class = "form-control valid lock",
                                    @data_val = "true",
-                                  
+
                              @value = "password",
                                    @onfocus = "this.value = '';",
                                    @onblur = "if (this.value == '') {this.value = 'Email address:';}"
@@ -95,6 +95,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <p><a href="#">Click Here</a> </p>
                             <div class="clearfix"> </div>
                         </div>
+                        <div>@ViewBag.SignInErrorMessage</div>
                     </div>
                 </div>
             </div>

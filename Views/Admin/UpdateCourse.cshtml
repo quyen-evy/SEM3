@@ -27,14 +27,14 @@
     </div>
 
 </div>
-@using (Html.BeginForm("UpdateCourse", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("UpdateCourses", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
+    
     @Html.ValidationSummary(true)
     <div class="form-group">
         <span>Name course</span>
-        @Html.DropDownListFor(u => u.Id, null, new { @class = "form-group" })
-        </div>
+        @Html.DropDownListFor(u => u.Id, ViewBag.ID as SelectList, null, new { @class = "form-group"})
+    </div>
 
     <div class="form-group">
         <span>Image:</span>
@@ -45,10 +45,10 @@
     <span>Faculty:</span>
     @Html.DropDownListFor(u => u.FacultyId, null, new { @class = "form-group" })
     <span>Seat:</span>
-    @Html.TextBoxFor(u => u.Seat, null, new { @class = "form-group", @type = "text" })
+    @Html.EditorFor(u => u.Seat, null, new { @class = "form-group", @type = "text" })
 
     <span>Time:</span>
-    @Html.TextBoxFor(u => u.Time, null, new { @class = "form-group" })
+    @Html.EditorFor(u => u.Time, null, new { @class = "form-group" })
 
     <div class="form-group">
         <span>Description:</span>
@@ -67,6 +67,14 @@
 
         </script>
     </div>
-    <input type="submit" value="Update">
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <button class="btn-success btn">Update</button>
+                <button class="btn-default btn">Add</button>
+                <button class="btn-inverse btn">Delete</button>
+            </div>
+        </div>
+    </div>
 }
 
