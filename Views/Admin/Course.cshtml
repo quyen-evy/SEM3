@@ -46,11 +46,10 @@
 
                                     </td>
                                     <td>
-                                        <a href="../admin/AddCourse" class="btn-default btn">Add</a>
+                                        <a href="../Admin/AddCourse" class="btn-default btn">Add</a>
                                     </td>
                                     <td>
-                                        <a href="../admin/UpdateCourse" class="btn-inverse btn">Delete</a>
-                                        
+                                        <button class="btn-inverse btn" onclick="location.href='@Url.Action("DeleteCourse","Admin",new { id = courses.Id })'">Delete</button>
                                     </td>
 
                                 </tr>

@@ -73,8 +73,11 @@ namespace projectsem3.Controllers
             List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false).ToList<COURSE>();
             return View("Course", course);
         }
-        public ActionResult Addcourse()
+
+        [HttpGet]
+        public ActionResult AddCourse()
         {
+            SetViewBag();
             return View();
         }
         
@@ -85,8 +88,22 @@ namespace projectsem3.Controllers
             SetViewBag();
             return View(course);
         }
-
+       
+        public ActionResult DeleteCourse(int id)
+        {
+           
+            var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && u.Status == false);
+            if(course != null)
+            {
+                course.Status = true;
+                ManageStudent.SaveChanges();
+            }
+           
+            
+            return ViewBag.Status = "Delete successful";
+        }
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult UpdateCourses(COURSE course, HttpPostedFileBase postedFile)
         {
             int courseId = (Session["Course"] as COURSE).Id;
@@ -115,7 +132,23 @@ namespace projectsem3.Controllers
             }
             return View("UpdateCourse");
         }
+        
 
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult AddCourses(COURSE course, HttpPostedFileBase PostedFile)
+        {
+            if(SaveImage(PostedFile))
+            {
+                course.Images = "images/" + PostedFile.FileName;
+                course.Status = false;
+                course.CourseName = GetNameById(course.Id);
+                ManageStudent.COURSEs.Add(course);
+                ManageStudent.SaveChanges();
+                return Content ("Add course successful");
+            }
+            return Content("Add course unsuccessful");
+        }
       
         // FACILITY
         public ActionResult UpdateFacilities(int id)
@@ -153,9 +186,14 @@ namespace projectsem3.Controllers
             ViewBag.DepartmentID = new SelectList(dao.ListAll(), "Id", "DepartmentName", selectedId);
             var fac = new FacultyDao();
             ViewBag.FacultyID = new SelectList(fac.ListAll(), "Id", "FirstName", selectedId);
-           
             var cou = new CourseDao();
             ViewBag.ID = new SelectList(cou.ListAll(), "Id", "CourseName", selectedId);
         }
+
+        public string GetNameById(int id)
+        {
+            return ManageStudent.COURSEs.SingleOrDefault(u => u.Status == false && u.Id == id).CourseName;
+        }
+
     }
 }

@@ -18,5 +18,6 @@ namespace projectsem3.Models.Dao
         {
             return db.COURSEs.Where(u => u.Status == false).ToList();
         }
+
     }
 }
