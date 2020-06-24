@@ -47,8 +47,8 @@
                     <img src="../Content/@ViewBag.courses[0].Images" alt="" class="img-fluid">
                 </div>
                 <div class="buttons-w3ls">
-                    <a class="btn button-cour-w3ls text-white" href="course_details.html" role="button">Learn More</a>
-                    <a class="btn bg-dark text-white" href="form.html" role="button">Apply Now</a>
+                    <a class="btn button-cour-w3ls text-white" href="../course/index?id=@ViewBag.courses[0].Id" role="button">Learn More</a>
+                    <a class="btn bg-dark text-white" href="../account/login" role="button">Apply Now</a>
                 </div>
             </div>
             <div class="row cource-list-agile cource-list-agile-2">
@@ -79,10 +79,8 @@
                     </div>
                 </div>
                 <div class="buttons-w3ls-2">
-                    @Html.ActionLink("Learn More", "Index", "Course", null, new { @class = "btn button-cour-w3ls text-white" })
-                    @*<a class="btn button-cour-w3ls text-white" href="course_details.html" role="button">Learn More</a>*@
-                    @Html.ActionLink("Apply Now", "Register", "Account", null, new { @class = "btn bg-dark text-white" })
-                    @*<a class="btn bg-dark text-white" href="form.html" role="button">Apply Now</a>*@
+                    <a class="btn button-cour-w3ls text-white" href="../course/index?id=@ViewBag.courses[0].Id" role="button">Learn More</a>
+                    <a class="btn bg-dark text-white" href="../account/login" role="button">Apply Now</a>
                 </div>
             </div>
 

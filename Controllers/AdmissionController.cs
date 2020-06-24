@@ -26,7 +26,7 @@ namespace projectsem3.Controllers
 
         public ActionResult Ads()
         {
-            return Content("fail vcl");
+            return Content("Done Submit");
         }
 
         public void SetViewBag(long? selectedId = null)

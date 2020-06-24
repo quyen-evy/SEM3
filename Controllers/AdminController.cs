@@ -1,6 +1,6 @@
 ﻿using projectsem3.Models;
 using projectsem3.Models.Dao;
-using projectsem3.ViewModel;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -25,33 +25,13 @@ namespace projectsem3.Controllers
 
             return View(tabular);
         }
-        public ActionResult UpdateFacilities(int id)
-        {
-            SetViewBag();
-            //var get = GetNameById(id);
-            //return ViewBag.Fac = new SelectList(get, "Id", "Name", id);
-            return View();
-        }
-        //public IEnumerable<FACILITy> GetNameById(int id)
-        //{
-        //    List<FacModel> fac = new List<FacModel>();
-        //    foreach (var facs in ManageStudent.FACILITIES.Where(u => u.Status == false).ToList())
-        //    {
-        //        FacModel fm = new FacModel(facs.Id);
-        //        fac.Add(fm);
-        //    }                
-        //    return null;
-        //}
-
-            public ActionResult UpdateCourse()
-        {
-            SetViewBag();
-            return View();
-        }
+      
         public ActionResult Login()
         {
             return View();
         }
+
+
         public ActionResult SignIn(string email, string password)
         {
 
@@ -63,12 +43,13 @@ namespace projectsem3.Controllers
                 {
                     Session["user"] = user;
                     return RedirectToAction("Admission", "Admin");
-
                 }
             }
             ViewBag.SignInErrorMessage = "The email or the password that you've entered is incorrect";
             return View("Index", "Error");
         }
+
+
         private bool SaveImage(HttpPostedFileBase postedFile)
         {
             try
@@ -89,6 +70,95 @@ namespace projectsem3.Controllers
             {
                 return false;
             }
+        }
+        // COURSE
+        public ActionResult Course()
+        {
+            List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false).ToList<COURSE>();
+            return View("Course", course);
+        }
+
+        [HttpGet]
+        public ActionResult AddCourse()
+        {
+            SetViewBag();
+            return View();
+        }
+        
+        [HttpGet]
+        public ActionResult UpdateCourse(int id)
+        {
+            var course = new CourseDao().ViewDetail(id); 
+            SetViewBag();
+            return View(course);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult UpdateCourses(COURSE course, HttpPostedFileBase postedFile)
+        {
+            if (ModelState.IsValid)
+            {
+                if (SaveImage(postedFile))
+                {
+                    if (postedFile != null)
+                    {
+                        course.Images = "images/" + postedFile.FileName;
+                    }   
+                    var cou = new CourseDao();
+                    var result = cou.Update(course);
+                    if (result)
+                    {
+                        return Content("Update Success");
+                    }
+                    else
+                    {
+                        return Content("Update course unsuccessful");
+                    }
+                }
+                else
+                {
+                    return Content("Update course unsuccessful");
+                }
+            }
+            return Content("Update course unsuccessful");
+        }
+
+        public ActionResult DeleteCourse(int id)
+        {
+           
+            var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && u.Status == false);
+            if(course != null)
+            {
+                course.Status = true;
+                ManageStudent.SaveChanges();
+            }
+           
+            return Content ("Delete successful");
+        }
+        
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult AddCourses(COURSE course, HttpPostedFileBase PostedFile)
+        {
+            if(SaveImage(PostedFile))
+            {
+                course.Images = "images/" + PostedFile.FileName;
+                course.Status = false;
+                course.CourseName = GetNameById(course.Id);
+                ManageStudent.COURSEs.Add(course);
+                ManageStudent.SaveChanges();
+                return Content ("Add course successful");
+            }
+            return Content("Add course unsuccessful");
+        }
+      
+        // FACILITY
+        public ActionResult UpdateFacilities(int id)
+        {
+            SetViewBag();
+            return View();
         }
         private ActionResult UpdateFacilities(FACILITy facilities, HttpPostedFileBase postedFile)
         {
@@ -113,7 +183,7 @@ namespace projectsem3.Controllers
             }
             return View("Facilities", facility);
         }
-
+        
         public void SetViewBag(long? selectedId = null)
         {
             var dao = new DepartmentDao();
@@ -123,5 +193,11 @@ namespace projectsem3.Controllers
             var cou = new CourseDao();
             ViewBag.ID = new SelectList(cou.ListAll(), "Id", "CourseName", selectedId);
         }
+
+        public string GetNameById(int id)
+        {
+            return ManageStudent.COURSEs.SingleOrDefault(u => u.Status == false && u.Id == id).CourseName;
+        }
+
     }
 }
