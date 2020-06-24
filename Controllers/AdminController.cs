@@ -78,20 +78,23 @@ namespace projectsem3.Controllers
             return View();
         }
         
+        [HttpGet]
         public ActionResult UpdateCourse(int id)
         {
             COURSE course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && !u.Status.Value);
             SetViewBag();
             return View(course);
         }
-        private ActionResult UpdateCourses(COURSE course, HttpPostedFileBase postedFile)
+
+        [HttpPost]
+        public ActionResult UpdateCourses(COURSE course, HttpPostedFileBase postedFile)
         {
             int courseId = (Session["Course"] as COURSE).Id;
+            COURSE courses = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == courseId && u.Status == false);
             if (ModelState.IsValid == false)
             {
                 if (SaveImage(postedFile))
                 {
-                    var courses = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == courseId && u.Status == false);
                     courses.Images = postedFile != null ? postedFile.FileName : course.Images;
                     courses.Time = course.Time;
                     courses.FacultyId = course.FacultyId;
@@ -101,6 +104,8 @@ namespace projectsem3.Controllers
                     courses.Time = course.Time;
 
                     ManageStudent.SaveChanges();
+
+                    courses = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == courseId && !u.Status.Value);
                     ViewBag.Status = "Update successful";
                 }
                 else
@@ -108,7 +113,7 @@ namespace projectsem3.Controllers
                     ViewBag.Status = "Update unsuccessful";
                 }
             }
-            return View("UpdateCourse", course);
+            return View("UpdateCourse");
         }
 
       
