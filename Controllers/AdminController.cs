@@ -1,6 +1,5 @@
 ﻿using projectsem3.Models;
 using projectsem3.Models.Dao;
-
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,23 +12,14 @@ namespace projectsem3.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
         private ManageStudentEntities ManageStudent = new ManageStudentEntities();
-        public ActionResult Index()
-        {
-            return View();
-        }
-        public ActionResult Admission()
-        {
-            List<TABULAR> tabular = ManageStudent.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
 
-            return View(tabular);
-        }
-      
+        // ----------========== LOGIN && REGISTER ==========----------
         public ActionResult Login()
         {
             return View();
         }
+
         public ActionResult SignIn(string email, string password)
         {
 
@@ -46,6 +36,19 @@ namespace projectsem3.Controllers
             ViewBag.SignInErrorMessage = "The email or the password that you've entered is incorrect";
             return View("Index", "Error");
         }
+        // ----------========== END LOGIN && REGISTER ==========----------
+
+
+        // ----------========== ADMISSION ==========----------
+        public ActionResult Admission()
+        {
+            List<TABULAR> tabular = ManageStudent.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
+
+            return View(tabular);
+        }
+      
+
+
         private bool SaveImage(HttpPostedFileBase postedFile)
         {
             try
@@ -67,7 +70,9 @@ namespace projectsem3.Controllers
                 return false;
             }
         }
-        // COURSE
+        // ----------========== END ADMISSION ==========----------
+
+        // ----------========== COURSE ==========----------
         public ActionResult Course()
         {
             List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false).ToList<COURSE>();
@@ -78,10 +83,10 @@ namespace projectsem3.Controllers
             return View();
         }
         
-        public ActionResult UpdateCourse(int id)
+        public ActionResult UpdateCourse(int id = 1)
         {
             COURSE course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && !u.Status.Value);
-            SetViewBag();
+            SetCourseViewBag();
             return View(course);
         }
         private ActionResult UpdateCourses(COURSE course, HttpPostedFileBase postedFile)
@@ -110,12 +115,21 @@ namespace projectsem3.Controllers
             }
             return View("UpdateCourse", course);
         }
-
-      
-        // FACILITY
-        public ActionResult UpdateFacilities(int id)
+        public void SetCourseViewBag(long? selectedId = null)
         {
-            SetViewBag();
+            var dao = new DepartmentDao();
+            ViewBag.DepartmentID = new SelectList(dao.ListAll(), "Id", "DepartmentName");
+            var fac = new FacultyDao();
+            ViewBag.FacultyID = new SelectList(fac.ListAll(), "Id", "FirstName");
+            var cou = new CourseDao();
+            ViewBag.ID = new SelectList(cou.ListAll(), "Id", "CourseName", selectedId);
+        }
+        // ----------========== END COURSE ==========----------
+
+        // ----------========== FACILITY ==========----------
+        public ActionResult UpdateFacilities(int id=1)
+        {
+            SetCourseViewBag();
             return View();
         }
         private ActionResult UpdateFacilities(FACILITy facilities, HttpPostedFileBase postedFile)
@@ -141,16 +155,8 @@ namespace projectsem3.Controllers
             }
             return View("Facilities", facility);
         }
-        
-        public void SetViewBag(long? selectedId = null)
-        {
-            var dao = new DepartmentDao();
-            ViewBag.DepartmentID = new SelectList(dao.ListAll(), "Id", "DepartmentName", selectedId);
-            var fac = new FacultyDao();
-            ViewBag.FacultyID = new SelectList(fac.ListAll(), "Id", "FirstName", selectedId);
-           
-            var cou = new CourseDao();
-            ViewBag.ID = new SelectList(cou.ListAll(), "Id", "CourseName", selectedId);
-        }
+        // ----------========== END FACILITY ==========----------
+
+        // ----------========== FACULTY ==========----------
     }
 }
