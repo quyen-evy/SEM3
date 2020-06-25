@@ -1,6 +1,5 @@
 ﻿using projectsem3.Models;
 using projectsem3.Models.Dao;
-
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,24 +12,13 @@ namespace projectsem3.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
         private ManageStudentEntities ManageStudent = new ManageStudentEntities();
-        public ActionResult Index()
-        {
-            return View();
-        }
-        public ActionResult Admission()
-        {
-            List<TABULAR> tabular = ManageStudent.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
 
-            return View(tabular);
-        }
-      
+        // ----------========== LOGIN && REGISTER ==========----------
         public ActionResult Login()
         {
             return View();
         }
-
 
         public ActionResult SignIn(string email, string password)
         {
@@ -71,7 +59,9 @@ namespace projectsem3.Controllers
                 return false;
             }
         }
-        // COURSE
+        // ----------========== END ADMISSION ==========----------
+
+        // ----------========== COURSE ==========----------
         public ActionResult Course()
         {
             List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false).ToList<COURSE>();
@@ -143,20 +133,17 @@ namespace projectsem3.Controllers
             }
             return Content("Update course unsuccessful");
         }
-
-        public ActionResult DeleteCourse(int id)
+        public void SetCourseViewBag(long? selectedId = null)
         {
-           
-            var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && u.Status == false);
-            if(course != null)
-            {
-                course.Status = true;
-                ManageStudent.SaveChanges();
-            }
-           
-            return Content ("Delete successful");
+            var dao = new DepartmentDao();
+            ViewBag.DepartmentID = new SelectList(dao.ListAll(), "Id", "DepartmentName");
+            var fac = new FacultyDao();
+            ViewBag.FacultyID = new SelectList(fac.ListAll(), "Id", "FirstName");
+            var cou = new CourseDao();
+            ViewBag.ID = new SelectList(cou.ListAll(), "Id", "CourseName", selectedId);
         }
-        
+        // ----------========== END COURSE ==========----------
+
 
         [HttpPost]
         [ValidateInput(false)]
@@ -177,7 +164,7 @@ namespace projectsem3.Controllers
         // FACILITY
         public ActionResult UpdateFacilities(int id)
         {
-            SetViewBag();
+            SetCourseViewBag();
             return View();
         }
         private ActionResult UpdateFacilities(FACILITy facilities, HttpPostedFileBase postedFile)

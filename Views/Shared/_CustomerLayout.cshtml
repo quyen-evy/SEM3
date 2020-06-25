@@ -276,6 +276,19 @@
     </footer>
     <!-- //footer -->
     <!-- Js files -->
+    <!-- Menu active -->
+    <script>
+        $(function(){
+            $('.nav-item a').filter(function(){
+                return this.href==location.href;
+                }).closest(".nav-item").addClass('active').siblings().removeClass('active')
+            $('.nav-item a').click(function(){
+                $(this).closest(".nav-item").addClass('active').siblings().removeClass('active')
+
+            })
+        })
+    </script>
+    <!-- Menu active -->
     <!-- JavaScript -->
     <script src="../Scripts/js/jquery-2.2.3.min.js"></script>
     <!-- Default-JavaScript-File -->
