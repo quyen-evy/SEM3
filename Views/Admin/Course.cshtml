@@ -3,7 +3,21 @@
     ViewBag.Title = "Course";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
+    <script>
+    function Remove(data) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteCourse", "Admin")',
+            data: JSON.stringify({ courseId: data }),
+            success: function (data) {
+                alert(data);
+            },
+            erro: function (err) {
+                alert("error:"+err)
+            }
+        });
+    }
+    </script>
 <div id="page-wrapper">
     <div class="graphs">
         <h3 class="blank1">Eligible for the admission</h3>
@@ -36,7 +50,7 @@
                                 <tr>
                                     <th scope="row">@courses.Id</th>
                                     <td>@courses.CourseName</td>
-                                    <td>@courses.Images</td>
+                                    <td><img src="../Content/@courses.Images" height="50" width="50"></td>
                                     <td>@courses.Time</td>
                                     <td>@courses.FacultyId</td>
                                     <td>@courses.DepartmentId</td>
@@ -46,11 +60,10 @@
 
                                     </td>
                                     <td>
-                                        <a href="../admin/AddCourse" class="btn-default btn">Add</a>
+                                        <a href="../Admin/AddCourse" class="btn-default btn">Add</a>
                                     </td>
                                     <td>
-                                        <a href="../admin/UpdateCourse" class="btn-inverse btn">Delete</a>
-                                        
+                                        <button class="btn-inverse btn" onclick="Remove(@courses.Id)">Delete</button>
                                     </td>
 
                                 </tr>

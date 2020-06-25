@@ -27,17 +27,20 @@
     </div>
 
 </div>
-@using (Html.BeginForm("UpdateCourses", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("UpdateCourses","Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    
+
     @Html.ValidationSummary(true)
     <div class="form-group">
         <span>Name course</span>
-        @Html.DropDownListFor(u => u.Id, ViewBag.ID as SelectList, null, new { @class = "form-group"})
+        @Html.TextBoxFor(u => u.CourseName, null, new { @class = "form-group"})
+        @Html.HiddenFor(u => u.Id, null);
     </div>
 
     <div class="form-group">
         <span>Image:</span>
+        <img id="course_image" width="150" height="150" src="../Content/@Model.Images" />
+        @Html.HiddenFor(u => u.Images, null);
         <input type="file" name="postedFile" id="postedFile" onchange="displayImage(this)" />
     </div>
     <span>Department:</span>
@@ -70,9 +73,7 @@
     <div class="panel-footer">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-                <button class="btn-success btn">Update</button>
-                <button class="btn-default btn">Add</button>
-                <button class="btn-inverse btn">Delete</button>
+                <input type="submit" value="Update"  class="btn-success btn"/>
             </div>
         </div>
     </div>
