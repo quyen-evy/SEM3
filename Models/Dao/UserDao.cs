@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PagedList;
+using PagedList.Mvc;
 using projectsem3.Models;
 
 namespace projectsem3.Models.Dao
@@ -21,10 +23,10 @@ namespace projectsem3.Models.Dao
             return entity.Id;
         }
 
-        //public IEnumerable<COURSE> ListAllPaging(int page, int pageSize)
-        //{
-        //    return db.COURSEs.OrderByDescending(u => u.Id).ToPagedList(page, pageSize);
-        //}
+        public IEnumerable<COURSE> ListAllPaging(int page, int pageSize)
+        {
+            return db.COURSEs.OrderByDescending(u => u.Id).ToPagedList(page, pageSize);
+        }
 
         public USER GetByID(int id)
         {
