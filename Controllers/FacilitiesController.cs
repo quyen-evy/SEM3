@@ -12,6 +12,7 @@ namespace projectsem3.Controllers
         private ManageStudentEntities ManageStudent = new ManageStudentEntities();
 
         // GET: Facilities
+        [HttpGet]
         public ActionResult Index(int id = 1)
         {
             List<FACILITy> facilitiesId = ManageStudent.FACILITIES.Where(u => u.Status == false && u.Id == id).ToList<FACILITy>();
@@ -27,20 +28,24 @@ namespace projectsem3.Controllers
 
             return View(facilitiesId);
         }
+
+        [HttpPost]
         public ActionResult AddFB(FEEDBACK feedback, string description, int id)
         {
             if (ModelState.IsValid)
             {
                 feedback.Description = description;
                 feedback.Status = false;
-                feedback.StudentId = (Session["student"] as STUDENT).Id;
+                feedback.StudentId = 2;
                 feedback.Time = DateTime.Now;
                 feedback.FacilitiesId = id;
 
                 ManageStudent.FEEDBACKs.Add(feedback);
                 ManageStudent.SaveChanges();
-                return Content("Thanks your comment");
+                return Redirect("/Facilities/Index?id="+id);
+
             }
+
             return Content("Please check comment");
         }
     }
