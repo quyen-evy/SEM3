@@ -89,7 +89,8 @@ namespace projectsem3.Controllers
             return View(course);
         }
        
-        public ActionResult DeleteCourse(int id)
+        [HttpPost]
+        public string DeleteCourse(int id)
         {
            
             var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && u.Status == false);
@@ -98,8 +99,15 @@ namespace projectsem3.Controllers
                 course.Status = true;
                 ManageStudent.SaveChanges();
             }
-           
-            return Content ("Delete successful");
+            var courses = Load();
+            string json = "{\"\"}";
+            return null;
+        }
+        public List<COURSE> Load()
+        {
+            List<COURSE> course = ManageStudent.COURSEs.Where(u => !u.Status.Value).ToList<COURSE>();
+            Session["course"] = course;
+            return course;
         }
         [HttpPost]
         [ValidateInput(false)]
