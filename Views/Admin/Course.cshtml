@@ -3,7 +3,21 @@
     ViewBag.Title = "Course";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
+    <script>
+    function Remove(data) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteCourse", "Admin")',
+            data: JSON.stringify({ courseId: data }),
+            success: function (data) {
+                alert(data);
+            },
+            erro: function (err) {
+                alert("error:"+err)
+            }
+        });
+    }
+    </script>
 <div id="page-wrapper">
     <div class="graphs">
         <h3 class="blank1">Eligible for the admission</h3>
@@ -49,7 +63,7 @@
                                         <a href="../Admin/AddCourse" class="btn-default btn">Add</a>
                                     </td>
                                     <td>
-                                        <button class="btn-inverse btn" onclick="location.href='@Url.Action("DeleteCourse","Admin",new { id = courses.Id })'">Delete</button>
+                                        <button class="btn-inverse btn" onclick="Remove(@courses.Id)">Delete</button>
                                     </td>
 
                                 </tr>

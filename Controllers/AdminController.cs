@@ -92,7 +92,27 @@ namespace projectsem3.Controllers
             SetViewBag();
             return View(course);
         }
-
+       
+        [HttpPost]
+        public string DeleteCourse(int id)
+        {
+           
+            var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && u.Status == false);
+            if(course != null)
+            {
+                course.Status = true;
+                ManageStudent.SaveChanges();
+            }
+            var courses = Load();
+            string json = "{\"\"}";
+            return null;
+        }
+        public List<COURSE> Load()
+        {
+            List<COURSE> course = ManageStudent.COURSEs.Where(u => !u.Status.Value).ToList<COURSE>();
+            Session["course"] = course;
+            return course;
+        }
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult UpdateCourses(COURSE course, HttpPostedFileBase postedFile)
