@@ -30,6 +30,8 @@ namespace projectsem3.Controllers
         {
             return View();
         }
+
+
         public ActionResult SignIn(string email, string password)
         {
 
@@ -46,6 +48,8 @@ namespace projectsem3.Controllers
             ViewBag.SignInErrorMessage = "The email or the password that you've entered is incorrect";
             return View("Index", "Error");
         }
+
+
         private bool SaveImage(HttpPostedFileBase postedFile)
         {
             try
@@ -84,7 +88,7 @@ namespace projectsem3.Controllers
         [HttpGet]
         public ActionResult UpdateCourse(int id)
         {
-            COURSE course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && !u.Status.Value);
+            var course = new CourseDao().ViewDetail(id); 
             SetViewBag();
             return View(course);
         }
@@ -113,31 +117,44 @@ namespace projectsem3.Controllers
         [ValidateInput(false)]
         public ActionResult UpdateCourses(COURSE course, HttpPostedFileBase postedFile)
         {
-            int courseId = (Session["Course"] as COURSE).Id;
-            COURSE courses = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == courseId && u.Status == false);
-            if (ModelState.IsValid == false)
+            if (ModelState.IsValid)
             {
                 if (SaveImage(postedFile))
                 {
-                    courses.Images = postedFile != null ? postedFile.FileName : course.Images;
-                    courses.Time = course.Time;
-                    courses.FacultyId = course.FacultyId;
-                    courses.DepartmentId = course.DepartmentId;
-                    courses.Seat = course.Seat;
-                    courses.Description = course.Description;
-                    courses.Time = course.Time;
-
-                    ManageStudent.SaveChanges();
-
-                    courses = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == courseId && !u.Status.Value);
-                    ViewBag.Status = "Update successful";
+                    if (postedFile != null)
+                    {
+                        course.Images = "images/" + postedFile.FileName;
+                    }   
+                    var cou = new CourseDao();
+                    var result = cou.Update(course);
+                    if (result)
+                    {
+                        return Content("Update Success");
+                    }
+                    else
+                    {
+                        return Content("Update course unsuccessful");
+                    }
                 }
                 else
                 {
-                    ViewBag.Status = "Update unsuccessful";
+                    return Content("Update course unsuccessful");
                 }
             }
-            return View("UpdateCourse");
+            return Content("Update course unsuccessful");
+        }
+
+        public ActionResult DeleteCourse(int id)
+        {
+           
+            var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && u.Status == false);
+            if(course != null)
+            {
+                course.Status = true;
+                ManageStudent.SaveChanges();
+            }
+           
+            return Content ("Delete successful");
         }
         
 
