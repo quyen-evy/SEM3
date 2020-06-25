@@ -143,20 +143,7 @@ namespace projectsem3.Controllers
             }
             return Content("Update course unsuccessful");
         }
-
-        public ActionResult DeleteCourse(int id)
-        {
-           
-            var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && u.Status == false);
-            if(course != null)
-            {
-                course.Status = true;
-                ManageStudent.SaveChanges();
-            }
-           
-            return Content ("Delete successful");
-        }
-        
+   
 
         [HttpPost]
         [ValidateInput(false)]
