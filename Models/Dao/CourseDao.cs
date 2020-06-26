@@ -42,6 +42,14 @@ namespace projectsem3.Models.Dao
             }
         }
 
+        public bool ChangeStatus(int id)
+        {
+            var course = db.COURSEs.Find(id);
+            course.Status = !course.Status;
+
+            return (bool)!course.Status;
+        }
+
         //public IEnumerable<COURSE> ListAllPaging(int page, int pageSize)
         //{
         //    return db.COURSEs.OrderByDescending(u => u.Id).ToPagedList(page, pageSize);
