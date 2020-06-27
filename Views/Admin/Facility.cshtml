@@ -3,11 +3,11 @@
     ViewBag.Title = "Course";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-    <script>
+<script>
     function Remove(data) {
         $.ajax({
             type: "POST",
-            url: '/Admin/DeleteCourse',
+            url: '/Admin/DeleteFacility',
             data: { id : data },
             success: function (response) {
                 console.log(response);
@@ -24,10 +24,18 @@
             }
         });
     }
-    </script>
+</script>
 <div id="page-wrapper">
     <div class="graphs">
-        <h3 class="blank1">Eligible for the admission</h3>
+        @if (ViewBag.Status != null)
+        {
+            <h3 class="blank1">@ViewBag.Status</h3>
+        }
+        else
+        {
+            <h3 class="blank1">Facilities Option</h3>
+        }
+
         <div class="xs tabls">
 
 
@@ -38,12 +46,10 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Course Name</th>
+                                <th>Facility Name</th>
                                 <th>Images</th>
-                                <th>Time</th>
-                                <th>Faculty Id</th>
-                                <th>Department Id</th>
                                 <th>Description</th>
+                                <th>Writer</th>
 
                                 <th></th>
                                 <th></th>
@@ -51,26 +57,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @{ var course = ViewBag.Course as List<COURSE>;}
-                            @foreach (var courses in Model)
+                            @foreach (var facility in Model)
                             {
                                 <tr>
-                                    <th scope="row">@courses.Id</th>
-                                    <td>@courses.CourseName</td>
-                                    <td><img src="../Content/@courses.Images" height="50" width="50"></td>
-                                    <td>@courses.Time</td>
-                                    <td>@courses.FacultyId</td>
-                                    <td>@courses.DepartmentId</td>
-                                    <td>@courses.Description</td>
+                                    <th scope="row">@facility.Id</th>
+                                    <td>@facility.Name</td>
+                                    <td><img src="../Content/@facility.Images" height="50" width="50"></td>
+                                    <td>@facility.Description</td>
+                                    <td>@facility.writer</td>
                                     <td>
-                                        <a href="../admin/UpdateCourse?id=@courses.Id" class="btn-success btn">Update</a>
+                                        <a href="../Admin/UpdateFacility?id=@facility.Id" class="btn-success btn">Update</a>
 
                                     </td>
                                     <td>
-                                        <a href="../Admin/AddCourse" class="btn-default btn">Add</a>
+                                        <a href="../Admin/AddFacility" class="btn-default btn">Add</a>
                                     </td>
                                     <td>
-                                        <button class="btn-inverse btn" id="delete-@courses.Id" onclick="Remove(@courses.Id)">Delete</button>
+                                        <button class="btn-inverse btn" id="delete-@facility.Id" onclick="Remove(@facility.Id)">Delete</button>
                                     </td>
 
                                 </tr>
