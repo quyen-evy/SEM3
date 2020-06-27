@@ -1,0 +1,75 @@
+﻿@using projectsem3.Models
+@model projectsem3.Models.FACILITy
+<script src="~/ckeditor/ckeditor.js" type="text/javascript"></script>
+@{
+    ViewBag.Title = "UpdateFacilities";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $("#Time").datepicker({
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1999:2020',
+            defaultDate: new Date(1999, 01 - 01, 09),
+        });
+    });
+</script>
+<div id="page-wrapper">
+    <div class="graphs">
+
+        <h3><span>Update Facilities</span></h3>
+
+
+        <div class="clearfix"> </div>
+
+    </div>
+
+</div>
+@using (Html.BeginForm("UpdateFacility", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        <span> Facilities</span>
+        @Html.TextBoxFor(u => u.Name, null, new { @class = "form-group", @type = "text" })
+        @Html.HiddenFor(u=>u.Id, null)
+    </div>
+
+    <div class="form-group">
+        <span>Image:</span>
+        <img id="course_image" width="150" height="150" src="../Content/@Model.Images" />
+        @Html.HiddenFor(u => u.Images, null);
+        <input type="file" name="postedFile" id="postedFile" onchange="displayImage(this)" />
+    </div>
+
+    <span>Writer:</span>
+    @Html.TextBoxFor(u => u.writer,null, new { @class = "form-group", @type = "text" })
+
+
+    <span>Time:</span>
+    @Html.TextBoxFor(u => u.Time,null, new { @class = "form-group" })
+
+    <div class="form-group">
+        <span>Description:</span>
+        @Html.TextAreaFor(u => u.Description, new { @id = "editor1", @name = "editor1", @cols = "80", @rows = "10" })
+
+        <!-- (2): textarea sẽ được thay thế bởi CKEditor -->
+        @*<textarea id="editor1" >
+            <p>Hello <strong>CKEditor</strong></p>
+            </textarea>*@
+
+        <!-- (3): Code Javascript thay thế textarea có id='editor1' bởi CKEditor -->
+
+        <script>
+
+            CKEDITOR.replace('editor1', { language: 'en' });
+
+        </script>
+    </div>
+    <input type="submit" value="Update">
+}
+
+

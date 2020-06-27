@@ -64,6 +64,10 @@ namespace projectsem3.Models.Dao
         {
             return db.COURSEs.SingleOrDefault(u => u.Id == id);
         }
+        public string GetNameById(int id)
+        {
+            return db.COURSEs.SingleOrDefault(u => u.Status == false && u.Id == id).CourseName;
+        }
 
         public List<COURSE> ListAll()
         {

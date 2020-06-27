@@ -71,35 +71,33 @@ namespace projectsem3.Controllers
         [HttpGet]
         public ActionResult AddCourse()
         {
-            SetViewBag();
+            SetCourseViewBag();
             return View();
         }
-        
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult AddCourses(COURSE course, HttpPostedFileBase PostedFile)
+        {
+            if (SaveImage(PostedFile))
+            {
+                course.Images = "images/" + PostedFile.FileName;
+                course.Status = false;
+                ManageStudent.COURSEs.Add(course);
+                ManageStudent.SaveChanges();
+                return Content("Add course successful");
+            }
+            return Content("Add course unsuccessful");
+        }
+
         [HttpGet]
         public ActionResult UpdateCourse(int id)
         {
             var course = new CourseDao().ViewDetail(id); 
-            SetViewBag();
+            SetCourseViewBag();
             return View(course);
         }
-       
-        [HttpPost]
-        public bool DeleteCourse(int id)
-        {
-            var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id);
-            if(course != null)
-            {
-                course.Status = !course.Status;
-                ManageStudent.SaveChanges();
-            }
-            return (bool)course.Status;
-        }
-        public List<COURSE> Load()
-        {
-            List<COURSE> course = ManageStudent.COURSEs.Where(u => !u.Status.Value).ToList<COURSE>();
-            Session["course"] = course;
-            return course;
-        }
+
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult UpdateCourses(COURSE course, HttpPostedFileBase postedFile)
@@ -111,7 +109,7 @@ namespace projectsem3.Controllers
                     if (postedFile != null)
                     {
                         course.Images = "images/" + postedFile.FileName;
-                    }   
+                    }
                     var cou = new CourseDao();
                     var result = cou.Update(course);
                     if (result)
@@ -130,64 +128,20 @@ namespace projectsem3.Controllers
             }
             return Content("Update course unsuccessful");
         }
-        public void SetCourseViewBag(long? selectedId = null)
-        {
-            var dao = new DepartmentDao();
-            ViewBag.DepartmentID = new SelectList(dao.ListAll(), "Id", "DepartmentName");
-            var fac = new FacultyDao();
-            ViewBag.FacultyID = new SelectList(fac.ListAll(), "Id", "FirstName");
-            var cou = new CourseDao();
-            ViewBag.ID = new SelectList(cou.ListAll(), "Id", "CourseName", selectedId);
-        }
-        // ----------========== END COURSE ==========----------
-
 
         [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult AddCourses(COURSE course, HttpPostedFileBase PostedFile)
+        public bool DeleteCourse(int id)
         {
-            if(SaveImage(PostedFile))
+            var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id);
+            if(course != null)
             {
-                course.Images = "images/" + PostedFile.FileName;
-                course.Status = false;
-                ManageStudent.COURSEs.Add(course);
+                course.Status = !course.Status;
                 ManageStudent.SaveChanges();
-                return Content ("Add course successful");
             }
-            return Content("Add course unsuccessful");
+            return (bool)course.Status;
         }
-      
-        // FACILITY
-        public ActionResult UpdateFacilities(int id)
-        {
-            SetCourseViewBag();
-            return View();
-        }
-        private ActionResult UpdateFacilities(FACILITy facilities, HttpPostedFileBase postedFile)
-        {
-            int facilitiesId = facilities.Id;
-            FACILITy facility = ManageStudent.FACILITIES.SingleOrDefault(u => u.Id == facilitiesId && u.Status == false);
-       
-            if(ModelState.IsValid)
-            {
-                if(SaveImage(postedFile))
-                {
-                    facility.Images = postedFile != null ? postedFile.FileName : facilities.Images;
-                    facility.Description = facilities.Description;
-                    facility.Time = facilities.Time;
-                    facility.writer = facilities.writer;
-                    ManageStudent.SaveChanges();
-                    ViewBag.Status = "Update successful";
-                }
-                else
-                {
-                    ViewBag.Status = "Update unsuccessful";
-                }
-            }
-            return View("Facilities", facility);
-        }
-        
-        public void SetViewBag(long? selectedId = null)
+
+        public void SetCourseViewBag(long? selectedId = null)
         {
             var dao = new DepartmentDao();
             ViewBag.DepartmentID = new SelectList(dao.ListAll(), "Id", "DepartmentName", selectedId);
@@ -197,10 +151,106 @@ namespace projectsem3.Controllers
             ViewBag.ID = new SelectList(cou.ListAll(), "Id", "CourseName", selectedId);
         }
 
-        public string GetNameById(int id)
+
+        // ----------=============== END COURSE ===============-----------------------
+
+
+
+
+        // ----------------=============== FACILITY ===============---------------------
+        public ActionResult Facility()
         {
-            return ManageStudent.COURSEs.SingleOrDefault(u => u.Status == false && u.Id == id).CourseName;
+            List<FACILITy> facility = ManageStudent.FACILITIES.Where(u => u.Status == false).ToList<FACILITy>();
+            return View(facility);
         }
+
+        [HttpGet]
+        public ActionResult AddFacility()
+        {
+            SetFacViewBag();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult AddFacility(FACILITy facility, HttpPostedFileBase PostedFile)
+        {
+            if (SaveImage(PostedFile))
+            {
+                facility.Images = "images/" + PostedFile.FileName;
+                facility.Status = false;
+                ManageStudent.FACILITIES.Add(facility);
+                ManageStudent.SaveChanges();
+                ViewBag.Status = "Add Facility " +facility.Name +" successful !!!";
+            }
+            else
+            {
+                ViewBag.Status = "Add Facility " + facility.Name + " failed !!!";
+            }
+            List<FACILITy> fac = ManageStudent.FACILITIES.Where(u => u.Status == false).ToList<FACILITy>();
+            return View("Facility", fac);
+        }
+
+        [HttpGet]
+        public ActionResult UpdateFacility(int id=1)
+        {
+            var facility = ManageStudent.FACILITIES.Find(id);
+            SetFacViewBag();
+            return View(facility);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult UpdateFacility(FACILITy facilities, HttpPostedFileBase postedFile)
+        {
+            int facilitiesId = facilities.Id;
+            FACILITy facility = ManageStudent.FACILITIES.SingleOrDefault(u => u.Id == facilitiesId && u.Status == false);
+       
+            if(ModelState.IsValid)
+            {
+                if(SaveImage(postedFile))
+                {
+                    if (postedFile != null)
+                    {
+                        facility.Images = "images/" + postedFile.FileName;
+                    }
+                    facility.Name = facilities.Name;
+                    facility.Description = facilities.Description;
+                    facility.Time = facilities.Time;
+                    facility.writer = facilities.writer;
+                    ManageStudent.SaveChanges();
+                    ViewBag.Status = "Update "+facilities.Name+" successful !!!";
+                }
+                else
+                {
+                    ViewBag.Status = "Update " + facilities.Name + " failed !!!";
+                }
+            }
+            List<FACILITy> fac = ManageStudent.FACILITIES.Where(u => u.Status == false).ToList<FACILITy>();
+            return View("Facility", fac);
+        }
+
+        [HttpPost]
+        public bool DeleteFacility(int id)
+        {
+            var facility = ManageStudent.FACILITIES.SingleOrDefault(u => u.Id == id);
+            if (facility != null)
+            {
+                facility.Status = !facility.Status;
+                ManageStudent.SaveChanges();
+            }
+            return (bool)facility.Status;
+        }
+
+        public void SetFacViewBag(int? selectedId = null)
+        {
+            var fac = new FacilityDao();
+            ViewBag.FacilityId = new SelectList(fac.ListAll(), "Id", "Name", selectedId);
+        }
+        // ----------------=============== END FACILITY ===============---------------------
+
+        // ----------------=============== OTHERS ===============---------------------
+
 
     }
 }
