@@ -84,18 +84,15 @@ namespace projectsem3.Controllers
         }
        
         [HttpPost]
-        public string DeleteCourse(int id)
+        public bool DeleteCourse(int id)
         {
-           
-            var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && u.Status == false);
+            var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id);
             if(course != null)
             {
-                course.Status = true;
+                course.Status = !course.Status;
                 ManageStudent.SaveChanges();
             }
-            var courses = Load();
-            string json = "{\"\"}";
-            return null;
+            return (bool)course.Status;
         }
         public List<COURSE> Load()
         {
@@ -153,7 +150,6 @@ namespace projectsem3.Controllers
             {
                 course.Images = "images/" + PostedFile.FileName;
                 course.Status = false;
-                course.CourseName = GetNameById(course.Id);
                 ManageStudent.COURSEs.Add(course);
                 ManageStudent.SaveChanges();
                 return Content ("Add course successful");

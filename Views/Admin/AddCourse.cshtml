@@ -33,7 +33,7 @@
     @Html.ValidationSummary(true)
     <div class="form-group">
         <span>Name course</span>
-        @Html.DropDownListFor(u => u.Id, null, new { @class = "form-group" })
+        @Html.TextBoxFor(u => u.CourseName, null, new { @class = "form-group"})
     </div>
 
     <div class="form-group">

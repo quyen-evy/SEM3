@@ -7,10 +7,17 @@
     function Remove(data) {
         $.ajax({
             type: "POST",
-            url: '@Url.Action("DeleteCourse", "Admin")',
-            data: JSON.stringify({ courseId: data }),
-            success: function (data) {
-                alert(data);
+            url: '/Admin/DeleteCourse',
+            data: { id : data },
+            success: function (response) {
+                console.log(response);
+                if (response == 'True') {
+                    console.log($('#' + data).text);
+                    $('#delete-' + data).text('Restore');
+                }
+                else {
+                    $('#delete-' + data).text('Delete');
+                }
             },
             erro: function (err) {
                 alert("error:"+err)
@@ -63,7 +70,7 @@
                                         <a href="../Admin/AddCourse" class="btn-default btn">Add</a>
                                     </td>
                                     <td>
-                                        <button class="btn-inverse btn" onclick="Remove(@courses.Id)">Delete</button>
+                                        <button class="btn-inverse btn" id="delete-@courses.Id" onclick="Remove(@courses.Id)">Delete</button>
                                     </td>
 
                                 </tr>
