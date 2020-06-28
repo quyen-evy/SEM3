@@ -96,23 +96,21 @@ namespace projectsem3.Controllers
         [HttpPost]
         public string DeleteCourse(int id)
         {
-           
             var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && u.Status == false);
             if(course != null)
             {
                 course.Status = true;
                 ManageStudent.SaveChanges();
             }
-            var courses = Load();
-            string json = "{\"\"}";
-            return null;
+            var courses = Course();
+            string json = "{\"Result\" : true }";
+            return json;
         }
-        public List<COURSE> Load()
-        {
-            List<COURSE> course = ManageStudent.COURSEs.Where(u => !u.Status.Value).ToList<COURSE>();
-            Session["course"] = course;
-            return course;
-        }
+        //public List<COURSE> Load()
+        //{
+        //    List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false).ToList<COURSE>();
+        //    return course;
+        //}
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult UpdateCourses(COURSE course, HttpPostedFileBase postedFile)
@@ -144,18 +142,18 @@ namespace projectsem3.Controllers
             return Content("Update course unsuccessful");
         }
 
-        public ActionResult DeleteCourse(int id)
-        {
+        //public ActionResult DeleteCourse(int id)
+        //{
            
-            var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && u.Status == false);
-            if(course != null)
-            {
-                course.Status = true;
-                ManageStudent.SaveChanges();
-            }
+        //    var course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && u.Status == false);
+        //    if(course != null)
+        //    {
+        //        course.Status = true;
+        //        ManageStudent.SaveChanges();
+        //    }
            
-            return Content ("Delete successful");
-        }
+        //    return Content ("Delete successful");
+        //}
         
 
         [HttpPost]

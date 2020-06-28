@@ -833,6 +833,9 @@
     <Content Include="Views\Admin\UpdateDepartment.cshtml" />
     <Content Include="Views\Admin\Course.cshtml" />
     <Content Include="Views\Admin\AddCourse.cshtml" />
+    <Content Include="Views\Admin\Department.cshtml" />
+    <Content Include="Views\Admin\Faculty.cshtml" />
+    <Content Include="Views\Admin\Facilities.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
