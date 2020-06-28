@@ -1,0 +1,85 @@
+﻿@using projectsem3.Models
+@{
+    ViewBag.Title = "Department";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script>
+    function Remove(data) {
+        $.ajax({
+            type: "POST",
+            url: '/Admin/DeleteDepartment',
+            data: { id : data },
+            success: function (response) {
+                console.log(response);
+                if (response == 'True') {
+                    console.log($('#' + data).text);
+                    $('#delete-' + data).text('Restore');
+                }
+                else {
+                    $('#delete-' + data).text('Delete');
+                }
+            },
+            erro: function (err) {
+                alert("error:"+err)
+            }
+        });
+    }
+</script>
+<div id="page-wrapper">
+    <div class="graphs">
+        @if (ViewBag.Status != null)
+        {
+            <h3 class="blank1">@ViewBag.Status</h3>
+        }
+        else
+        {
+            <h3 class="blank1">Facilities Option</h3>
+        }
+
+        <div class="xs tabls">
+
+
+            <div class="bs-example4" data-example-id="simple-responsive-table">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Department Name</th>
+                                <th>Images</th>
+                                <th>Number of student in department</th>
+                                
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var department in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@department.Id</th>
+                                    <td>@department.DepartmentName</td>
+                                    <td><img src="../Content/@department.Images" height="50" width="50"></td>
+                                    <td>@department.Seat</td>
+                                    
+                                    <td>
+                                        <a href="../Admin/UpdateDepartment?id=@department.Id" class="btn-success btn">Update</a>
+
+                                    </td>
+                                    <td>
+                                        <a href="../Admin/AddDepartment" class="btn-default btn">Add</a>
+                                    </td>
+                                    <td>
+                                        <button class="btn-inverse btn" id="delete-@department.Id" onclick="Remove(@department.Id)">Delete</button>
+                                    </td>
+
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- /.table-responsive -->
+
