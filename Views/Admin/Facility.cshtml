@@ -1,0 +1,87 @@
+﻿@using projectsem3.Models
+@{
+    ViewBag.Title = "Course";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script>
+    function Remove(data) {
+        $.ajax({
+            type: "POST",
+            url: '/Admin/DeleteFacility',
+            data: { id : data },
+            success: function (response) {
+                console.log(response);
+                if (response == 'True') {
+                    console.log($('#' + data).text);
+                    $('#delete-' + data).text('Restore');
+                }
+                else {
+                    $('#delete-' + data).text('Delete');
+                }
+            },
+            erro: function (err) {
+                alert("error:"+err)
+            }
+        });
+    }
+</script>
+<div id="page-wrapper">
+    <div class="graphs">
+        @if (ViewBag.Status != null)
+        {
+            <h3 class="blank1">@ViewBag.Status</h3>
+        }
+        else
+        {
+            <h3 class="blank1">Facilities Option</h3>
+        }
+
+        <div class="xs tabls">
+
+
+            <div class="bs-example4" data-example-id="simple-responsive-table">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Facility Name</th>
+                                <th>Images</th>
+                                <th>Description</th>
+                                <th>Writer</th>
+
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var facility in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@facility.Id</th>
+                                    <td>@facility.Name</td>
+                                    <td><img src="../Content/@facility.Images" height="50" width="50"></td>
+                                    <td>@facility.Description</td>
+                                    <td>@facility.writer</td>
+                                    <td>
+                                        <a href="../Admin/UpdateFacility?id=@facility.Id" class="btn-success btn">Update</a>
+
+                                    </td>
+                                    <td>
+                                        <a href="../Admin/AddFacility" class="btn-default btn">Add</a>
+                                    </td>
+                                    <td>
+                                        <button class="btn-inverse btn" id="delete-@facility.Id" onclick="Remove(@facility.Id)">Delete</button>
+                                    </td>
+
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- /.table-responsive -->
+
+
+

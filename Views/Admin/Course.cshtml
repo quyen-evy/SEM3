@@ -17,15 +17,17 @@
     function Remove(data) {
         $.ajax({
             type: "POST",
-            url: '@Url.Action("DeleteCourse", "Admin")',
-            data: JSON.stringify({ id: data }),
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            asyn: true,
-            cache: false,
-            processData: false,
-            success: function (data) {
-                alert(data);
+            url: '/Admin/DeleteCourse',
+            data: { id : data },
+            success: function (response) {
+                console.log(response);
+                if (response == 'True') {
+                    console.log($('#' + data).text);
+                    $('#delete-' + data).text('Restore');
+                }
+                else {
+                    $('#delete-' + data).text('Delete');
+                }
             },
             error: function (err) {
                 alert("error:"+err)
