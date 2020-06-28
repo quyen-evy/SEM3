@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ManageStudent.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ManageStudentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="COURSE">
           <Key>
             <PropertyRef Name="Id" />
@@ -26,6 +26,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DepartmentName" Type="varchar(max)" />
           <Property Name="Images" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
           <Property Name="Seat" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="bit" />
         </EntityType>
@@ -224,7 +225,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ManageStudentStoreContainer">
+        <EntityContainer Name="ManageStudentModelStoreContainer">
           <EntitySet Name="COURSE" EntityType="Self.COURSE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FACILITIES" EntityType="Self.FACILITIES" Schema="dbo" store:Type="Tables" />
@@ -267,7 +268,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ManageStudent" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ManageStudentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="COURSE">
           <Key>
             <PropertyRef Name="Id" />
@@ -293,6 +294,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DepartmentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Seat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" />
           <NavigationProperty Name="COURSEs" Relationship="Self.FK_COURSE_DEPARTMENT" FromRole="DEPARTMENT" ToRole="COURSE" />
@@ -545,9 +547,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ManageStudentStoreContainer" CdmEntityContainer="ManageStudentEntities">
+        <EntityContainerMapping StorageEntityContainer="ManageStudentModelStoreContainer" CdmEntityContainer="ManageStudentEntities">
           <EntitySetMapping Name="COURSEs">
-            <EntityTypeMapping TypeName="ManageStudent.COURSE">
+            <EntityTypeMapping TypeName="ManageStudentModel.COURSE">
               <MappingFragment StoreEntitySet="COURSE">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CourseName" ColumnName="CourseName" />
@@ -562,18 +564,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DEPARTMENTs">
-            <EntityTypeMapping TypeName="ManageStudent.DEPARTMENT">
+            <EntityTypeMapping TypeName="ManageStudentModel.DEPARTMENT">
               <MappingFragment StoreEntitySet="DEPARTMENT">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
                 <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Seat" ColumnName="Seat" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FACILITIES">
-            <EntityTypeMapping TypeName="ManageStudent.FACILITy">
+            <EntityTypeMapping TypeName="ManageStudentModel.FACILITy">
               <MappingFragment StoreEntitySet="FACILITIES">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -586,7 +589,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FACULTies">
-            <EntityTypeMapping TypeName="ManageStudent.FACULTY">
+            <EntityTypeMapping TypeName="ManageStudentModel.FACULTY">
               <MappingFragment StoreEntitySet="FACULTY">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -601,7 +604,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FEEDBACKs">
-            <EntityTypeMapping TypeName="ManageStudent.FEEDBACK">
+            <EntityTypeMapping TypeName="ManageStudentModel.FEEDBACK">
               <MappingFragment StoreEntitySet="FEEDBACK">
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="FacilitiesId" ColumnName="FacilitiesId" />
@@ -613,7 +616,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ROLEs">
-            <EntityTypeMapping TypeName="ManageStudent.ROLE">
+            <EntityTypeMapping TypeName="ManageStudentModel.ROLE">
               <MappingFragment StoreEntitySet="ROLE">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -622,7 +625,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="STUDENTs">
-            <EntityTypeMapping TypeName="ManageStudent.STUDENT">
+            <EntityTypeMapping TypeName="ManageStudentModel.STUDENT">
               <MappingFragment StoreEntitySet="STUDENT">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -645,7 +648,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TABULARs">
-            <EntityTypeMapping TypeName="ManageStudent.TABULAR">
+            <EntityTypeMapping TypeName="ManageStudentModel.TABULAR">
               <MappingFragment StoreEntitySet="TABULAR">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FatherName" ColumnName="FatherName" />
@@ -674,7 +677,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="USERs">
-            <EntityTypeMapping TypeName="ManageStudent.USER">
+            <EntityTypeMapping TypeName="ManageStudentModel.USER">
               <MappingFragment StoreEntitySet="USER">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Avatar" ColumnName="Avatar" />

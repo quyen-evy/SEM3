@@ -1,8 +1,7 @@
 ﻿@using projectsem3.Models
 @model projectsem3.Models.DEPARTMENT
-<script src="~/ckeditor/ckeditor.js" type="text/javascript"></script>
 @{
-    ViewBag.Title = "UpdateDepartment";
+    ViewBag.Title = "AddDepartment";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -20,7 +19,7 @@
 <div id="page-wrapper">
     <div class="graphs">
 
-        <h3><span>Update Department</span></h3>
+        <h3><span>Add Department</span></h3>
 
 
         <div class="clearfix"> </div>
@@ -28,22 +27,20 @@
     </div>
 
 </div>
-@using (Html.BeginForm("UpdateDepartment", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AddDepartment", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
     @Html.ValidationSummary(true)
-<div class="form-group">
-    <span> Facilities name</span>
-    @Html.TextBoxFor(u => u.DepartmentName, null, new { @class = "form-group", @type = "text" })
-    @Html.HiddenFor(u => u.Id, null)
-</div>
+    <div class="form-group">
+        <span> Department name</span>
+        @Html.TextBoxFor(u => u.DepartmentName, null, new { @class = "form-group" })
+    </div>
 
-<div class="form-group">
-    <span>Image:</span>
-    <img id="course_image" width="150" height="150" src="../Content/@Model.Images" />
-    @Html.HiddenFor(u => u.Images, null);
-    <input type="file" name="postedFile" id="postedFile" onchange="displayImage(this)" />
-</div>
+    <div class="form-group">
+        <span>Image:</span>
+
+        <input type="file" name="postedFile" id="postedFile" onchange="displayImage(this)" />
+    </div>
 
     <span>Number of student:</span>
     @Html.TextBoxFor(u => u.Seat, null, new { @class = "form-group", @type = "text" })
@@ -65,6 +62,7 @@
 
         </script>
     </div>
-    <input type="submit" value="Update">
+    <input type="submit" value="Add">
 }
+
 

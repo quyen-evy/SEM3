@@ -150,6 +150,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
+    <Compile Include="MailHelper.cs" />
     <Compile Include="Models\COURSE.cs">
       <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
@@ -805,6 +806,7 @@
     <Content Include="Scripts\js\slider.js" />
     <Content Include="Scripts\js\SmoothScroll.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Shared\mail.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -842,6 +844,11 @@
     <Content Include="Views\Admin\AddCourse.cshtml" />
     <Content Include="Views\Admin\Facility.cshtml" />
     <Content Include="Views\Admin\AddFacility.cshtml" />
+    <Content Include="Views\Admin\Department.cshtml" />
+    <Content Include="Views\Admin\Faculty.cshtml" />
+    <Content Include="Views\Admin\AddFaculty.cshtml" />
+    <Content Include="Views\Admin\AddDepartment.cshtml" />
+    <Content Include="Views\Admin\Mail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
