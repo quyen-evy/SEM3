@@ -1,8 +1,93 @@
-﻿
+﻿@using projectsem3.Models
+
 @{
     ViewBag.Title = "Faculty";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Faculty</h2>
+<script>
+    function Remove(data) {
+        $.ajax({
+            type: "POST",
+            url: '/Admin/DeleteFaculty',
+            data: { id : data },
+            success: function (response) {
+                console.log(response);
+                if (response == 'True') {
+                    console.log($('#' + data).text);
+                    $('#delete-' + data).text('Restore');
+                }
+                else {
+                    $('#delete-' + data).text('Delete');
+                }
+            },
+            erro: function (err) {
+                alert("error:"+err)
+            }
+        });
+    }
+</script>
+<div id="page-wrapper">
+    <div class="graphs">
+        @if (ViewBag.Status != null)
+        {
+            <h3 class="blank1">@ViewBag.Status</h3>
+        }
+        else
+        {
+            <h3 class="blank1">Faculty Option</h3>
+        }
+
+        <div class="xs tabls">
+
+
+            <div class="bs-example4" data-example-id="simple-responsive-table">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Avatar</th>
+                                <th>Birthday</th>
+                                <th>Gender</th>
+                                <th>Address</th>
+                                <th>Profiles</th>
+
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var faculty in Model)
+                            {
+                            <tr>
+                                <th scope="row">@faculty.Id</th>
+                                <td>@faculty.FirstName</td>
+                                <td>@faculty.LastName</td>
+                                <td><img src="../Content/@faculty.Avatar" height="50" width="50"></td>
+                                <td>@faculty.Birthday</td>
+                                <td>@faculty.Gender</td>
+                                <td>@faculty.Address</td>
+                                <td>@faculty.Profiles</td>
+                                <td>
+                                    <a href="../Admin/UpdateFaculty?id=@faculty.Id" class="btn-success btn">Update</a>
+
+                                </td>
+                                <td>
+                                    <a href="../Admin/AddFaculty" class="btn-default btn">Add</a>
+                                </td>
+                                <td>
+                                    <button class="btn-inverse btn" id="delete-@faculty.Id" onclick="Remove(@faculty.Id)">Delete</button>
+                                </td>
+
+                            </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- /.table-responsive -->
 
