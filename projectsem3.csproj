@@ -150,6 +150,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
+    <Compile Include="MailHelper.cs" />
     <Compile Include="Models\COURSE.cs">
       <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
@@ -189,9 +190,6 @@
       <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\STUDENT.cs">
-      <DependentUpon>ManageStudent.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>ManageStudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TABULAR.cs">
@@ -808,6 +806,7 @@
     <Content Include="Scripts\js\slider.js" />
     <Content Include="Scripts\js\SmoothScroll.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Shared\mail.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

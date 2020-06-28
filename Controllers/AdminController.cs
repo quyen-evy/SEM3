@@ -1,7 +1,9 @@
-﻿using projectsem3.Models;
+﻿using projectsem3;
+using projectsem3.Models;
 using projectsem3.Models.Dao;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -431,6 +433,13 @@ namespace projectsem3.Controllers
         // ----------------=============== SEND MAIL ===============---------------------
         public ActionResult Mail()
         {
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/View/Shared/mail.html"));
+
+            content = content.Replace("{{Name}}", "minhva25041997@gmail.com");
+            content = content.Replace("{{StudentName}}", "Student Name");
+            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+            new MailHelper().SendMail(toEmail, "Thông tin nhập học", content);
             return View();
         }
         // ----------------=============== SEND MAIL END ===============---------------------
