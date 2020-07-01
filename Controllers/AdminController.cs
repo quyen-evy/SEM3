@@ -22,6 +22,23 @@ namespace projectsem3.Controllers
             List<TABULAR> tab = ManageStudent.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
             return View("Admission",tab);
         }
+
+        public string StudentApply(int id)
+        {
+            var student = ManageStudent.TABULARs.Find(id);
+            string json;
+            if (student != null)
+            {
+                var stu = new StudentDao();
+                stu.Insert(student);
+                student.Status = true;
+                ManageStudent.SaveChanges();
+                json = "{\"result\" : Successful}";
+                return json;
+            }
+            json = "{\"result\" : Failed}";
+            return json;
+        }
         // ----------========== END ADMISSION ==========----------
 
         // ----------========== LOGIN && REGISTER ==========----------

@@ -13,7 +13,25 @@
             yearRange : '1990:2000',
             defaultDate: new Date(1999,01-01,09),
         });
-    </script>
+</script>
+
+<script>
+        function SubmitStudent(data) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("StudentApply","Admin")',
+                data: { id: data },
+                dataType: "json",
+                succsess: function (data) {
+                    alert(data);
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        }
+</script>
+
     <div id="page-wrapper">
         <div class="graphs">
             <h3 class="blank1">Eligible for the admission</h3>
@@ -74,7 +92,7 @@
                                     <td>@tabular.OutOf</td>
                                     <td>@tabular.ClassObtained</td>
                                     <td>
-                                        <button class="btn-success btn">Submit</button>
+                                        <button class="btn-success btn" onclick="SubmitStudent(@tabular.Id)">Submit</button>
                                     </td>
                                     <td>
                                         <button class="btn-danger btn">Deny</button>
