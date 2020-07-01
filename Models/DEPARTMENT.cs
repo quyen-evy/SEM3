@@ -24,6 +24,7 @@ namespace projectsem3.Models
         public int Id { get; set; }
         public string DepartmentName { get; set; }
         public string Images { get; set; }
+        public string Description { get; set; }
         public string Seat { get; set; }
         public Nullable<bool> Status { get; set; }
     

@@ -69,7 +69,7 @@ namespace projectsem3.Controllers
                 return false;
             }
         }
-        // ----------========== END ADMISSION ==========----------
+        // ----------========== END LOGIN && REGISTER ==========----------
 
         // ----------========== COURSE ==========----------
         public ActionResult Course()
