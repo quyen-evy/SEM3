@@ -1,4 +1,4 @@
-.vs/projectsem3/
+.vs/projectsem3/v16/
 /build/
 *.suo
 *.user
@@ -16,4 +16,3 @@ TestResult.xml
 Version.cs
 Version.h
 Version.cpp
-Web.config
