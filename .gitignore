@@ -16,3 +16,5 @@ TestResult.xml
 Version.cs
 Version.h
 Version.cpp
+Web.config
+.vs\projectsem3\config\applicationhost.config
