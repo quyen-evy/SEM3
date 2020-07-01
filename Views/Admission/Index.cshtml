@@ -54,7 +54,7 @@
                     @Html.TextBoxFor(u => u.LastName, new { @placeholder = "Last Name", @class = "form-control", @type = "text", @required = "", @name = "Your last name" })
                 </div>
                 <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.Birthday, null, new { @type="date", @class = "form-control", @placeholder = "Date of Birth ( as per the certificate)" })
+                    @Html.TextBoxFor(u => u.Birthday, null, new { @type="text", @onfocus = "(this.type='date')", @onblur = "(this.type='text')", @class = "form-control", @placeholder = "Date of Birth ( as per the certificate)" })
                 </div>
                 <div class="styled-input form-group">
                     @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email", @class = "form-control", @type = "text", @required = "", @name = "Your email" })
