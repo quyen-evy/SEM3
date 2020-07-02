@@ -49,8 +49,9 @@
                                 <th>Id</th>
                                 <th>Department Name</th>
                                 <th>Images</th>
+                                <th>Description</th>
                                 <th>Number of student in department</th>
-                                
+
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -59,24 +60,25 @@
                         <tbody>
                             @foreach (var department in Model)
                             {
-                                <tr>
-                                    <th scope="row">@department.Id</th>
-                                    <td>@department.DepartmentName</td>
-                                    <td><img src="../Content/@department.Images" height="50" width="50"></td>
-                                    <td>@department.Seat</td>
-                                    
-                                    <td>
-                                        <a href="../Admin/UpdateDepartment?id=@department.Id" class="btn-success btn">Update</a>
+                            <tr>
+                                <th scope="row">@department.Id</th>
+                                <td>@department.DepartmentName</td>
+                                <td><img src="../Content/@department.Images" height="50" width="50"></td>
+                                <td>@department.Description</td>
+                                <td>@department.Seat</td>
 
-                                    </td>
-                                    <td>
-                                        <a href="../Admin/AddDepartment" class="btn-default btn">Add</a>
-                                    </td>
-                                    <td>
-                                        <button class="btn-inverse btn" id="delete-@department.Id" onclick="Remove(@department.Id)">Delete</button>
-                                    </td>
+                                <td>
+                                    <a href="../Admin/UpdateDepartment?id=@department.Id" class="btn-success btn">Update</a>
 
-                                </tr>
+                                </td>
+                                <td>
+                                    <a href="../Admin/AddDepartment" class="btn-default btn">Add</a>
+                                </td>
+                                <td>
+                                    <button class="btn-inverse btn" id="delete-@department.Id" onclick="Remove(@department.Id)">Delete</button>
+                                </td>
+
+                            </tr>
 
                             }
                         </tbody>
