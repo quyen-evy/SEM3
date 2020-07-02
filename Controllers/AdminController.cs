@@ -1,7 +1,9 @@
-﻿using projectsem3.Models;
+﻿using projectsem3;
+using projectsem3.Models;
 using projectsem3.Models.Dao;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -19,6 +21,23 @@ namespace projectsem3.Controllers
         {
             List<TABULAR> tab = ManageStudent.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
             return View("Admission",tab);
+        }
+
+        public string StudentApply(int id)
+        {
+            var student = ManageStudent.TABULARs.Find(id);
+            string json;
+            if (student != null)
+            {
+                var stu = new StudentDao();
+                stu.Insert(student);
+                student.Status = true;
+                ManageStudent.SaveChanges();
+                json = "{\"result\" : Successful}";
+                return json;
+            }
+            json = "{\"result\" : Failed}";
+            return json;
         }
         // ----------========== END ADMISSION ==========----------
 
@@ -67,7 +86,7 @@ namespace projectsem3.Controllers
                 return false;
             }
         }
-        // ----------========== END ADMISSION ==========----------
+        // ----------========== END LOGIN && REGISTER ==========----------
 
         // ----------========== COURSE ==========----------
         public ActionResult Course()
@@ -431,6 +450,13 @@ namespace projectsem3.Controllers
         // ----------------=============== SEND MAIL ===============---------------------
         public ActionResult Mail()
         {
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/View/Shared/mail.html"));
+
+            content = content.Replace("{{Name}}", "minhva25041997@gmail.com");
+            content = content.Replace("{{StudentName}}", "Student Name");
+            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+            new MailHelper().SendMail(toEmail, "Thông tin nhập học", content);
             return View();
         }
         // ----------------=============== SEND MAIL END ===============---------------------

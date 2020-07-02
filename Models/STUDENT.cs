@@ -37,6 +37,7 @@ namespace projectsem3.Models
         public Nullable<int> CourseId { get; set; }
         public Nullable<bool> Status { get; set; }
         public string Avatar { get; set; }
+        public string StudentID { get; set; }
     
         public virtual COURSE COURSE { get; set; }
         public virtual DEPARTMENT DEPARTMENT { get; set; }

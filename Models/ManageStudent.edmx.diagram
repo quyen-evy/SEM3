@@ -4,16 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="97fa5424eacf4ec5abd99768615c476b" Name="Diagram1">
-        <EntityTypeShape EntityType="ManageStudentModel.COURSE" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManageStudentModel.DEPARTMENT" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+      <Diagram DiagramId="96cc289d0efc4f169ba2530519b7a7dc" Name="Diagram1">
+        <EntityTypeShape EntityType="ManageStudentModel.COURSE" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.DEPARTMENT" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="ManageStudentModel.FACILITy" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManageStudentModel.FACULTY" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManageStudentModel.FEEDBACK" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.FACULTY" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.FEEDBACK" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="ManageStudentModel.ROLE" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManageStudentModel.STUDENT" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManageStudentModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManageStudentModel.TABULAR" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.STUDENT" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManageStudentModel.TABULAR" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ManageStudentModel.USER" Width="1.5" PointX="10" PointY="9" IsExpanded="true" />
         <AssociationConnector Association="ManageStudentModel.FK_COURSE_DEPARTMENT" ManuallyRouted="false" />
         <AssociationConnector Association="ManageStudentModel.FK_COURSE_FACULTY" ManuallyRouted="false" />

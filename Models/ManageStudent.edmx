@@ -96,16 +96,7 @@
           <Property Name="CourseId" Type="int" />
           <Property Name="Status" Type="bit" />
           <Property Name="Avatar" Type="varchar(max)" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="StudentID" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="TABULAR">
           <Key>
@@ -134,6 +125,7 @@
           <Property Name="University" Type="varchar" MaxLength="50" />
           <Property Name="MarksSecured" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="bit" />
+          <Property Name="UniqueID" Type="varchar" MaxLength="5" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -243,7 +235,6 @@
           <EntitySet Name="FEEDBACK" EntityType="Self.FEEDBACK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TABULAR" EntityType="Self.TABULAR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_COURSE_DEPARTMENT" Association="Self.FK_COURSE_DEPARTMENT">
@@ -380,19 +371,10 @@
           <Property Name="CourseId" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
           <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StudentID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="COURSE" Relationship="Self.FK_STUDENT_COURSE" FromRole="STUDENT" ToRole="COURSE" />
           <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK_STUDENT_DEPARTMENT" FromRole="STUDENT" ToRole="DEPARTMENT" />
           <NavigationProperty Name="FEEDBACKs" Relationship="Self.FK_Feedback_STUDENT" FromRole="STUDENT" ToRole="FEEDBACK" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TABULAR">
           <Key>
@@ -421,6 +403,7 @@
           <Property Name="University" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MarksSecured" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" />
+          <Property Name="UniqueID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="COURSE" Relationship="Self.FK_TABULAR_COURSE" FromRole="TABULAR" ToRole="COURSE" />
         </EntityType>
         <EntityType Name="USER">
@@ -532,7 +515,6 @@
           <EntitySet Name="FEEDBACKs" EntityType="Self.FEEDBACK" />
           <EntitySet Name="ROLEs" EntityType="Self.ROLE" />
           <EntitySet Name="STUDENTs" EntityType="Self.STUDENT" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TABULARs" EntityType="Self.TABULAR" />
           <EntitySet Name="USERs" EntityType="Self.USER" />
           <AssociationSet Name="FK_COURSE_DEPARTMENT" Association="Self.FK_COURSE_DEPARTMENT">
@@ -666,17 +648,7 @@
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Avatar" ColumnName="Avatar" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ManageStudentModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -706,6 +678,7 @@
                 <ScalarProperty Name="University" ColumnName="University" />
                 <ScalarProperty Name="MarksSecured" ColumnName="MarksSecured" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

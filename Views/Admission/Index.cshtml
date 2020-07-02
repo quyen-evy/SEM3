@@ -5,17 +5,25 @@
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
 
-<script>
+@*<script>
     $(document).ready(function () {
         $("#Birthday").datepicker({
             dateFormat: "dd/mm/yy",
             changeMonth: true,
             changeYear: true,
-            yearRange: '1990:2000',
+            yearRange: '1999:2020',
             defaultDate: new Date(1999, 01 - 01, 09),
         });
     });
-</script>
+</script>*@
+@if (ViewBag.Status != null)
+{
+    <script>
+        $(document).ready(function () {
+            alert('@ViewBag.Status');
+        })
+    </script>
+}
 <!-- breadcrumb -->
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -36,7 +44,7 @@
         </h3>
         <div class="register-form pt-md-4">
 
-            @using (Html.BeginForm("Ads", "Admission", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Submit", "Admission", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
 
                 <div class="styled-input form-group">
@@ -46,7 +54,7 @@
                     @Html.TextBoxFor(u => u.LastName, new { @placeholder = "Last Name", @class = "form-control", @type = "text", @required = "", @name = "Your last name" })
                 </div>
                 <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.Birthday, null, new { @class = "form-control", @placeholder = "Date of Birth ( as per the certificate)" })
+                    @Html.TextBoxFor(u => u.Birthday, null, new { @type="text", @onfocus = "(this.type='date')", @onblur = "(this.type='text')", @class = "form-control", @placeholder = "Date of Birth ( as per the certificate)" })
                 </div>
                 <div class="styled-input form-group">
                     @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email", @class = "form-control", @type = "text", @required = "", @name = "Your email" })
@@ -120,9 +128,9 @@
                 </div>
                 <input type="submit" value="Submit">
                 <a class="custom-download" href="..\Content\admissionform.pdf" download="Admission Form"> Download Form </a>
-                }
-                
-            
+            }
+
+
         </div>
     </div>
 </div>
