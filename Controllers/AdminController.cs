@@ -20,7 +20,7 @@ namespace projectsem3.Controllers
         public ActionResult Admission()
         {
             List<TABULAR> tab = ManageStudent.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
-            return View("Admission",tab);
+            return View("Admission", tab);
         }
 
         public string StudentApply(int id)
@@ -64,6 +64,26 @@ namespace projectsem3.Controllers
             return View("Index", "Error");
         }
 
+        public ActionResult Register()
+        {
+            return View();
+        }
+        public ActionResult SignUp(USER user, HttpPostedFileBase postedFile)
+        {
+
+            if (SaveImage(postedFile))
+            {
+                user.Avatar = "../Content/images/" + postedFile.FileName;
+                user.Password = user.Password.ToMD5();
+                user.Status = false;
+                ManageStudent.USERs.Add(user);
+                ManageStudent.SaveChanges();
+                return Content("Thêm khách hàng thành công!");
+            }
+
+
+            return Content("Thêm thất bại");
+        }
 
         private bool SaveImage(HttpPostedFileBase postedFile)
         {

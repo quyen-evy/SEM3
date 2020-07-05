@@ -1,0 +1,123 @@
+﻿@using projectsem3.Models
+@model projectsem3.Models.USER
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<body class="sign-in-up">
+    <section>
+        <div id="page-wrapper" class="sign-in-wrapper">
+            <div class="graphs">
+                <div class="sign-up">
+                    <h3>Register Here</h3>
+                    <p class="creating">
+
+                    </p>
+                    <h5>Personal Information</h5>
+                    @using (Html.BeginForm("SignUp", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.ValidationSummary(true)
+                        <div class="sign-u">
+                            <h4>Avatar* :</h4>
+                            @Html.HiddenFor(u => u.Avatar, null)
+                            <input type="file" name="postedFile" id="postedFile" onchange="displayImage(this)" />
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="sign-u">
+                            <div class="sign-up1">
+                                <h4>First Name* :</h4>
+                            </div>
+
+                            @Html.TextBoxFor(u => u.FirstName, new { @placeholder = "FirstName", @class = "form-control sign-up2", @required = "", @name = "Your first name" })
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="sign-u">
+                            <div class="sign-up1">
+                                <h4>Last Name* :</h4>
+                            </div>
+                            @Html.TextBoxFor(u => u.LastName, new { @placeholder = "LastName", @class = "form-control sign-up2", @required = "", @name = "Your last name" })
+
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="sign-u">
+                            <div class="sign-up1">
+                                <h4>Gender* :</h4>
+                            </div>
+                            @Html.DropDownListFor(u => u.Gender,
+         new List<SelectListItem> {
+              new SelectListItem { Value = "0" , Text = "Male" },
+              new SelectListItem { Value = "1" , Text = "Female" },
+           },
+         new { @class = "sign-up2" })
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="sign-u">
+                            <div class="sign-up1">
+                                <h4>Birthday* :</h4>
+                            </div>
+                            @Html.TextBoxFor(u => u.Birthday, null, new { @type = "text", @onfocus = "(this.type='date')", @onblur = "(this.type='text')", @class = "form-control sign-up2", @placeholder = "Date of Birth ( as per the certificate)" })
+
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="sign-u">
+                            <div class="sign-up1">
+                                <h4>Email Address* :</h4>
+                            </div>
+                            @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email", @class = "form-control sign-up2", @type = "text", @required = "", @name = "Your email" })
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="sign-u">
+                            <div class="sign-up1">
+                                <h4>Role* :</h4>
+                            </div>
+                            @*@Html.DropDownListFor(u => u.Role, null, new { @class = "form-group sign-up2" })*@
+                            <div class="clearfix"> </div>
+                        </div>
+
+                        <h6>Login Information</h6>
+                        <div class="sign-u">
+                            <div class="sign-up1">
+                                <h4>Password* :</h4>
+                            </div>
+                            <div class="sign-up2">
+                                @Html.TextBoxFor(u => u.Password, new { @placeholder = "Password", @class = "form-control sign-up2", @type = "text", @required = "", @name = "Your password" })
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="sign-u">
+                            <div class="sign-up1">
+                                <h4>Confirm Password* :</h4>
+                            </div>
+                            @Html.TextBoxFor(u => u.Password, new { @placeholder = "Confirm Password", @class = "form-control sign-up2", @type = "text", @required = "", @name = "Your password" })
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="sub_home">
+                            <div class="sub_home_left">
+                                <form>
+                                    <input type="submit" value="Submit">
+                                </form>
+                            </div>
+                            <div class="sub_home_right">
+                                <p>Go Back to <a href="index.html">Home</a></p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!--footer section start-->
+        <footer>
+            <p>&copy 2015 Easy Admin Panel. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">w3layouts.</a></p>
+        </footer>
+        <!--footer section end-->
+    </section>
+
+    <script src="js/jquery.nicescroll.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+    

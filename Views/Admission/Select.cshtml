@@ -1,0 +1,43 @@
+﻿@using projectsem3.Models
+@model projectsem3.Models.TABULAR
+@{
+    ViewBag.Title = "Select Course";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<!-- breadcrumb -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html">Home</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Admission Course</li>
+    </ol>
+</nav>
+<!-- breadcrumb -->
+<!-- login -->
+<div class="login-w3ls py-5">
+    <div class="container py-xl-5 py-lg-3">
+        <h3 class="title text-capitalize font-weight-light text-dark text-center mb-5">
+            Admission
+            <span class="font-weight-bold">course</span>
+        </h3>
+        <!-- content -->
+        <div class="sub-main-w3 pt-md-4">
+            @using (Html.BeginForm("Select", "Admission", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.ValidationSummary(true)
+                <div class="form-style-agile form-group">
+                    <label>
+                        Choose the course you want to assign for
+                        <i class="far fa-calendar-alt"></i>
+                    </label>
+                    @Html.DropDownListFor(u => u.CourseId, null, new { @class = "form-group" })
+                </div>
+                <input type="submit" value="Confirm Course">
+            }
+
+            <!-- //content -->
+        </div>
+</div>
+<!-- //login -->

@@ -161,13 +161,13 @@
 
                                 @foreach (var department in TempData["department"] as List<DEPARTMENT>)
                                 {
-                                    <a class="dropdown-item" href="../department/index?id=@department.Id">@department.DepartmentName</a>
+                                    <a class="dropdown-item" href="../Department/Index?id=@department.Id">@department.DepartmentName</a>
 
                                 }
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="blog.html">Faculty</a>
+                            <a class="nav-link text-white" href="../Faculty/Index">Faculty</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -181,12 +181,12 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="../account/register">Register</a>
+                            <a class="nav-link text-white" href="../Account/Register">Register</a>
                         </li>
                         
                         
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="../contact/index">Contact Us</a>
+                            <a class="nav-link text-white" href="../Contact/Index">Contact Us</a>
                         </li>
                     </ul>
                 </div>

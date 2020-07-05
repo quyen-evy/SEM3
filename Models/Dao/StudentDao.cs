@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using projectsem3.Models;
+using projectsem3;
 
 namespace projectsem3.Models.Dao
 {
@@ -35,6 +36,8 @@ namespace projectsem3.Models.Dao
             student.AdmissionFor = entity.AdmissionFor;
             student.DepartmentId = entity.DepartmentId;
             student.CourseId = entity.CourseId;
+            student.Status = false;
+            student.Password = "1".ToMD5();
 
             db.STUDENTs.Add(student);
             db.SaveChanges();
