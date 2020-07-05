@@ -850,6 +850,7 @@
     <Content Include="Views\Admin\AddFaculty.cshtml" />
     <Content Include="Views\Admin\AddDepartment.cshtml" />
     <Content Include="Views\Admin\Mail.cshtml" />
+    <Content Include="Views\Admission\Select.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
