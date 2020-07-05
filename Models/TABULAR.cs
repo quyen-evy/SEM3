@@ -37,6 +37,7 @@ namespace projectsem3.Models
         public string University { get; set; }
         public string MarksSecured { get; set; }
         public Nullable<bool> Status { get; set; }
+        public string UniqueID { get; set; }
     
         public virtual COURSE COURSE { get; set; }
     }
