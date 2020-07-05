@@ -1,4 +1,7 @@
-﻿
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<projectsem3.Models.FACULTY>
+@using projectsem3.Models
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
@@ -23,158 +26,75 @@
             <span class="font-weight-bold">page</span>
         </h3>
         <div class="row blog-content pt-md-4">
-            <!-- left side -->
-            <div class="col-lg-8 blog_section">
-                <div class="card">
-                    <img class="card-img-top" src="../content/images/banner2.jpg" alt="">
-                    <div class="card-body text-center">
-                        <h6 class="blog-first text-dark">
-                            <i class="far fa-user mr-2"></i>Adrian Lie
-                        </h6>
-                        <ul class="blog_list my-3">
-                            <li>May 15, 2018</li>
-                            <li class="mx-3">
-                                <a href="#">
-                                    <i class="far fa-heart mr-1"></i>
-                                    30
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="far fa-comments mr-1"></i>
-                                    18
-                                </a>
-                            </li>
-                        </ul>
-                        <h5 class="card-title">
-                            <a href="single.html" class="text-dark">Blog title here</a>
-                        </h5>
-                        <p class="card-text">
-                            Morbi eget dui elit. In lectus eros, convallis vel dolor vitae, semper sodales risus. Donec convallis maximus neque
-                            vel cursus.
-                        </p>
-                        <a href="single.html" class="btn btn-primary blog-button mt-3">Read More</a>
-                    </div>
-                </div>
-                <div class="card my-4">
-                    <img class="card-img-top" src="../content/images/banner3.jpg" alt="">
-                    <div class="card-body text-center">
-                        <h6 class="blog-first text-dark">
-                            <i class="far fa-user mr-2"></i>James Doe
-                        </h6>
-                        <ul class="blog_list my-3">
-                            <li>May 22, 2018</li>
-                            <li class="mx-3">
-                                <a href="#">
-                                    <i class="far fa-heart mr-1"></i>
-                                    28
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="far fa-comments mr-1"></i>
-                                    12
-                                </a>
-                            </li>
-                        </ul>
-                        <h5 class="card-title">
-                            <a href="single.html" class="text-dark">Blog title here</a>
-                        </h5>
-                        <p class="card-text">
-                            Morbi eget dui elit. In lectus eros, convallis vel dolor vitae, semper sodales risus. Donec convallis maximus neque
-                            vel cursus.
-                        </p>
-                        <a href="single.html" class="btn btn-primary blog-button mt-3">Read More</a>
-                    </div>
-                </div>
-                <div class="card my-4">
-                    <img class="card-img-top" src="../content/images/banner4.jpg" alt="">
-                    <div class="card-body text-center">
-                        <h6 class="blog-first text-dark">
-                            <i class="far fa-user mr-2"></i>Jenny Joy
-                        </h6>
-                        <ul class="blog_list my-3">
-                            <li>June 02, 2018</li>
-                            <li class="mx-3">
-                                <a href="#">
-                                    <i class="far fa-heart mr-1"></i>
-                                    22
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="far fa-comments mr-1"></i>
-                                    16
-                                </a>
-                            </li>
-                        </ul>
-                        <h5 class="card-title">
-                            <a href="single.html" class="text-dark">Blog title here</a>
-                        </h5>
-                        <p class="card-text">
-                            Morbi eget dui elit. In lectus eros, convallis vel dolor vitae, semper sodales risus. Donec convallis maximus neque
-                            vel cursus.
-                        </p>
-                        <a href="single.html" class="btn btn-primary blog-button mt-3">Read More</a>
-                    </div>
-                </div>
+
+            @for (int i = 0; i < 3; i++)
+            {
+                if (i >= Math.Ceiling((double)Model.Count / 3)) { break; }
+                <!-- left side -->
+                <div class="col-lg-8 blog_section">
+                    @for (int j = 0; j < 3; j++)
+                    {
+                        if (i * 3 + j >= Model.Count) { break; }
+                        <div class="card">
+                            <img class="card-img-top" src="../content/@Model[i*3+j].Avatar" alt="">
+                            <div class="card-body text-center">
+                                <h6 class="blog-first text-dark">
+                                    <i class="far fa-user mr-2"></i>@Model[i * 3 + j].FirstName @Model[i * 3 + j].LastName
+                                </h6>
+                                <ul class="blog_list my-3">
+                                    <li>@Model[i * 3 + j].Birthday</li>
+                                    <li class="mx-3">
+                                        <a href="#">
+                                            <i class="far fa-heart mr-1"></i>
+                                            30
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-comments mr-1"></i>
+                                            18
+                                        </a>
+                                    </li>
+                                </ul>
+                                <h5 class="card-title">
+                                    <a href="single.html" class="text-dark">Blog title here</a>
+                                </h5>
+                                <p class="card-text">
+                                    @(new HtmlString(Model[i * 3 + j].Profiles))
+                                </p>
+                                <a href="single.html" class="btn btn-primary blog-button mt-3">Read More</a>
+                            </div>
+                        </div>
+                    }
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination mt-5">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
+                   new PagedListRenderOptions() {
+                       LiElementClasses = new List<string> { "page-item page-link" },
+                       LinkToPreviousPageFormat = "Previous",
+                       LinkToNextPageFormat = "Next",
+                       DisplayPageCountAndCurrentLocation = true,
+                   })
+
                 </nav>
-                <!-- //left side -->
-            </div>
+                    <!-- //left side -->
+                </div>
+            }
             <!-- right side -->
             <div class="col-lg-4 event-right mt-lg-0 mt-sm-5 mt-4">
                 <div class="event-right1">
-                    <div class="search1">
-                        <form class="form-inline" action="#" method="post">
-                            <input class="form-control rounded-0 mr-sm-2" type="search" placeholder="Search Here" aria-label="Search" required>
-                            <button class="btn bg-dark text-white rounded-0 mt-3" type="submit">Search</button>
-                        </form>
-                    </div>
+
                     <div class="categories my-4 p-4 border">
                         <h3 class="blog-title text-dark">Categories</h3>
                         <ul>
-                            <li class="mt-3">
-                                <i class="fas fa-check mr-2"></i>
-                                <a href="single.html">At vero eos et accusamus iusto</a>
-                            </li>
-                            <li class="mt-3">
-                                <i class="fas fa-check mr-2"></i>
-                                <a href="single.html">Sed ut perspiciatis unde omnis</a>
-                            </li>
-                            <li class="mt-3">
-                                <i class="fas fa-check mr-2"></i>
-                                <a href="single.html">Accusantium doloremque lauda</a>
-                            </li>
-                            <li class="mt-3">
-                                <i class="fas fa-check mr-2"></i>
-                                <a href="single.html">Vel illum qui dolorem fugiat quo</a>
-                            </li>
-                            <li class="mt-3">
-                                <i class="fas fa-check mr-2"></i>
-                                <a href="single.html">Quis autem vel eum repreh</a>
-                            </li>
-                            <li class="mt-3">
-                                <i class="fas fa-check mr-2"></i>
-                                <a href="single.html">Neque porro quisquam est qui</a>
-                            </li>
+                            @foreach (var facilitiesCate in TempData["facilities"] as List<FACILITy>)
+                            {
+                                <li class="mt-3">
+                                    <i class="fas fa-check mr-2"></i>
+                                    <a href="../Facilities/Index?id=@facilitiesCate.Id">@facilitiesCate.Name</a>
+                                </li>
+                            }
+
+
                         </ul>
                     </div>
                     <div class="posts p-4 border">

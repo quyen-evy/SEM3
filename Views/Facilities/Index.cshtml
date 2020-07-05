@@ -172,39 +172,18 @@
                 <!-- right side -->
                 <div class="col-lg-4 event-right mt-lg-0 mt-sm-5 mt-4">
                     <div class="event-right1">
-                        <div class="search1">
-                            <form class="form-inline" action="#" method="post">
-                                <input class="form-control rounded-0 mr-sm-2" type="search" placeholder="Search Here" aria-label="Search" required>
-                                <button class="btn bg-dark text-white rounded-0 mt-3" type="submit">Search</button>
-                            </form>
-                        </div>
+
                         <div class="categories my-4 p-4 border">
                             <h3 class="blog-title text-dark">Categories</h3>
                             <ul>
-                                <li class="mt-3">
-                                    <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">At vero eos et accusamus iusto</a>
-                                </li>
-                                <li class="mt-3">
-                                    <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Sed ut perspiciatis unde omnis</a>
-                                </li>
-                                <li class="mt-3">
-                                    <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Accusantium doloremque lauda</a>
-                                </li>
-                                <li class="mt-3">
-                                    <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Vel illum qui dolorem fugiat quo</a>
-                                </li>
-                                <li class="mt-3">
-                                    <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Quis autem vel eum repreh</a>
-                                </li>
-                                <li class="mt-3">
-                                    <i class="fas fa-check mr-2"></i>
-                                    <a href="single.html">Neque porro quisquam est qui</a>
-                                </li>
+                                @foreach (var facilitiesCate in TempData["facilities"] as List<FACILITy>)
+                                {
+                                    <li class="mt-3">
+                                        <i class="fas fa-check mr-2"></i>
+                                        <a href="../Facilities/Index?id=@facilitiesCate.Id">@facilitiesCate.Name</a>
+                                    </li>
+                                }
+
                             </ul>
                         </div>
                         <div class="posts p-4 border">
@@ -326,7 +305,7 @@
                 </div>
                 <!-- //right side -->
             </div>
-            }
+        }
     </div>
 </div>
 <!-- //blog -->

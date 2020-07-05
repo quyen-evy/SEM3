@@ -52,6 +52,36 @@ namespace projectsem3.Controllers
             TempData["department"] = department;
             return View();
         }
+
+        public ActionResult SignUp(USER user, HttpPostedFileBase postedFile)
+        {
+
+            if (SaveImage(postedFile))
+            {
+                user.Avatar = postedFile.FileName;
+                user.Password = user.Password.ToMD5();
+                user.Status = false;
+                ManageStudent.USERs.Add(user);
+                ManageStudent.SaveChanges();
+                return Content("Thêm khách hàng thành công!");
+            }
+
+
+            return Content("Thêm thất bại");
+        }
+        public ActionResult SignUp(string email, string StudentId, string password)
+        {
+            string passwordMD5 = password.ToMD5();
+            STUDENT student = ManageStudent.STUDENTs.SingleOrDefault(u => u.Email == email && u.StudentID == StudentId && u.Status == false);
+            if (student != null)
+            {
+                student.Password = passwordMD5;
+                ManageStudent.SaveChanges();
+                return Content("Successful");
+            }
+            return Content("Un Successful");
+        }
+
         private bool SaveImage(HttpPostedFileBase postedFile)
         {
             try
