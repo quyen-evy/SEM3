@@ -25,17 +25,26 @@ namespace projectsem3.Controllers
             return View();
 
         }
-        public ActionResult SignIn(string email, string password)
+        public ActionResult SignIn(string studentID, string password)
         {
 
             if (ModelState.IsValid)
             {
                 string passwordMD5 = password.ToMD5();
-                STUDENT student = ManageStudent.STUDENTs.SingleOrDefault(u => u.Email == email && u.Password == passwordMD5 && u.Status == false);
+                STUDENT student = ManageStudent.STUDENTs.SingleOrDefault(u => u.StudentID == studentID && u.Password == passwordMD5 && u.Status == false);
                 if (student != null)
                 {
-                    Session["student"] = student;
-                    return RedirectToAction("Index", "Index");
+                    if(student.CourseId != null)
+                    {
+                        Session["student"] = student;
+                        return RedirectToAction("Index", "Index");
+                    }
+                    else
+                    {
+                        Session["student"] = student;
+                        return RedirectToAction("Select", "Admission");
+                    }
+                    
                 }
             }
             ViewBag.SignInErrorMessage = "The email or the password that you've entered is incorrect";
@@ -80,6 +89,19 @@ namespace projectsem3.Controllers
                 return Content("Successful");
             }
             return Content("Un Successful");
+        }
+
+        public ActionResult Logout()
+        {
+            Session["student"] = null;
+
+            List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
+            TempData["courses"] = course;
+            List<FACILITy> facilities = ManageStudent.FACILITIES.Where(v => v.Status == false).ToList<FACILITy>();
+            TempData["facilities"] = facilities;
+            List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
+            TempData["department"] = department;
+            return RedirectToAction("Index","Index");
         }
 
         private bool SaveImage(HttpPostedFileBase postedFile)

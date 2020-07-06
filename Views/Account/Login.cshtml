@@ -1,5 +1,5 @@
 ﻿@using projectsem3.Models
-@model projectsem3.Models.USER
+@model projectsem3.Models.STUDENT
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
@@ -9,7 +9,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="index.html">Home</a>
+            <a href="../Index/Index">Home</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Login Form</li>
     </ol>
@@ -30,16 +30,16 @@
                 @Html.ValidationSummary(true)
                 <div class="form-style-agile form-group">
                     <label>
-                        Username
+                        Student ID
                         <i class="fas fa-user"></i>
                     </label>
-                    @Html.TextBox("email", null, new
+                    @Html.TextBox("StudentID", null, new
                     {
                         @class = "form-control valid",
                         @data_val = "true",
-                            @data_val_required = "Please fill in email"
+                            @data_val_required = "Please fill in StudentID"
                     })
-                    @Html.ValidationMessage("email")
+                    @Html.ValidationMessage("StudentID")
                 </div>
                 <div class="form-style-agile form-group">
                     <label>

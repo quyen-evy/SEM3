@@ -84,10 +84,10 @@
                                     <td>@tabular.OutOf</td>
                                     <td>@tabular.ClassObtained</td>
                                     <td>
-                                        <button class="btn-success btn" onclick="SubmitStudent(@tabular.Id)">Submit</button>
+                                        <a class="btn-success btn" href="../Admin/StudentApply?id=@tabular.Id">Submit</a>
                                     </td>
                                     <td>
-                                        <button class="btn-danger btn">Deny</button>
+                                        <a class="btn-danger btn" href="../Admin/StudentDeny?id=@tabular.Id">Deny</a>
                                     </td>
                                 </tr>
                                     
