@@ -19,25 +19,28 @@ namespace projectsem3.Controllers
         // ----------========== ADMISSION ==========----------
         public ActionResult Admission()
         {
-            List<TABULAR> tab = ManageStudent.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
-            return View("Admission", tab);
+            return View("Admission", GetAdmission());
         }
 
         public string StudentApply(int id)
         {
             var student = ManageStudent.TABULARs.Find(id);
-            string json;
+
             if (student != null)
             {
                 var stu = new StudentDao();
                 stu.Insert(student);
                 student.Status = true;
                 ManageStudent.SaveChanges();
-                json = "{\"result\" : Successful}";
-                return json;
             }
-            json = "{\"result\" : Failed}";
+            string json = "{\"ketQua\" : 'Mày đéo biết nói à thằng lồn ???????????????'}";
             return json;
+        }
+
+        public List<TABULAR> GetAdmission()
+        {
+            List<TABULAR> tab = ManageStudent.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
+            return tab;
         }
         // ----------========== END ADMISSION ==========----------
 
