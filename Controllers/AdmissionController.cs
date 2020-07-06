@@ -2,9 +2,11 @@
 using projectsem3.Models.Dao;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 
 namespace projectsem3.Controllers
 {
@@ -53,12 +55,49 @@ namespace projectsem3.Controllers
                 return RedirectToAction("Index");
         }
 
+        public ActionResult Check(string SearchString)
+        {
+            if(!string.IsNullOrEmpty(SearchString))
+            {
+                TABULAR tab = ManageStudent.TABULARs.FirstOrDefault(u => u.UniqueID == SearchString);
+                if (tab == null)
+                {
+                    ViewBag.Status = "The UniqueID " + SearchString + " you entered is not exist !!! Please Try again";
+                }
+                else
+                {
+                    if (tab.Status == false)
+                    {
+                        ViewBag.Status = "The Student " + tab.FirstName + " is waiting for submission. Please Wait and follow your email !";
+                    }
+                    else if (tab.Status == true)
+                    {
+                        ViewBag.Status = "The Student " + tab.FirstName + " admission is successful. Congratulation !";
+                    }
+                    else
+                    {
+                        ViewBag.Status = "The Student " + tab.FirstName + " has failed admission !";
+                    }
+                }
+            }
+
+            ViewBag.SearchString = SearchString;
+            List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
+            TempData["courses"] = course;
+            List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
+            TempData["department"] = department;
+            List<FACILITy> facilities = ManageStudent.FACILITIES.Where(y => y.Status == false).ToList<FACILITy>();
+            TempData["facilities"] = facilities;
+            return View("Check");
+        }
+
         public ActionResult Submit(TABULAR tabular)
         {
             tabular.Status = false;
             ManageStudent.TABULARs.Add(tabular);
             ManageStudent.SaveChanges();
             ViewBag.Status = "Register for " + tabular.FirstName + " successful !!!";
+            Mail(tabular);
 
             List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
             TempData["courses"] = course;
@@ -92,6 +131,20 @@ namespace projectsem3.Controllers
         {
             COURSE course = ManageStudent.COURSEs.SingleOrDefault(u => u.Id == id && u.Status == false);
             return course.DepartmentId ?? 0;
+        }
+
+        public void Mail(TABULAR student)
+        {
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/Views/Shared/AdmissionEmail.html"));
+
+            content = content.Replace("{{Name}}", "ITM College");
+            content = content.Replace("{{StudentName}}", student.FirstName);
+            content = content.Replace("{{StudentID}}", student.UniqueID);
+            content = content.Replace("{{EmailSender}}", ConfigurationManager.AppSettings["FromEmailAddress"].ToString());
+            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+            new MailHelper().SendMail(student.Email, "ITM College thank you for you Admission", content);
+            new MailHelper().SendMail(toEmail, "ITM College thank you for you Admission", content);
         }
     }
 }

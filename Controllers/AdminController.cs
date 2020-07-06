@@ -19,25 +19,40 @@ namespace projectsem3.Controllers
         // ----------========== ADMISSION ==========----------
         public ActionResult Admission()
         {
-            List<TABULAR> tab = ManageStudent.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
-            return View("Admission", tab);
+            return View("Admission", GetAdmission());
         }
 
-        public string StudentApply(int id)
+        public ActionResult StudentApply(int id)
         {
             var student = ManageStudent.TABULARs.Find(id);
-            string json;
             if (student != null)
             {
                 var stu = new StudentDao();
                 stu.Insert(student);
                 student.Status = true;
                 ManageStudent.SaveChanges();
-                json = "{\"result\" : Successful}";
-                return json;
+                Mail(student);
             }
-            json = "{\"result\" : Failed}";
-            return json;
+            return View("Admission", GetAdmission());
+        }
+
+        public ActionResult StudentDeny(int id)
+        {
+            var student = ManageStudent.TABULARs.Find(id);
+
+            if (student != null)
+            {
+                student.Status = null;
+                ManageStudent.SaveChanges();
+                DenyMail(student);
+            }
+            return View("Admission", GetAdmission());
+        }
+
+        public List<TABULAR> GetAdmission()
+        {
+            List<TABULAR> tab = ManageStudent.TABULARs.Where(u => u.Status == false).ToList<TABULAR>();
+            return tab;
         }
         // ----------========== END ADMISSION ==========----------
 
@@ -468,16 +483,32 @@ namespace projectsem3.Controllers
         // ----------------=============== END DEPARTMENT ===============---------------------
 
         // ----------------=============== SEND MAIL ===============---------------------
-        public ActionResult Mail()
+        public void Mail(TABULAR student)
         {
-            string content = System.IO.File.ReadAllText(Server.MapPath("~/View/Shared/mail.html"));
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/Views/Shared/SubmitMail.html"));
 
-            content = content.Replace("{{Name}}", "minhva25041997@gmail.com");
-            content = content.Replace("{{StudentName}}", "Student Name");
+            content = content.Replace("{{Name}}", "ITM College");
+            content = content.Replace("{{StudentName}}", student.FirstName);
+            content = content.Replace("{{StudentID}}", student.UniqueID);
+            content = content.Replace("{{EmailSender}}", ConfigurationManager.AppSettings["FromEmailAddress"].ToString());
             var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
-            new MailHelper().SendMail(toEmail, "Thông tin nhập học", content);
-            return View();
+            new MailHelper().SendMail(student.Email, "Congratulation mail on ITM College Admission", content);
+            new MailHelper().SendMail(toEmail, "Congratulation mail on ITM College Admission", content);
+        }
+
+        public void DenyMail(TABULAR student)
+        {
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/Views/Shared/SubmitMail.html"));
+
+            content = content.Replace("{{Name}}", "ITM College");
+            content = content.Replace("{{StudentName}}", student.FirstName);
+            content = content.Replace("{{StudentID}}", student.UniqueID);
+            content = content.Replace("{{EmailSender}}", ConfigurationManager.AppSettings["FromEmailAddress"].ToString());
+            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+            new MailHelper().SendMail(student.Email, "Admission Information from ITM College", content);
+            new MailHelper().SendMail(toEmail, "Admission Information from ITM College", content);
         }
         // ----------------=============== SEND MAIL END ===============---------------------
     }

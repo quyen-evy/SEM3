@@ -1,8 +1,17 @@
 ﻿@using projectsem3.Models
 @model projectsem3.Models.TABULAR
 @{
-    ViewBag.Title = "Select Course";
+    ViewBag.Title = "Check Admission Status";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@if (ViewBag.Status != null)
+{
+    <script>
+        $(document).ready(function () {
+            alert('@ViewBag.Status');
+        })
+    </script>
 }
 
 <!-- breadcrumb -->
@@ -11,7 +20,7 @@
         <li class="breadcrumb-item">
             <a href="../Index/Index">Home</a>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Admission Course</li>
+        <li class="breadcrumb-item active" aria-current="page">Admission Check</li>
     </ol>
 </nav>
 <!-- breadcrumb -->
@@ -20,24 +29,23 @@
     <div class="container py-xl-5 py-lg-3">
         <h3 class="title text-capitalize font-weight-light text-dark text-center mb-5">
             Admission
-            <span class="font-weight-bold">course</span>
+            <span class="font-weight-bold">check</span>
         </h3>
         <!-- content -->
         <div class="sub-main-w3 pt-md-4">
-            @using (Html.BeginForm("Select", "Admission", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Check", "Admission", FormMethod.Get))
             {
-                @Html.ValidationSummary(true)
                 <div class="form-style-agile form-group">
                     <label>
-                        Choose the course you want to assign for
-                        <i class="far fa-calendar-alt"></i>
+                        Use the provided UniqueID (eg : ST001) to check your admission status
+                        <i class="fas fa-address-card"></i> :
                     </label>
-                    @Html.DropDownListFor(u => u.CourseId, null, new { @class = "form-group" })
+                    <input type="text" name="SearchString" value="@ViewBag.SearchString" class="form-group" />
                 </div>
-                <input type="submit" value="Confirm Course">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Check your status</button>
             }
 
             <!-- //content -->
         </div>
-</div>
-<!-- //login -->
+    </div>
+    <!-- //login -->

@@ -12,10 +12,9 @@ namespace projectsem3
 {
     public class MailHelper
     { 
-        public void SendMail(string toEmail, string subject, string content)
+        public void SendMail(string toEmailAddress, string subject, string content)
         {
             var fromEmailAddress = ConfigurationManager.AppSettings["FromEmailAddress"].ToString();
-            var toEmailAddress = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
             var fromEmailDisplayName = ConfigurationManager.AppSettings["FromEmailDisplayName"].ToString();
             var fromEmailPassword = ConfigurationManager.AppSettings["FromEmailPassword"].ToString();
             var smtpHost = ConfigurationManager.AppSettings["SMTPHost"].ToString();

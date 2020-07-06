@@ -16,6 +16,7 @@
         });
     });
 </script>*@
+
 @if (ViewBag.Status != null)
 {
     <script>
@@ -28,7 +29,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="index.html">Home</a>
+            <a href="../Index/Index">Home</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Admission Form</li>
     </ol>
@@ -48,16 +49,16 @@
             {
 
                 <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.FirstName, new { @placeholder = "First Name", @class = "form-control", @type = "text", @required = "", @name = "Your first name" })
+                    @Html.TextBoxFor(u => u.FirstName, new { @placeholder = "First Name (eg: A)", @class = "form-control", @type = "text", @required = "", @name = "Your first name" })
                 </div>
                 <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.LastName, new { @placeholder = "Last Name", @class = "form-control", @type = "text", @required = "", @name = "Your last name" })
+                    @Html.TextBoxFor(u => u.LastName, new { @placeholder = "Last Name (eg: Nguyen Van)", @class = "form-control", @type = "text", @required = "", @name = "Your last name" })
                 </div>
                 <div class="styled-input form-group">
                     @Html.TextBoxFor(u => u.Birthday, null, new { @type="text", @onfocus = "(this.type='date')", @onblur = "(this.type='text')", @class = "form-control", @placeholder = "Date of Birth ( as per the certificate)" })
                 </div>
                 <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email", @class = "form-control", @type = "text", @required = "", @name = "Your email" })
+                    @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email (must be xyz@abc.com)", @class = "form-control", @type = "email", @required = "", @name = "Your email" })
                 </div>
                 <div class="styled-input agile-styled-input-top form-group">
                     <span> Select your Gender :</span>
@@ -70,18 +71,18 @@
                 </div>
 
                 <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.FatherName, new { @placeholder = "Father Name", @class = "form-control", @type = "text", @required = "", @name = "Your father name" })
+                    @Html.TextBoxFor(u => u.FatherName, new { @placeholder = "Father Name (required)", @class = "form-control", @type = "text", @required = "", @name = "Your father name" })
                 </div>
                 <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.MotherName, new { @placeholder = "Mother Name", @class = "form-control", @type = "text", @required = "", @name = "Your mother name" })
+                    @Html.TextBoxFor(u => u.MotherName, new { @placeholder = "Mother Name (required)", @class = "form-control", @type = "text", @required = "", @name = "Your mother name" })
                 </div>
 
 
                 <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.ResidentialAddress, new { @placeholder = "Residential Address", @class = "form-control", @type = "text", @required = "", @name = "Residential Address" })
+                    @Html.TextBoxFor(u => u.ResidentialAddress, new { @placeholder = "Residential Address (required)", @class = "form-control", @type = "text", @required = "", @name = "Residential Address" })
                 </div>
                 <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.PermanentAddress, new { @placeholder = "Permanent Address", @class = "form-control", @type = "text", @required = "", @name = "Permanent Address" })
+                    @Html.TextBoxFor(u => u.PermanentAddress, new { @placeholder = "Permanent Address (required)", @class = "form-control", @type = "text", @required = "", @name = "Permanent Address" })
                 </div>
                 <div class="styled-input form-group">
                     <div class="agileits_w3layouts_grid">
@@ -95,34 +96,34 @@
                     </div>
                 </div>
                 <div class="styled-input form-group">
-                    @Html.TextBoxFor(u => u.Sports, new { @placeholder = "Sports (if any)", @class = "form-control", @type = "text", @required = "", @name = "Sport" })
+                    @Html.TextBoxFor(u => u.Sports, new { @placeholder = "Sports (provide at least 1)", @class = "form-control", @type = "text", @required = "", @name = "Sport" })
                 </div>
                 <div class="styled-input">
 
                     <label class="header-admin-form font-weight-bold text-dark my-3">The details of your previous education</label>
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.University, new { @placeholder = "University", @class = "form-control", @type = "text", @required = "", @name = "University" })
+                        @Html.TextBoxFor(u => u.University, new { @placeholder = "University (required)", @class = "form-control", @type = "text", @required = "", @name = "University" })
                     </div>
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.EnrollmentNo, new { @placeholder = "Enrollment number", @class = "form-control", @type = "text", @required = "", @name = "EnrollmentNo" })
+                        @Html.TextBoxFor(u => u.EnrollmentNo, new { @placeholder = "Enrollment number (required)", @class = "form-control", @type = "text", @required = "", @name = "EnrollmentNo" })
                     </div>
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.Center, new { @placeholder = "Center", @class = "form-control", @type = "text", @required = "", @name = "Center" })
+                        @Html.TextBoxFor(u => u.Center, new { @placeholder = "Center (required)", @class = "form-control", @type = "text", @required = "", @name = "Center" })
                     </div>
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.Stream, new { @placeholder = "Stream", @class = "form-control", @type = "text", @required = "", @name = "Stream" })
+                        @Html.TextBoxFor(u => u.Stream, new { @placeholder = "Stream (required)", @class = "form-control", @type = "text", @required = "", @name = "Stream" })
                     </div>
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.Field, new { @placeholder = "Field", @class = "form-control", @type = "text", @required = "", @name = "Field" })
+                        @Html.TextBoxFor(u => u.Field, new { @placeholder = "Field (required)", @class = "form-control", @type = "text", @required = "", @name = "Field" })
                     </div>
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.MarksSecured, new { @placeholder = "Marks Secured", @class = "form-control", @type = "text", @required = "", @name = "MarksSecured" })
+                        @Html.TextBoxFor(u => u.MarksSecured, new { @placeholder = "Marks Secured (required)", @class = "form-control", @type = "text", @required = "", @name = "MarksSecured" })
                     </div>
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.OutOf, new { @placeholder = "Out Of", @class = "form-control", @type = "text", @required = "", @name = "OutOf" })
+                        @Html.TextBoxFor(u => u.OutOf, new { @placeholder = "Out Of (required)", @class = "form-control", @type = "text", @required = "", @name = "OutOf" })
                     </div>
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.ClassObtained, new { @placeholder = "Class Obtained", @class = "form-control", @type = "text", @required = "", @name = "ClassObtained" })
+                        @Html.TextBoxFor(u => u.ClassObtained, new { @placeholder = "Class Obtained (required)", @class = "form-control", @type = "text", @required = "", @name = "ClassObtained" })
                     </div>
                     @* } *@
                 </div>
