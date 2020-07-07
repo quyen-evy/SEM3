@@ -1711,9 +1711,10 @@ ul.dropdown-menu {
   }
 }
 /********* profile details **********/
-.profile_details{
+.profile_details {
 	float: right;
-    margin: 0 4.8em 0 1em;
+	margin: 0 4.8em 0 1em;
+	min-width: 15rem;
 }
 .profile_details_drop .lnr.lnr-chevron-up{
 	display:none;
@@ -4338,10 +4339,11 @@ button.rew:hover {
 	margin:1.6em 0 1em;
 	font-size:18px;
 	}
-.sign-up2{
-	float:right;
-	width:70%;
-	}
+.sign-up2 {
+	float: right;
+	width: 70%;
+	margin-top: 20px;
+}
 .sign-up2 input[type="text"],.sign-up2 input[type="password"]{
 	outline:none;
 	border: 1px solid #eee;

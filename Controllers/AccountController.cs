@@ -16,12 +16,7 @@ namespace projectsem3.Controllers
         // GET: Account
         public ActionResult Login()
         {
-            List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
-            TempData["courses"] = course;
-            List<FACILITy> facilities = ManageStudent.FACILITIES.Where(v => v.Status == false).ToList<FACILITy>();
-            TempData["facilities"] = facilities;
-            List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
-            TempData["department"] = department;
+            SetTempData();
             return View();
 
         }
@@ -44,71 +39,107 @@ namespace projectsem3.Controllers
                         Session["student"] = student;
                         return RedirectToAction("Select", "Admission");
                     }
-                    
                 }
             }
-            ViewBag.SignInErrorMessage = "The email or the password that you've entered is incorrect";
-            // return Content("Test");
-            return RedirectToAction("Index","Error");
+            ViewBag.Status = "The email or the password that you've entered is incorrect";
+            SetTempData();
+            return View("Login");
         }
         public ActionResult Register()
         {
-            List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
-            TempData["courses"] = course;
-            List<FACILITy> facilities = ManageStudent.FACILITIES.Where(v => v.Status == false).ToList<FACILITy>();
-            TempData["facilities"] = facilities;
-            List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
-            TempData["department"] = department;
+            if (Session["student"] != null)
+            {
+                int Id = (Session["student"] as STUDENT).Id;
+                STUDENT stu = ManageStudent.STUDENTs.SingleOrDefault(u => u.Id == Id && u.Status == false);
+                SetTempData();
+                return View(stu);
+            }
+            SetTempData();
             return View();
         }
 
-        public ActionResult SignUp(USER user, HttpPostedFileBase postedFile)
+        public ActionResult Profile()
         {
-
-            if (SaveImage(postedFile))
+            if (Session["student"] == null)
             {
-                user.Avatar = postedFile.FileName;
-                user.Password = user.Password.ToMD5();
-                user.Status = false;
-                ManageStudent.USERs.Add(user);
-                ManageStudent.SaveChanges();
-                return Content("Thêm khách hàng thành công!");
+                return RedirectToAction("Login");
             }
-
-
-            return Content("Thêm thất bại");
+            SetTempData();
+            int studentId = (Session["student"] as STUDENT).Id;
+            STUDENT student = ManageStudent.STUDENTs.SingleOrDefault(u => u.Id == studentId && u.Status == false);
+            return View(student);
         }
-        public ActionResult SignUp(string email, string StudentId, string password)
+        public ActionResult SignUp(STUDENT student, string ConfirmPassword)
         {
-            string passwordMD5 = password.ToMD5();
-            STUDENT student = ManageStudent.STUDENTs.SingleOrDefault(u => u.Email == email && u.StudentID == StudentId && u.Status == false);
-            if (student != null)
+            STUDENT stu = ManageStudent.STUDENTs.SingleOrDefault(u => u.StudentID == student.StudentID && u.Status == false);
+            if (stu.Email != student.Email)
             {
-                student.Password = passwordMD5;
-                ManageStudent.SaveChanges();
-                return Content("Successful");
+                ViewBag.Status = "Email is invalid !";
+                SetTempData();
+                return View("Register");
             }
-            return Content("Un Successful");
+            if (student.Password != ConfirmPassword)
+            {
+                ViewBag.Status = "Password Confirmation Failed !";
+                SetTempData();
+                return View("Register");
+            }
+            stu.Password = student.Password.ToMD5();
+            ManageStudent.SaveChanges();
+            Session["student"] = stu;
+            
+            if (stu.CourseId != null)
+            {
+                return RedirectToAction("Index", "Index");
+            }
+            return RedirectToAction("Select", "Admission");
         }
 
         public ActionResult Logout()
         {
             Session["student"] = null;
 
-            List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
-            TempData["courses"] = course;
-            List<FACILITy> facilities = ManageStudent.FACILITIES.Where(v => v.Status == false).ToList<FACILITy>();
-            TempData["facilities"] = facilities;
-            List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
-            TempData["department"] = department;
             return RedirectToAction("Index","Index");
+        }
+
+        public ActionResult Update(STUDENT student, HttpPostedFileBase postedFile)
+        {
+            int Id = (Session["student"] as STUDENT).Id;
+            STUDENT stu = ManageStudent.STUDENTs.SingleOrDefault(u => u.Id == Id && u.Status == false);
+            if (stu!=null)
+            {
+                if (SaveImage(postedFile))
+                {
+                    stu.Avatar = "images/" + postedFile.FileName;
+                }
+                stu.FirstName = student.FirstName;
+                stu.LastName = student.LastName;
+                stu.Birthday = student.Birthday;
+                stu.Gender = student.Gender;
+                stu.FatherName = student.FatherName;
+                stu.MotherName = student.MotherName;
+                stu.ResidentialAddress = student.ResidentialAddress;
+                stu.PermanentAddress = student.PermanentAddress;
+                stu.AdmissionFor = student.AdmissionFor;
+                stu.Sports = student.Sports;
+                ManageStudent.SaveChanges();
+                Session["student"] = stu;
+                ViewBag.Status = "Update Successful";
+                SetTempData();
+                return View("Profile",stu);
+            }
+            ViewBag.Status = "Update failed";
+            SetTempData();
+            return View("Profile",stu);
+
+
         }
 
         private bool SaveImage(HttpPostedFileBase postedFile)
         {
             try
             {
-                string path = Server.MapPath("../Content/images/");
+                string path = Server.MapPath("../Content/");
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
@@ -124,6 +155,16 @@ namespace projectsem3.Controllers
             {
                 return false;
             }
+        }
+
+        public void SetTempData()
+        {
+            List<COURSE> course = ManageStudent.COURSEs.Where(m => m.Status == false).ToList<COURSE>();
+            TempData["courses"] = course;
+            List<FACILITy> facilities = ManageStudent.FACILITIES.Where(v => v.Status == false).ToList<FACILITy>();
+            TempData["facilities"] = facilities;
+            List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
+            TempData["department"] = department;
         }
        
     }

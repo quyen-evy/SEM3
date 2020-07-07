@@ -23,6 +23,10 @@
             Login
             <span class="font-weight-bold">now</span>
         </h3>
+        @if (ViewBag.Status != null)
+        {
+            <h5 class="title text-capitalize font-weight-light text-danger text-center mb-5"> @ViewBag.Status</h5>
+        }
         <!-- content -->
         <div class="sub-main-w3 pt-md-4">
             @using (Html.BeginForm("SignIn", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))

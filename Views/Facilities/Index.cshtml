@@ -155,16 +155,22 @@
                         <h3 class="blog-title text-dark mb-4">Leave a Reply</h3>
                         @using (Html.BeginForm("AddFB", "Facilities", new { id = @ViewBag.facilitiesId[0].Id }, FormMethod.Post))
                         {
-
                             @Html.TextArea("description", null, new
-                       {
-                           @class = "form-control valid",
-                           @data_val = "true",
-                           @data_val_required = "Please ..."
-                       })
-                            <div class="mm_single_submit">
+                            {
+                               @class = "form-control valid",
+                               @data_val = "true",
+                               @data_val_required = "Please ..."
+                            })
+                        <div class="mm_single_submit">
+                            @if (Session["student"] != null)
+                            {
                                 <input type="submit" value="Post Comment">
-                            </div>
+                            }
+                            else
+                            {
+                                <a href="../Account/Login" class="custom-feedback-button">Login to comment</a>
+                            }
+                        </div>
                         }
                     </div>
                 </div>

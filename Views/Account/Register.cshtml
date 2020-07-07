@@ -23,40 +23,47 @@
             register
             <span class="font-weight-bold">now</span>
         </h3>
+        @if (ViewBag.Status != null)
+        {
+            <h5 class="title text-capitalize font-weight-light text-danger text-center mb-5"> @ViewBag.Status</h5>
+        }
         <!-- content -->
         <div class="sub-main-w3 pt-md-4">
             @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.ValidationSummary(true)
 
-                
+
                 <div class="form-style-agile form-group">
                     <label>
                         Student ID
                         <i class="fas fa-user"></i>
                     </label>
-                    @Html.TextBoxFor(u => u.Id, new { @placeholder = "StudentID", @class = "form-control", @required = "", @name = "Your id" })
+                    @Html.TextBoxFor(u => u.StudentID, new { @placeholder = "StudentID", @class = "form-control", @required = "", @name = "Your id" })
+
                 </div>
                 <div class="form-style-agile form-group">
                     <label>
                         Email
                         <i class="fas fa-envelope"></i>
                     </label>
-                    <input placeholder="Email" class="form-control" name="Email" type="email" required="">
+                    @Html.TextBoxFor(u => u.Email, new { @type = "email" })
+                    @Html.ValidationMessageFor(u => u.Email)
                 </div>
                 <div class="form-style-agile form-group">
                     <label>
                         Password
                         <i class="fas fa-unlock-alt"></i>
                     </label>
-                    <input placeholder="Password" class="form-control" name="Password" id="password1" type="password" required="">
+                    @Html.PasswordFor(u => u.Password)
+                    @Html.ValidationMessageFor(u => u.Password)
                 </div>
                 <div class="form-style-agile form-group">
                     <label>
                         Confirm Password
                         <i class="fas fa-unlock-alt"></i>
                     </label>
-                    <input placeholder="Confirm Password" class="form-control" name="Confirm Password" id="password2" type="password" required="">
+                    @Html.TextBox("ConfirmPassword", null, new { @type = "password" })
                 </div>
                 <!-- switch -->
                 <ul class="list-unstyled list-login">
