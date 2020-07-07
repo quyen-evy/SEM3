@@ -105,7 +105,7 @@
                                 @if (Session["student"] != null)
                                 {
                                     var student = Session["student"] as STUDENT;
-                                    <text>Hello <a href="../Admission/Select">@student.FirstName @student.LastName</a></text> <br />
+                                    <text>Hello <a href="../Account/Profile">@student.FirstName @student.LastName</a></text> <br />
                                     <text> <a href="../Account/Logout">Log out</a></text>
                                 }
                                 else

@@ -37,7 +37,6 @@ namespace projectsem3.Models.Dao
             student.DepartmentId = entity.DepartmentId;
             student.CourseId = entity.CourseId;
             student.Status = false;
-            student.Password = "1".ToMD5();
 
             db.STUDENTs.Add(student);
             db.SaveChanges();

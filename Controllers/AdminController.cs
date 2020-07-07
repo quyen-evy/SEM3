@@ -19,6 +19,7 @@ namespace projectsem3.Controllers
         // ----------========== ADMISSION ==========----------
         public ActionResult Admission()
         {
+            if (Session["user"] == null) return View("Login");
             return View("Admission", GetAdmission());
         }
 
@@ -83,9 +84,13 @@ namespace projectsem3.Controllers
         {
             return View();
         }
-        public ActionResult SignUp(USER user, HttpPostedFileBase postedFile)
+        public ActionResult SignUp(USER user, HttpPostedFileBase postedFile, string ConfirmPassword)
         {
-
+            if (user.Password != ConfirmPassword)
+            {
+                ViewBag.Status = "Wrong Password Confirmation !!!";
+                return View("Register"); 
+            }
             if (SaveImage(postedFile))
             {
                 user.Avatar = "../Content/images/" + postedFile.FileName;
@@ -93,11 +98,17 @@ namespace projectsem3.Controllers
                 user.Status = false;
                 ManageStudent.USERs.Add(user);
                 ManageStudent.SaveChanges();
-                return Content("Thêm khách hàng thành công!");
+                Session["user"] = user;
+                return RedirectToAction("Admission", GetAdmission());
             }
+            ViewBag.Status = "Register Failed";
+            return View("Register");
+        }
 
-
-            return Content("Thêm thất bại");
+        public ActionResult Logout()
+        {
+            Session["user"] = null;
+            return View("Login");
         }
 
         private bool SaveImage(HttpPostedFileBase postedFile)
@@ -126,6 +137,7 @@ namespace projectsem3.Controllers
         // ----------========== COURSE ==========----------
         public ActionResult Course()
         {
+            if (Session["user"] == null) return View("Login");
             List<COURSE> course = ManageStudent.COURSEs.Where(u => u.Status == false).ToList<COURSE>();
             return View("Course", course);
         }
@@ -133,6 +145,7 @@ namespace projectsem3.Controllers
         [HttpGet]
         public ActionResult AddCourse()
         {
+            if (Session["user"] == null) return View("Login");
             SetCourseViewBag();
             return View();
         }
@@ -156,6 +169,7 @@ namespace projectsem3.Controllers
         [HttpGet]
         public ActionResult UpdateCourse(int id)
         {
+            if (Session["user"] == null) return View("Login");
             var course = new CourseDao().ViewDetail(id); 
             SetCourseViewBag();
             return View(course);
@@ -223,6 +237,7 @@ namespace projectsem3.Controllers
         // ----------------=============== FACILITY ===============---------------------
         public ActionResult Facility()
         {
+            if (Session["user"] == null) return View("Login");
             List<FACILITy> facility = ManageStudent.FACILITIES.Where(u => u.Status == false).ToList<FACILITy>();
             return View(facility);
         }
@@ -230,6 +245,7 @@ namespace projectsem3.Controllers
         [HttpGet]
         public ActionResult AddFacility()
         {
+            if (Session["user"] == null) return View("Login");
             SetFacViewBag();
             return View();
         }
@@ -257,6 +273,7 @@ namespace projectsem3.Controllers
         [HttpGet]
         public ActionResult UpdateFacility(int id=1)
         {
+            if (Session["user"] == null) return View("Login");
             var facility = ManageStudent.FACILITIES.Find(id);
             SetFacViewBag();
             return View(facility);
@@ -317,12 +334,14 @@ namespace projectsem3.Controllers
         // ----------------=============== FACULTY ===============---------------------
         public ActionResult Faculty()
         {
+            if (Session["user"] == null) return View("Login");
             List<FACULTY> faculty = ManageStudent.FACULTies.Where(u => u.Status == false).ToList<FACULTY>();
             return View(faculty);
         }
         [HttpGet]
         public ActionResult UpdateFaculty(int id = 1)
         {
+            if (Session["user"] == null) return View("Login");
             var faculty = ManageStudent.FACULTies.Find(id);
             SetCourseViewBag();
             return View(faculty);
@@ -363,6 +382,7 @@ namespace projectsem3.Controllers
         [HttpGet]
         public ActionResult AddFaculty()
         {
+            if (Session["user"] == null) return View("Login");
             SetCourseViewBag();
             return View();
         }
@@ -402,12 +422,14 @@ namespace projectsem3.Controllers
         // ----------------=============== DEPARTMENT ===============---------------------
         public ActionResult Department()
         {
+            if (Session["user"] == null) return View("Login");
             List<DEPARTMENT> department = ManageStudent.DEPARTMENTs.Where(u => u.Status == false).ToList<DEPARTMENT>();
             return View(department);
         }
         [HttpGet]
         public ActionResult AddDepartment()
         {
+            if (Session["user"] == null) return View("Login");
             SetCourseViewBag();
             return View();
         }
@@ -446,6 +468,7 @@ namespace projectsem3.Controllers
         [HttpGet]
         public ActionResult UpdateDepartment(int id = 1)
         {
+            if (Session["user"] == null) return View("Login");
             var dep = ManageStudent.DEPARTMENTs.Find(id);
             SetCourseViewBag();
             return View(dep);

@@ -10,7 +10,14 @@
         <div id="page-wrapper" class="sign-in-wrapper">
             <div class="graphs">
                 <div class="sign-up">
-                    <h3>Register Here</h3>
+                    @if (ViewBag.Status != null)
+                    {
+                        <h3>@ViewBag.Status</h3>
+                    }
+                    else
+                    {
+                        <h3>Register Here</h3>
+                    }
                     <p class="creating">
 
                     </p>
@@ -21,7 +28,7 @@
                         <div class="sign-u">
                             <h4>Avatar* :</h4>
                             @Html.HiddenFor(u => u.Avatar, null)
-                            <input type="file" name="postedFile" id="postedFile" onchange="displayImage(this)" />
+                            <input type="file" name="postedFile" id="postedFile" onchange="displayImage(this)" required=""/>
                             <div class="clearfix"> </div>
                         </div>
                         <div class="sign-u">
@@ -30,6 +37,7 @@
                             </div>
 
                             @Html.TextBoxFor(u => u.FirstName, new { @placeholder = "FirstName", @class = "form-control sign-up2", @required = "", @name = "Your first name" })
+                            @Html.ValidationMessageFor(u => u.FirstName)
                             <div class="clearfix"> </div>
                         </div>
                         <div class="sign-u">
@@ -45,11 +53,11 @@
                                 <h4>Gender* :</h4>
                             </div>
                             @Html.DropDownListFor(u => u.Gender,
-         new List<SelectListItem> {
-              new SelectListItem { Value = "0" , Text = "Male" },
-              new SelectListItem { Value = "1" , Text = "Female" },
-           },
-         new { @class = "sign-up2" })
+                                 new List<SelectListItem> {
+                                      new SelectListItem { Value = "0" , Text = "Male" },
+                                      new SelectListItem { Value = "1" , Text = "Female" },
+                                   },
+                                 new { @class = "form-control sign-up2" })
                             <div class="clearfix"> </div>
                         </div>
                         <div class="sign-u">
@@ -64,16 +72,17 @@
                             <div class="sign-up1">
                                 <h4>Email Address* :</h4>
                             </div>
-                            @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email", @class = "form-control sign-up2", @type = "text", @required = "", @name = "Your email" })
+                            @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email", @class = "form-control sign-up2", @type = "email", @required = "", @name = "Your email" })
+                            @ViewBag.emailSame
                             <div class="clearfix"> </div>
                         </div>
-                        <div class="sign-u">
+                        @*<div class="sign-u">
                             <div class="sign-up1">
                                 <h4>Role* :</h4>
                             </div>
-                            @*@Html.DropDownListFor(u => u.Role, null, new { @class = "form-group sign-up2" })*@
+                            @Html.DropDownListFor(u => u.Role, null, new { @class = "form-group sign-up2" })
                             <div class="clearfix"> </div>
-                        </div>
+                        </div>*@
 
                         <h6>Login Information</h6>
                         <div class="sign-u">
@@ -87,9 +96,9 @@
                         </div>
                         <div class="sign-u">
                             <div class="sign-up1">
-                                <h4>Confirm Password* :</h4>
+                                <h4>Confirm Password*</h4>
                             </div>
-                            @Html.TextBoxFor(u => u.Password, new { @placeholder = "Confirm Password", @class = "form-control sign-up2", @type = "text", @required = "", @name = "Your password" })
+                            @Html.TextBox("ConfirmPassword", null, new { @placeholder = "Confirm Password", @class = "form-control sign-up2", @type = "text", @required = "", @name = "Your password" })
                             <div class="clearfix"> </div>
                         </div>
                         <div class="sub_home">
@@ -99,7 +108,7 @@
                                 </form>
                             </div>
                             <div class="sub_home_right">
-                                <p>Go Back to <a href="index.html">Home</a></p>
+                                <p>Go Back to <a href="../Admin/Login">Login</a></p>
                             </div>
                             <div class="clearfix"> </div>
                         </div>
@@ -120,4 +129,3 @@
     <script src="js/bootstrap.min.js"></script>
 </body>
 
-    

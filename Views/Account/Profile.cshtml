@@ -1,0 +1,137 @@
+﻿@using projectsem3.Models
+@model projectsem3.Models.STUDENT
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@*<script>
+        $(document).ready(function () {
+            $("#Birthday").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '1999:2020',
+                defaultDate: new Date(1999, 01 - 01, 09),
+            });
+        });
+    </script>*@
+
+@if (ViewBag.Status != null)
+{
+    <script>
+        $(document).ready(function () {
+            alert('@ViewBag.Status');
+        })
+    </script>
+}
+<!-- breadcrumb -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="../Index/Index">Home</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Student Information</li>
+    </ol>
+</nav>
+<!-- breadcrumb -->
+<!-- //banner -->
+<!-- admission form -->
+<div class="form-w3l py-5">
+    <div class="container py-xl-5 py-lg-3">
+        @{ var student = Session["student"] as STUDENT;
+            <h3 class="title text-capitalize font-weight-light text-dark text-center mb-5">
+                STUDENT
+                <span class="font-weight-bold">@student.FirstName @student.LastName</span>
+            </h3>
+        }
+    <div class="register-form pt-md-4">
+
+        @using (Html.BeginForm("Update", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="styled-input form-group">
+                <p>Student ID:</p>
+                <p class="custom-profile-text">@Model.StudentID</p>
+            </div>
+            <div class="styled-input form-group">
+                <p>First Name:</p>
+                @Html.TextBoxFor(u => u.FirstName, new { @placeholder = "First Name (eg: A)", @class = "form-control", @type = "text", @required = "", @name = "fname" })
+            </div>
+            <div class="styled-input form-group">
+                <p>Last Name:</p>
+                @Html.TextBoxFor(u => u.LastName, new { @placeholder = "Last Name (eg: Nguyen Van)", @class = "form-control", @type = "text", @required = "", @name = "lname" })
+            </div>
+            <div class="styled-input form-group">
+                <p>Image:</p>
+                <img id="course_image" width="150" height="150" src="../Content/@Model.Avatar" />
+                @Html.HiddenFor(u => u.Avatar, null);
+                <input type="file" name="postedFile" id="postedFile" onchange="displayImage(this)" />
+            </div>
+            <div class="styled-input form-group">
+                <p>Email (Can not change): </p>
+                <p class="custom-profile-text">@Model.Email</p>
+            </div>
+            <div class="styled-input form-group">
+                <p>Email (Can not change): </p>
+                <p class="custom-profile-text">@Model.CourseId</p>
+            </div>
+            <div class="styled-input form-group">
+                <p>Email (Can not change): </p>
+                <p class="custom-profile-text">@Model.DepartmentId</p>
+            </div>
+            <div class="styled-input form-group">
+                <p>Birthday: </p>
+                @Html.TextBoxFor(u => u.Birthday, new { @type = "text", @onfocus = "(this.type='date')", @onblur = "(this.type='text')", @class = "form-control", @placeholder = Model.Birthday })
+            </div>
+            <div class="styled-input agile-styled-input-top form-group">
+                <p>Gender:</p>
+                @Html.DropDownListFor(u => u.Gender,
+            new List<SelectListItem> {
+                 new SelectListItem { Value = "0" , Text = "Male" },
+                 new SelectListItem { Value = "1" , Text = "Female" },
+              },
+            new { @class = "category2" })
+            </div>
+
+            <div class="styled-input form-group">
+                <p>Father Name:</p>
+                @Html.TextBoxFor(u => u.FatherName, new { @placeholder = "Father Name (required)", @class = "form-control", @type = "text", @required = "", @name = "Your father name" })
+            </div>
+            <div class="styled-input form-group">
+                <p>Mother Name:</p>
+                @Html.TextBoxFor(u => u.MotherName, new { @placeholder = "Mother Name (required)", @class = "form-control", @type = "text", @required = "", @name = "Your mother name" })
+            </div>
+
+
+            <div class="styled-input form-group">
+                <p>Residential Address:</p>
+                @Html.TextBoxFor(u => u.ResidentialAddress, new { @placeholder = "Residential Address (required)", @class = "form-control", @type = "text", @required = "", @name = "Residential Address" })
+            </div>
+            <div class="styled-input form-group">
+                <p>Permanent Address: </p>
+                @Html.TextBoxFor(u => u.PermanentAddress, new { @placeholder = "Permanent Address (required)", @class = "form-control", @type = "text", @required = "", @name = "Permanent Address" })
+            </div>
+            <div class="styled-input form-group">
+                <div class="agileits_w3layouts_grid">
+                    <p> Admission for :</p>
+                    @Html.DropDownListFor(u => u.AdmissionFor,
+            new List<SelectListItem> {
+                 new SelectListItem { Value = "0" , Text = "Stream" },
+                 new SelectListItem { Value = "1" , Text = "Field" },
+              },
+            new { @class = "category2" })
+                </div>
+            </div>
+            <div class="styled-input form-group">
+                <p>Sports: </p>
+                @Html.TextBoxFor(u => u.Sports, new { @placeholder = "Sports (provide at least 1)", @class = "form-control", @type = "text", @required = "", @name = "Sport" })
+            </div>
+            <input type="submit" value="Update">
+            <a class="custom-download" href="@Url.Action("Register","Account")"> Change Password </a>
+        }
+    </div>
+    </div>
+</div>
+<!-- admission form -->
